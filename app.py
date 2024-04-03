@@ -61,13 +61,18 @@ def verificar_token(req):
     token = req.args.get('hub.verify_token')
     challenge = req.args.get('hub.challenge')
     if challenge and token == TOKEN_SS:
-        return challenge
+        return jsonify({'message':'Token Correcto'}),401 #challenge
     else:
-        return jsonify({'Error' : 'Token Invalido'}),401
+        return jsonify({'error':'Token Invalido'}),401
 
 def recibir_mensajes(req):
-    return jsonify
+    req = request.get_json()
+    agregar_mensajes_log(req)
+    return jsonify({'message':'EVENT_RECEIVED'})
 
 if __name__=='__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
     #app.run(debug=True)
+    # git add .
+    # git commit -m "xxx"
+    # git push
