@@ -48,7 +48,7 @@ def agregar_mensajes_log(texto):
 # Token de verificación para la configuración
 TOKEN_SS = "SOFTWARESOLUTIONS"
 
-@app.route('/webhook', methods = ['GET', 'POST'])
+@app.route('/webhook', methods=['GET','POST'])
 def webhook():
     if request.method == 'GET':
         challenge = verificar_token(request)
@@ -61,7 +61,7 @@ def verificar_token(req):
     token = req.args.get('hub.verify_token')
     challenge = req.args.get('hub.challenge')
     if challenge and token == TOKEN_SS:
-        return jsonify({'message':'Token Correcto'}),401 #challenge
+        return challenge
     else:
         return jsonify({'error':'Token Invalido'}),401
 
