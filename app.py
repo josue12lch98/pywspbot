@@ -82,8 +82,9 @@ def recibir_mensajes(req):
                     texto = messages["text"]["body"]
                     numero = messages["from"]
 
-                    agregar_mensajes_log(json.dumps(texto))
-                    agregar_mensajes_log(json.dumps(numero))
+                    enviar_mensajes_wsp(texto, numero)
+                    #agregar_mensajes_log(json.dumps(texto))
+                    #agregar_mensajes_log(json.dumps(numero))
         
         #agregar_mensajes_log(json.dumps(objeto_mensaje))
         return jsonify({'message':'EVENT_RECEIVED'})
