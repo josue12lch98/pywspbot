@@ -67,6 +67,8 @@ def recibir_mensajes(req):
         changes = entry['changes'][0]
         value = changes['value']
         objeto_mensaje = value['messages']
+
+        agregar_mensajes_log(json.dumps(objeto_mensaje))
         return jsonify({'message':'EVENT_RECEIVED'})
     except Exception as e:
         return jsonify({'message':'EVENT_RECEIVED'})
