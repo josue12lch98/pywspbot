@@ -104,6 +104,29 @@ def enviar_mensajes_wsp(texto, numero):
                 "body": "🤖 Hola, ¿Cómo estas? Bienvenido."
             }
         }
+    elif "1" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": numero,
+            "text": {
+                "preview_url": False,
+                "body": "Lore Ipsum"
+            }
+        }
+    elif "2" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": numero,
+            "type": "location",
+            "location": {
+                "latitude": "-12.054347540574366", 
+                "longitude": "-77.03943293543378",
+                "name": "KDN4 Software Solutions",
+                "address": "Jr. Washington 1206"
+            }
+        }
     else:
         data = {
             "messaging_product": "whatsapp",
