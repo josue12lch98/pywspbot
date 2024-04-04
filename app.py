@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import json
+import http.client
 
 app = Flask(__name__)
 
@@ -89,9 +90,52 @@ def recibir_mensajes(req):
     except Exception as e:
         return jsonify({'message':'EVENT_RECEIVED'})
 
+def enviar_mensajes_wsp(texto, numero):
+    texto = texto.lower()
+
+    if "hola" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": numero,
+            "text": {
+                "preview_url": False,
+                "body": "🤖 Hola, ¿Cómo estas? Bienvenido."
+            }
+        }
+    else:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": numero,
+            "text": {
+                "preview_url": False,
+                "body": "🚀 Hola, visita mi Github https://github.com/m1guel17 para más información.\n \n📌Por favor, ingresa un número #️⃣ para recibir información.\n \n1️⃣. Información del Curso. ❔\n2️⃣. Ubicación del local. 📍\n3️⃣. Enviar temario en PDF. 📄\n4️⃣. Audio explicando curso. 🎧\n5️⃣. Video de Introducción. ⏯️\n6️⃣. Hablar con AnderCode. 🙋‍♂️\n7️⃣. Horario de Atención. 🕜 \n0️⃣. Regresar al Menú. 🕜"
+            }
+        }
+    data = json.dumps(data) # Convertir el diccionario en formato JSON
+
+    headers = {
+        "Content-Type" : "application/json",
+        "Authorization" : "Bearer EAAFtbtx1eJEBO6ZAVIPf1OfczeANIply94hzIowLrPPMA2Hb6cckPVVknhcKQBuGnznZBaSHUcPdy8n6hDqZBhKlUd7oZCIxqIXyq7LcLVEcJpYbUwME18AX5Mpc2Y93wp8v8wDOf7UgzDFORpe6bePhgMLa5JlZCR0DQBFwff6Vk8uiZB3NbpQZCtDHH62oMYNSUwGIBwqBkunTEIFTRA9ZAqDzDzinriFBkVgZD"
+    }
+    connection = http.client.HTTPSConnection("graph.facebook.com")
+
+    try:
+        connection.request("POST","/v18.0/259957250537628/messages", data, headers)
+        response = connection.getresponse()
+        print(response.status, response.reason)
+    except Exception as e:
+        agregar_mensajes_log(json.dumps(e))
+    finally:
+        connection.close()
+
+
 if __name__=='__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
     #app.run(debug=True)
-    # git add .
-    # git commit -m "xxx"
-    # git push
+
+# Commands to push to production
+# git add .
+# git commit -m "xxx"
+# git push
