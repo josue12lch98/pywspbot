@@ -18,11 +18,6 @@ class Log(db.Model):
 
 with app.app_context():   # Crear la tabla si no existe
     db.create_all()
-    #prueba1 = Log(texto = 'Mensaje de Prueba 1')
-    #prueba2 = Log(texto = 'Mensaje de Prueba 2')
-    #db.session.add(prueba1)
-    #db.session.add(prueba2)
-    #db.session.commit()
 
 # Función para ordenar los registros por fecha y hora
 def ordenar_por_fecha_y_hora(registros):
@@ -46,7 +41,7 @@ def agregar_mensajes_log(texto):
     db.session.commit()
     
 # Token de verificación para la configuración
-TOKEN_SS = "SOFTWARESOLUTIONS"
+TOKEN = "TOKENX"
 
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
@@ -60,15 +55,26 @@ def webhook():
 def verificar_token(req):
     token = req.args.get('hub.verify_token')
     challenge = req.args.get('hub.challenge')
-    if challenge and token == TOKEN_SS:
+    if challenge and token == TOKEN:
         return challenge
     else:
         return jsonify({'error':'Token Invalido'}),401
 
 def recibir_mensajes(req):
-    req = request.get_json()
-    agregar_mensajes_log(req)
-    return jsonify({'message':'EVENT_RECEIVED'})
+    #req = request.get_json()
+    #agregar_mensajes_log(req)
+    try:
+        req = request.get_json()
+        entry = req['entry'][0]
+        changes = entry['changes'][0]
+        value = changes['value']
+        objeto_mensaje = value['messages']
+
+
+
+        return jsonify({'message':'EVENT_RECEIVED'})
+    except Exception as e:
+        return jsonify({'message':'EVENT_RECEIVED'})
 
 if __name__=='__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
