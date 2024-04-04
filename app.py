@@ -20,8 +20,7 @@ class Log(db.Model):
 with app.app_context():   # Crear la tabla si no existe
     db.create_all()
 
-# Función para ordenar los registros por fecha y hora
-def ordenar_por_fecha_y_hora(registros):
+def ordenar_por_fecha_y_hora(registros): # Función para ordenar los registros por fecha y hora
     #return sorted(registros, key = lambda x: x.id, reverse = False) # Para invertir orden de id
     return sorted(registros, key = lambda x: x.fecha_y_hora, reverse = True)
 
@@ -127,6 +126,17 @@ def enviar_mensajes_wsp(texto, numero):
                 "address": "Jr. Washington 1206"
             }
         }
+    elif "3" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": "51998249361",
+            "type": "document",
+            "document": {
+                "link": "https://www.renfe.com/content/dam/renfe/es/General/PDF-y-otros/Ejemplo-de-descarga-pdf.pdf",
+                "caption": "Ejemplo de PDF"
+            }
+        }
     else:
         data = {
             "messaging_product": "whatsapp",
@@ -141,7 +151,7 @@ def enviar_mensajes_wsp(texto, numero):
 
     headers = {
         "Content-Type" : "application/json",
-        "Authorization" : "Bearer EAAFtbtx1eJEBO6ZAVIPf1OfczeANIply94hzIowLrPPMA2Hb6cckPVVknhcKQBuGnznZBaSHUcPdy8n6hDqZBhKlUd7oZCIxqIXyq7LcLVEcJpYbUwME18AX5Mpc2Y93wp8v8wDOf7UgzDFORpe6bePhgMLa5JlZCR0DQBFwff6Vk8uiZB3NbpQZCtDHH62oMYNSUwGIBwqBkunTEIFTRA9ZAqDzDzinriFBkVgZD"
+        "Authorization" : "Bearer EAAFtbtx1eJEBO0fAejPfZCmwhT8lWsSsUnM1rqlbb0aoFkJVL6fgYZB4NErXNOc9XyedW8tX9dsxJcVN8FOEWpW0XHNZCMHhG3iZB0rBD888jeZAKMa8GriXZBLEQPSVzZBe0HwvN7Xv9O34e8WUKmhL7FmsThdjGsZCH8vuUP9ej0U8f9dyLug67h5AZCLCMy87x2atYbnlq66sZClk0cNLcD7AuVCCypu3oDIyvh"
     }
     connection = http.client.HTTPSConnection("graph.facebook.com")
 
