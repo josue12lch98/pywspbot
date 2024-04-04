@@ -137,6 +137,17 @@ def enviar_mensajes_wsp(texto, numero):
                 "caption": "Ejemplo de PDF"
             }
         }
+    elif "4" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": "51998249361",
+            "type": "audio",
+            "audio": {
+                "link": "https://filesamples.com/samples/audio/mp3/sample1.mp3",
+            }
+        }
+    
     else:
         data = {
             "messaging_product": "whatsapp",
