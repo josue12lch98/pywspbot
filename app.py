@@ -242,7 +242,7 @@ def enviar_mensajes_wsp(texto, numero):
 
     headers = {
         "Content-Type" : "application/json",
-        "Authorization" : "Bearer EAAFtbtx1eJEBO0fAejPfZCmwhT8lWsSsUnM1rqlbb0aoFkJVL6fgYZB4NErXNOc9XyedW8tX9dsxJcVN8FOEWpW0XHNZCMHhG3iZB0rBD888jeZAKMa8GriXZBLEQPSVzZBe0HwvN7Xv9O34e8WUKmhL7FmsThdjGsZCH8vuUP9ej0U8f9dyLug67h5AZCLCMy87x2atYbnlq66sZClk0cNLcD7AuVCCypu3oDIyvh"
+        "Authorization" : "Bearer EAAFtbtx1eJEBO1Q8TLNHZBAIglzNMXIyxl0kH2RDTT1GUdb6jPN6DQylQwwnyalEZADP4racCgKMFER0N6BZBoHs8ZAZBvXxF1X1LsPdQmKZAkKBVp14iI2ZB6QgBjJVIX3jIWFrzU1iRr4dbaPxlhE4KvEt0nqdYpHdkY7VLTUTMFCcJ1A42ziWwKlQSlcWz9pvZBLFdsPoWVCmwz37U7lgesq7iwvh8SbpVLAZD"
     }
     connection = http.client.HTTPSConnection("graph.facebook.com")
 
