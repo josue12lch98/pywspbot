@@ -130,7 +130,7 @@ def enviar_mensajes_wsp(texto, numero):
         data = {
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
-            "to": "51998249361",
+            "to": numero,
             "type": "document",
             "document": {
                 "link": "https://www.renfe.com/content/dam/renfe/es/General/PDF-y-otros/Ejemplo-de-descarga-pdf.pdf",
@@ -141,10 +141,47 @@ def enviar_mensajes_wsp(texto, numero):
         data = {
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
-            "to": "51998249361",
+            "to": numero,
             "type": "audio",
             "audio": {
                 "link": "https://filesamples.com/samples/audio/mp3/sample1.mp3",
+            }
+        }
+    elif "5" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "to": numero,
+            "text": {
+                "preview_url" : True,
+                "body" : "Introducción al curso! XXXXXXXXX"
+            }
+        }
+    elif "6" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "to": numero,
+            "text": {
+                "preview_url" : False,
+                "body" : "🤝 En breve me pondré en contacto contigo."
+            }
+        }
+    elif "7" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "to": numero,
+            "text": {
+                "preview_url" : False,
+                "body" : "El horario de atención: Lunes a Viernes (9:00 AM - 17:00 PM)"
+            }
+        }
+    elif "0" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": numero,
+            "text": {
+                "preview_url": False,
+                "body": "🚀 Hola, visita mi Github https://github.com/m1guel17 para más información.\n \n📌Por favor, ingresa un número #️⃣ para recibir información.\n \n1️⃣. Información del Curso. ❔\n2️⃣. Ubicación del local. 📍\n3️⃣. Enviar temario en PDF. 📄\n4️⃣. Audio explicando curso. 🎧\n5️⃣. Video de Introducción. ⏯️\n6️⃣. Hablar con Miguel. 🙋‍♂️\n7️⃣. Horario de Atención. 🕜 \n0️⃣. Regresar al Menú. 🔄"
             }
         }
     
@@ -155,7 +192,7 @@ def enviar_mensajes_wsp(texto, numero):
             "to": numero,
             "text": {
                 "preview_url": False,
-                "body": "🚀 Hola, visita mi Github https://github.com/m1guel17 para más información.\n \n📌Por favor, ingresa un número #️⃣ para recibir información.\n \n1️⃣. Información del Curso. ❔\n2️⃣. Ubicación del local. 📍\n3️⃣. Enviar temario en PDF. 📄\n4️⃣. Audio explicando curso. 🎧\n5️⃣. Video de Introducción. ⏯️\n6️⃣. Hablar con AnderCode. 🙋‍♂️\n7️⃣. Horario de Atención. 🕜 \n0️⃣. Regresar al Menú. 🕜"
+                "body": "🚀 Hola, visita mi Github https://github.com/m1guel17 para más información.\n \n📌Por favor, ingresa un número #️⃣ para recibir información.\n \n1️⃣. Información del Curso. ❔\n2️⃣. Ubicación del local. 📍\n3️⃣. Enviar temario en PDF. 📄\n4️⃣. Audio explicando curso. 🎧\n5️⃣. Video de Introducción. ⏯️\n6️⃣. Hablar con Miguel. 🙋‍♂️\n7️⃣. Horario de Atención. 🕜 \n0️⃣. Regresar al Menú. 🔄"
             }
         }
     data = json.dumps(data) # Convertir el diccionario en formato JSON
