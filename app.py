@@ -30,7 +30,7 @@ def index():
     # Obtener todos los registros de la base de datos
     registros = Log.query.all()
     registros_ordenados = ordenar_por_fecha_y_hora(registros)
-    return render_template('index.html', registros=registros_ordenados) , render_template('duplicate.html', registros=registros_ordenados) 
+    return render_template('index.html', registros=registros_ordenados);
 
 mensajes_log = []
 # Función para agregar mensajes y guardar en la base de datos
