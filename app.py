@@ -77,12 +77,19 @@ def recibir_mensajes(req):
                 
                 if tipo == "interactive":
                     tipo_interactivo  = messages["interactive"]["type"]
+                    
                     if tipo_interactivo == "button_reply":
                         texto = messages["interactive"]["button_reply"]["id"]
                         numero = messages["from"]
-                        #return 0
                         enviar_mensajes_wsp(texto, numero)
-                
+                        #return 0
+                    
+                    elif tipo_interactivo == "list_reply":
+                        texto = messages["interactive"]["list_reply"]["id"]
+                        numero = messages["from"]
+                        enviar_mensajes_wsp(texto, numero)
+
+
                 if "text" in messages:
                     texto = messages["text"]["body"]
                     numero = messages["from"]
@@ -268,7 +275,7 @@ def enviar_mensajes_wsp(texto, numero):
     elif "lista" in texto:
         data = {
             "messaging_product": "whatsapp",
-            "recipient_type": "individual",
+            #"recipient_type": "individual",
             "to": numero,
             "type": "interactive",
             "interactive": {
@@ -316,7 +323,28 @@ def enviar_mensajes_wsp(texto, numero):
                 }
             }
         }
-
+    elif "btncomprar" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": numero,
+            "type": "text",
+            "text": {
+                "preview_url": False,
+                "body": "Los mejores artículos top en ofertas."
+            }
+        }
+    elif "btnvender" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": numero,
+            "type": "text",
+            "text": {
+                "preview_url": False,
+                "body": "Excelente elección."
+            }
+        }
     else:
         data = {
             "messaging_product": "whatsapp",
