@@ -14,11 +14,18 @@ db = SQLAlchemy(app)
 # Modelo de la tabla log
 class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    fecha_y_hora = db.Column(db.DateTime, default = datetime.utcnow)
+    fecha_y_hora = db.Column(db.DateTime, default = datetime)
     texto = db.Column(db.TEXT)
+    number = db.Column(db.TEXT)
 
 with app.app_context():   # Crear la tabla si no existe
     db.create_all()
+    #t1= Log(texto = "Test1")
+    #t2= Log(texto = "Test2")
+    #db.session.add(t1)
+    #db.session.add(t2)
+    #db.session.commit()
+
 
 def ordenar_por_fecha_y_hora(registros): # Función para ordenar los registros por fecha y hora
     #return sorted(registros, key = lambda x: x.id, reverse = False) # Para invertir orden de id
@@ -73,7 +80,7 @@ def recibir_mensajes(req):
             
             if  "type" in messages:
                 tipo = messages["type"]
-                agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
+                #agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
                 
                 if tipo == "interactive":
                     tipo_interactivo  = messages["interactive"]["type"]
@@ -97,7 +104,7 @@ def recibir_mensajes(req):
                     enviar_mensajes_wsp(texto, numero)
                     #agregar_mensajes_log(json.dumps(texto))
                     #agregar_mensajes_log(json.dumps(numero))
-                    agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
+                    agregar_mensajes_log(messages, texto)  #Guardar registro en base de datos
         
         #agregar_mensajes_log(json.dumps(objeto_mensaje))
         return jsonify({'message':'EVENT_RECEIVED'})
