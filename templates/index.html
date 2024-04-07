@@ -27,13 +27,13 @@
         <tr>
             <th>Fecha y Hora</th>
             <th>Mensaje</th>
-            <th>Numero</th>
+            <!--<th>Numero</th>-->
         </tr>
         {%for registro in registros %}
             <tr>
                 <td>{{registro.fecha_y_hora}}</td>
                 <td>{{registro.texto}}</td>
-                <td>{{registro.from}}</td>
+                <!--<td>{{registro.number}}</td>-->
             </tr>
         {% endfor %}
     </table>

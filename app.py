@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 # Modelo de la tabla log
 class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    fecha_y_hora = db.Column(db.DateTime, default = datetime)
+    fecha_y_hora = db.Column(db.DateTime, default = datetime.utcnow)
     texto = db.Column(db.TEXT)
     number = db.Column(db.TEXT)
 
@@ -47,6 +47,19 @@ def agregar_mensajes_log(texto):
     db.session.add(nuevo_registro)
     db.session.commit()
     
+
+mensajes_log2 = []
+number_log2 = []
+# Función para agregar mensajes y guardar en la base de datos
+def agregar_mensajes_log2(texto, number):
+    mensajes_log2.append(texto)
+    number_log2.append(number)
+    nuevo_registro = Log(texto = texto, number = number) # Guardar el mensaje en la base de datos
+    db.session.add(nuevo_registro)
+    db.session.commit()
+
+
+
 # Token de verificación para la configuración
 TOKEN = "TOKENX"
 
@@ -80,7 +93,7 @@ def recibir_mensajes(req):
             
             if  "type" in messages:
                 tipo = messages["type"]
-                #agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
+                agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
                 
                 if tipo == "interactive":
                     tipo_interactivo  = messages["interactive"]["type"]
@@ -104,7 +117,7 @@ def recibir_mensajes(req):
                     enviar_mensajes_wsp(texto, numero)
                     #agregar_mensajes_log(json.dumps(texto))
                     #agregar_mensajes_log(json.dumps(numero))
-                    agregar_mensajes_log(messages, texto)  #Guardar registro en base de datos
+                    agregar_mensajes_log2(json.dumps(messages), numero)  #Guardar log en base de datos
         
         #agregar_mensajes_log(json.dumps(objeto_mensaje))
         return jsonify({'message':'EVENT_RECEIVED'})
