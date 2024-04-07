@@ -323,7 +323,7 @@ def enviar_mensajes_wsp(texto, numero):
                 }
             }
         }
-    elif "btncomprar" in texto:
+    elif "btncompra" in texto:
         data = {
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
