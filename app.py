@@ -265,6 +265,57 @@ def enviar_mensajes_wsp(texto, numero):
                 "body": "Estaré a la espera"
             }
         }
+    elif "lista" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": numero,
+            "type": "interactive",
+            "interactive": {
+                "type": "list",
+                "body": {
+                    "text": "Selecciona alguna opción"
+                },
+                "footer": {
+                    "text": "Selecciona alguna de las opciones para poder ayudarte"
+                },
+                "action":{
+                    "button": "Ver Opciones",
+                    "sections": [
+                        {
+                            "title": "Compra y Venta",
+                            "rows": [
+                                {
+                                    "id": "btncompra",
+                                    "title": "Comprar",
+                                    "description": "Compra los mejores artículos de tecnología"
+                                },
+                                {
+                                    "id": "btnvender",
+                                    "title": "Vender",
+                                    "description": "Vende lo que ya no estés usando"
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Distribución y Entrega",
+                            "rows": [
+                                {
+                                    "id": "btndireccion",
+                                    "title": "Local",
+                                    "description": "Puedes visistar nuestro local."
+                                },
+                                {
+                                    "id": "btnentrega",
+                                    "title": "Entrega",
+                                    "description": "La entrega se realiza todo los dias."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
 
     else:
         data = {
