@@ -49,7 +49,7 @@ def agregar_mensajes_log(texto):
 mensajes_log2 = []
 number_log2 = []
 # Función para agregar mensajes y guardar en la base de datos
-def agregar_mensajes_log2(texto, number):
+def agregar_txt_num_log(texto, number):
     mensajes_log2.append(texto)
     number_log2.append(number)
     nuevo_registro = Log(texto = texto, number = number) # Guardar el mensaje en la base de datos
@@ -92,7 +92,7 @@ def recibir_mensajes(req):
             
             if  "type" in messages:
                 tipo = messages["type"]
-                agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
+                #agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
                 
                 if tipo == "interactive":
                     tipo_interactivo  = messages["interactive"]["type"]
@@ -107,7 +107,7 @@ def recibir_mensajes(req):
                         texto = messages["interactive"]["list_reply"]["id"]
                         numero = messages["from"]
                         enviar_mensajes_wsp(texto, numero)
-
+                    agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
 
                 if "text" in messages:
                     texto = messages["text"]["body"]
@@ -116,7 +116,7 @@ def recibir_mensajes(req):
                     enviar_mensajes_wsp(texto, numero)
                     #agregar_mensajes_log(json.dumps(texto))
                     #agregar_mensajes_log(json.dumps(numero))
-                    agregar_mensajes_log2(json.dumps(messages), numero)  #Guardar log en base de datos
+                    agregar_txt_num_log(json.dumps(messages), numero)  #Guardar log en base de datos
         
         #agregar_mensajes_log(json.dumps(objeto_mensaje))
         return jsonify({'message':'EVENT_RECEIVED'})
