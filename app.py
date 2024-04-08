@@ -21,11 +21,10 @@ class Log(db.Model):
 with app.app_context():   # Crear la tabla si no existe
     db.create_all()
     #t1= Log(texto = "Test1")
-    #t2= Log(texto = "Test2")
+    #t2= Log(texto = "Test2", number = "XXXXXXXXX")
     #db.session.add(t1)
     #db.session.add(t2)
     #db.session.commit()
-
 
 def ordenar_por_fecha_y_hora(registros): # Función para ordenar los registros por fecha y hora
     #return sorted(registros, key = lambda x: x.id, reverse = False) # Para invertir orden de id
@@ -44,8 +43,8 @@ mensajes_log = []
 def agregar_mensajes_log(texto):
     mensajes_log.append(texto)
     nuevo_registro = Log(texto=texto) # Guardar el mensaje en la base de datos
-    db.session.add(nuevo_registro)
-    db.session.commit()
+    #db.session.add(nuevo_registro)
+    #db.session.commit()
     
 
 mensajes_log2 = []
@@ -55,8 +54,8 @@ def agregar_mensajes_log2(texto, number):
     mensajes_log2.append(texto)
     number_log2.append(number)
     nuevo_registro = Log(texto = texto, number = number) # Guardar el mensaje en la base de datos
-    db.session.add(nuevo_registro)
-    db.session.commit()
+    #db.session.add(nuevo_registro)
+    #db.session.commit()
 
 
 
@@ -64,6 +63,7 @@ def agregar_mensajes_log2(texto, number):
 TOKEN = "TOKENX"
 
 @app.route('/webhook', methods=['GET','POST'])
+
 def webhook():
     if request.method == 'GET':
         challenge = verificar_token(request)
@@ -93,7 +93,7 @@ def recibir_mensajes(req):
             
             if  "type" in messages:
                 tipo = messages["type"]
-                agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
+                #agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
                 
                 if tipo == "interactive":
                     tipo_interactivo  = messages["interactive"]["type"]
@@ -365,6 +365,28 @@ def enviar_mensajes_wsp(texto, numero):
                 "body": "Excelente elección."
             }
         }
+    elif "btndireccion" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": numero,
+            "type": "text",
+            "text": {
+                "preview_url": False,
+                "body": "La dirección es la siguiente."
+            }
+        }
+    elif "btnentrega" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": numero,
+            "type": "text",
+            "text": {
+                "preview_url": False,
+                "body": "La entrega son los días miercoles en oficina."
+            }
+        }
     else:
         data = {
             "messaging_product": "whatsapp",
@@ -379,7 +401,7 @@ def enviar_mensajes_wsp(texto, numero):
 
     headers = {
         "Content-Type" : "application/json",
-        "Authorization" : "Bearer EAAFtbtx1eJEBO59dJ6UlVFlcZAaeZBhZCnaZB2JZB3nVdpFxlIqBHq8cgwtvkhmh21EAXcKgnHZBJZBrT7mnvbouqn5ZAsafnYBUG7kIkLmgKZAZBM2ocKIEgSqOAayg3T4dud7khAFdqMx3cpmnbRHwciGTrRXkp7wa8BBKDts7ZAfYrxOuNZCMiSvXLJlMKiytpE05ZA8DjuLPZBPfU8EgORZAzF02wz3wszgBkNOfOfWpCcZD"
+        "Authorization" : "Bearer EAAFtbtx1eJEBO5QPMqzfpMkzel5UaKE8N5qeDkFQdZC5pFr90v4v4LCfeRHOqP8T53dYMbr2qKBIEjn6K5it0reCX18mLomZAX0fSZAZBVliOeC9d0jyhexLidIbYh0ZCKa9q11BImksxGnmkl6urpMTokOi5jAw2u7nS1wVSpkkRgLXw9T0p7krq2PICbGZCoMtnjWkvHZAY88I2B8cz3giHHgt2IxxZCG0DZAkZD"
     }
     connection = http.client.HTTPSConnection("graph.facebook.com")
 
