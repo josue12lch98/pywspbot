@@ -43,10 +43,9 @@ mensajes_log = []
 def agregar_mensajes_log(texto):
     mensajes_log.append(texto)
     nuevo_registro = Log(texto=texto) # Guardar el mensaje en la base de datos
-    #db.session.add(nuevo_registro)
-    #db.session.commit()
+    db.session.add(nuevo_registro)
+    db.session.commit()
     
-
 mensajes_log2 = []
 number_log2 = []
 # Función para agregar mensajes y guardar en la base de datos
@@ -54,8 +53,8 @@ def agregar_mensajes_log2(texto, number):
     mensajes_log2.append(texto)
     number_log2.append(number)
     nuevo_registro = Log(texto = texto, number = number) # Guardar el mensaje en la base de datos
-    #db.session.add(nuevo_registro)
-    #db.session.commit()
+    db.session.add(nuevo_registro)
+    db.session.commit()
 
 
 
