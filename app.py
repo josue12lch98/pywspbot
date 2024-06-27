@@ -154,11 +154,22 @@ def recibir_mensaje(req):
     except Exception as e:
         return jsonify({'message': 'EVENT_RECEIVED'})
 
-
+def find_last_flow_by_number(number):
+    try:
+        last_log = Log.query.filter_by(number=number).order_by(Log.fecha_y_hora.desc()).first()
+        if last_log:
+            return last_log.flow
+        else:
+            return None
+    except Exception as e:
+        print("Error retrieving last flow: ", str(e))
+        return None
 # Ciclo entrada
 def send_txt(texto, numero, flow):
     texto = texto.lower()
-    flow=get_last_flow(numero)
+    flow=  find_last_flow_by_number(numero)
+    if flow is None:
+        flow = 0
     match flow:
         case 0:
             data = {
