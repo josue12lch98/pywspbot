@@ -5,20 +5,6 @@ import json
 import http.client
 
 from flow1 import handle_flow_0_subflow_0, handle_flow_0_subflow_1, handle_flow_0_subflow_2, handle_flow_0_subflow_3
-from flask import Flask, request, jsonify, render_template
-
-from Config import DevelopmentConfig  # Importa la configuración que necesitas
-
-app = Flask(__name__)
-app.config.from_object(DevelopmentConfig)  # Utiliza la configuración del objeto
-
-# Ahora inicializa SQLAlchemy con la app configurada
-from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy(app)
-
-# Modelo de la tabla y otras partes de tu aplicación aquí...
-
-# Resto del código de Flask...
 
 app = Flask(__name__)
 
@@ -33,6 +19,7 @@ class UserState(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.TEXT, unique=True, nullable=False)
     flow = db.Column(db.Integer, default=0)
+    @app.route('/')
     subFlow=db.Column(db.Integer, default=0)
     dni = db.Column(db.TEXT)
     full_name = db.Column(db.TEXT)
@@ -40,6 +27,8 @@ class UserState(db.Model):
     sucursal = db.Column(db.TEXT)
 def get_user_state(number):
     return UserState.query.filter_by(number=number).first()
+
+
 def update_user_state( number , **kwargs):
     user_state = get_user_state(number)
     if not user_state:
@@ -61,55 +50,39 @@ with app.app_context():  # Crear la tabla si no existe
 
 
 
-@app.route('/')
-def index():
-    # Obtener todos los registros de la base de datos
-    registros = UserState.query.all()
-    registros_ordenados = ordenar_por_fecha_y_hora(registros)
-    return render_template('index.html', registros=registros_ordenados);
-
-
-mensajes_log = []
-
-
-# Función para agregar mensajes y guardar en la base de datos
-def agregar_mensajes_log(texto):
-    mensajes_log.append(texto)
-    nuevo_registro = UserState(texto=texto)  # Guardar el mensaje en la base de datos
     db.session.add(nuevo_registro)
     db.session.commit()
-
-
 mensajes_log2 = []
+
+
 number_log2 = []
-
-
 # Función para agregar mensajes y guardar en la base de datos
+
+
 def agregar_txt_num_log(texto, number, flow):
     mensajes_log2.append(texto)
     number_log2.append(number)
     nuevo_registro = UserState(texto=texto, number=number, flow=flow)  # Guardar el mensaje en la base de datos
     db.session.add(nuevo_registro)
     db.session.commit()
-
-
 # variables globales
 flow = 0
 dni = ""
 full_name = ""
 name = ""
 client = ""
+
 sucursal = ""
-
 # Token de verificación para la configuración
+exto)  # Guardar el mensaje en la base de datos
+
+
 TOKEN = "TOKENX"
-
-
 @app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
     if request.method == 'GET':
-        challenge = verificar_token(request)
-        return challenge
+    challenge = verificar_token(request)
+return challenge
     elif request.method == 'POST':
         response = recibir_mensaje(request)
         return response
