@@ -4,7 +4,7 @@ from datetime import datetime
 import json
 import http.client
 
-from flow1 import handle_flow_0_subflow_0, handle_flow_0_subflow_1
+from flow1 import handle_flow_0_subflow_0, handle_flow_0_subflow_1, handle_flow_0_subflow_2, handle_flow_0_subflow_3
 
 app = Flask(__name__)
 
@@ -173,37 +173,10 @@ def send_txt(texto, numero):
                 case 1:
                     handle_flow_0_subflow_1(numero, texto)
                 case 2:  # Consultar si se puede hacer lista
-                    full_name = texto
-                    name = texto.split()[0]
-                    msg = name + " Un gusto de conocerte por este medio (...), ¿Puedes comentarme, a qué cliente estás asignado? (Ejemplo: BCP)"
-                    data = {
-                        "messaging_product": "whatsapp",
-                        "recipient_type": "individual",
-                        "to": numero,
-                        "text": {
-                            "preview_url": False,
-                            "body": msg
-                        }
-                    }
-                    client = name
-                    flow = 3
-                    update_user_state( number=numero, flow=flow)
+                    handle_flow_0_subflow_2(numero, texto)
 
                 case 3:
-                    msg = "Finalmente, detállame a qué sucursal perteneces " + name + " (Ejemplos: Lima Sur, Arequipa, Chiclayo)"
-                    # Colocar excepcion para cuando está asignado a clientes que no maneja G4S pending
-                    data = {
-                        "messaging_product": "whatsapp",
-                        "recipient_type": "individual",
-                        "to": numero,
-                        "text": {
-                            "preview_url": False,
-                            "body": msg
-                        }
-                    }
-                    flow = 4
-
-                    update_user_state( number=numero, flow=flow)
+                    handle_flow_0_subflow_3(numero, texto)
         case 4:
             """                
             if texto != "": 
@@ -277,6 +250,9 @@ def send_txt(texto, numero):
                 }
                 flow = 0
 
+
+
+def generic_reply(data):
     data = json.dumps(data)  # Convertir el diccionario en formato JSON
 
     headers = {
@@ -293,6 +269,7 @@ def send_txt(texto, numero):
         agregar_mensajes_log(json.dumps(e))
     finally:
         connection.close()
+
 
 
 if __name__ == '__main__':
