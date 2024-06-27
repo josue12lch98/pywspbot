@@ -56,6 +56,13 @@ def agregar_txt_num_log(texto, number):
     db.session.add(nuevo_registro)
     db.session.commit()
 
+# variables globales
+flow = 0
+dni = ""
+full_name = ""
+name = ""
+client = ""
+sucursal = ""
 
 
 # Token de verificación para la configuración
@@ -68,7 +75,7 @@ def webhook():
         challenge = verificar_token(request)
         return challenge
     elif request.method == 'POST':
-        response = recibir_mensajes(request)
+        response = recibir_mensaje(request)
         return response
 
 def verificar_token(req):
@@ -79,7 +86,7 @@ def verificar_token(req):
     else:
         return jsonify({'error':'Token Invalido'}),401
 
-def recibir_mensajes(req):
+def recibir_mensaje(req):
     try:
         req = request.get_json()
         entry = req['entry'][0]
@@ -100,20 +107,19 @@ def recibir_mensajes(req):
                     if tipo_interactivo == "button_reply":
                         texto = messages["interactive"]["button_reply"]["id"]
                         numero = messages["from"]
-                        enviar_mensajes_wsp(texto, numero)
+                        send_txt(texto, numero, flow)
                         #return 0
                     
                     elif tipo_interactivo == "list_reply":
                         texto = messages["interactive"]["list_reply"]["id"]
                         numero = messages["from"]
-                        enviar_mensajes_wsp(texto, numero)
+                        send_txt(texto, numero, flow)
                     agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
 
                 if "text" in messages:
                     texto = messages["text"]["body"]
                     numero = messages["from"]
-
-                    enviar_mensajes_wsp(texto, numero)
+                    send_txt(texto, numero, flow)
                     #agregar_mensajes_log(json.dumps(texto))
                     #agregar_mensajes_log(json.dumps(numero))
                     agregar_txt_num_log(json.dumps(messages), numero)  #Guardar log en base de datos
@@ -123,279 +129,150 @@ def recibir_mensajes(req):
     except Exception as e:
         return jsonify({'message':'EVENT_RECEIVED'})
 
-def enviar_mensajes_wsp(texto, numero):
+# Ciclo entrada
+def send_txt(texto, numero, flow):
     texto = texto.lower()
+    
+    match flow:
+        case 0:
+            data = {
+                "messaging_product": "whatsapp",
+                "recipient_type": "individual",
+                "to": numero,
+                "text": {
+                    "preview_url": False,
+                    "body": "Hola! 😃 Te saluda *Robotín*, asistente virtual G4S que ha sido creado para absolver las dudas generales de todos los colaboradores G4S Perú \n Para ayudarte de la mejor manera, por favor detállame tu número de DNI (Ejemplo: 758152334)"
+                }
+            }
+            flow = 1
+        case 1:
+            try:
+                int(texto)
+                data = {
+                    "messaging_product": "whatsapp",
+                    "recipient_type": "individual",
+                    "to": numero,
+                    "text": {
+                        "preview_url": False,
+                        "body": "Así mismo, bríndame tu nombre completo (Ejemplo: Juan Luis Perez Gonzales)"
+                    }
+                }
+                dni = texto
+                flow = 2
+            except Exception as e:
+                msgerror = "Disculpa tú numero de dni no parece válido. Ingresaste: " + texto + " Ingresa sólo el número de tu DNI"
+                data = {
+                        "messaging_product": "whatsapp",
+                        "recipient_type": "individual",
+                        "to": numero,
+                        "text": {
+                            "preview_url": False,
+                            "body": msgerror
+                        }
+                }
+        case 2: #Consultar si se puede hacer lista
+            full_name = texto
+            name = texto.split()[0]
+            msg = name + " Un gusto de conocerte por este medio (...), ¿Puedes comentarme, a qué cliente estás asignado? (Ejemplo: BCP)"
+            data = {
+                "messaging_product": "whatsapp",
+                "recipient_type": "individual",
+                "to": numero,
+                "text": {
+                    "preview_url": False,
+                    "body": msg
+                }
+            }
+            client = name
+            flow = 3
+            
+        case 3:
+            msg =  "Finalmente, detállame a qué sucursal perteneces " + name + " (Ejemplos: Lima Sur, Arequipa, Chiclayo)"
+            #Colocar excepcion para cuando está asignado a clientes que no maneja G4S pending
+            data = {
+                "messaging_product": "whatsapp",
+                "recipient_type": "individual",
+                "to": numero,
+                "text": {
+                    "preview_url": False,
+                    "body": msg
+                }
+            }
+            flow = 4
+            sucursal = texto
+        case 4:
+            """                
+            if texto != "": 
+                msg = "¡Listo " + name + " Gracias por confirmar tu DNI: " + dni + ", sucursal a la que perteneces: " + sucursal + " y al cliente: " + client + ", al que estás asignado. \n Para continuar, necesito que me confirmes que tus datos son los correctos."
+                data = {
+                    "messaging_product": "whatsapp",
+                    "recipient_type": "individual",
+                    "to": numero,
+                    "text": {
+                        "preview_url": False,
+                        "body": msg
+                    }
+                }
+                flow = 5    
+            """ 
+            msg = "¡Listo " + name + " Gracias por confirmar tu DNI: " + dni + ", sucursal a la que perteneces: " + sucursal + " y al cliente: " + client + ", al que estás asignado. \n Para continuar, necesito que me confirmes que tus datos son los correctos."
+            data = {
+                "messaging_product": "whatsapp",
+                "recipient_type": "individual",
+                "to": numero,
+                "type": "interactive",
+                "interactive": {
+                    "type": "button",
+                    "body": {
+                        "text": msg
+                    },
+                    "footer": {
+                        "text": "Selecciona una de las opciones"
+                    },
+                    "action": {
+                        "buttons": [
+                            {
+                                "type": "reply",
+                                "reply": {
+                                    "id": "btnsi",
+                                    "title": "Si"
+                                }
+                            },
+                            {
+                                "type": "reply",
+                                "reply": {
+                                    "id": "btnno",
+                                    "title": "No"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+            flow = 5    
+        case 5:
+            if "btnsi" in texto:
+                data = {
+                    "messaging_product": "whatsapp",
+                    "recipient_type": "individual",
+                    "to": numero,
+                    "text": {
+                        "preview_url": False,
+                        "body": "Nice"
+                    }
+                }
+            else:
+                data = {
+                    "messaging_product": "whatsapp",
+                    "recipient_type": "individual",
+                    "to": numero,
+                    "text": {
+                        "preview_url": False,
+                        "body": "Indicame tus datos nuevamente"
+                    }
+                }
 
-    if "hola" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "text": {
-                "preview_url": False,
-                "body": "🤖 Hola, ¿Cómo estas? Bienvenido."
-            }
-        }
-    elif "1" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "text": {
-                "preview_url": False,
-                "body": "Lore Ipsum"
-            }
-        }
-    elif "2" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "type": "location",
-            "location": {
-                "latitude": "-12.054347540574366", 
-                "longitude": "-77.03943293543378",
-                "name": "KDN4 Software Solutions",
-                "address": "Jr. Washington 1206"
-            }
-        }
-    elif "3" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "type": "document",
-            "document": {
-                "link": "https://www.renfe.com/content/dam/renfe/es/General/PDF-y-otros/Ejemplo-de-descarga-pdf.pdf",
-                "caption": "Ejemplo de PDF"
-            }
-        }
-    elif "4" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "type": "audio",
-            "audio": {
-                "link": "https://filesamples.com/samples/audio/mp3/sample1.mp3",
-            }
-        }
-    elif "5" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "to": numero,
-            "text": {
-                "preview_url" : True,
-                "body" : "Introducción al curso! XXXXXXXXX"
-            }
-        }
-    elif "6" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "to": numero,
-            "text": {
-                "preview_url" : False,
-                "body" : "🤝 En breve me pondré en contacto contigo."
-            }
-        }
-    elif "7" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "to": numero,
-            "text": {
-                "preview_url" : False,
-                "body" : "El horario de atención: Lunes a Viernes (9:00 AM - 17:00 PM)"
-            }
-        }
-    elif "0" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "text": {
-                "preview_url": False,
-                "body": "🚀 Hola, visita mi Github https://github.com/m1guel17 para más información.\n \n📌Por favor, ingresa un número #️⃣ para recibir información.\n \n1️⃣. Información del Curso. ❔\n2️⃣. Ubicación del local. 📍\n3️⃣. Enviar temario en PDF. 📄\n4️⃣. Audio explicando curso. 🎧\n5️⃣. Video de Introducción. ⏯️\n6️⃣. Hablar con Miguel. 🙋‍♂️\n7️⃣. Horario de Atención. 🕜 \n0️⃣. Regresar al Menú. 🔄"
-            }
-        }
-    elif "button" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "type": "interactive",
-            "interactive": {
-                "type": "button",
-                "body": {
-                    "text": "¿Confirmas tu registro?"
-                },
-                "footer": {
-                    "text": "Selecciona una de las opciones"
-                },
-                "action": {
-                    "buttons": [
-                        {
-                            "type": "reply",
-                            "reply": {
-                                "id": "btnsi",
-                                "title": "Si"
-                            }
-                        },
-                        {
-                            "type": "reply",
-                            "reply": {
-                                "id": "btnno",
-                                "title": "No"
-                            }
-                        },
-                        {
-                            "type": "reply",
-                            "reply": {
-                                "id": "btntalvez",
-                                "title": "Tal vez"
-                            }
-                        }
-                    ]
-                }
-            }
-        }
-    elif "btnsi" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "type": "text",
-            "text": {
-                "preview_url": False,
-                "body": "Muchas Gracias por aceptar"
-            }
-        }
-    elif "btnno" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "type": "text",
-            "text": {
-                "preview_url": False,
-                "body": "Es una lástima"
-            }
-        }
-    elif "btntalvez" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "type": "text",
-            "text": {
-                "preview_url": False,
-                "body": "Estaré a la espera"
-            }
-        }
-    elif "lista" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            #"recipient_type": "individual",
-            "to": numero,
-            "type": "interactive",
-            "interactive": {
-                "type": "list",
-                "body": {
-                    "text": "Selecciona alguna opción"
-                },
-                "footer": {
-                    "text": "Selecciona alguna de las opciones para poder ayudarte"
-                },
-                "action":{
-                    "button": "Ver Opciones",
-                    "sections": [
-                        {
-                            "title": "Compra y Venta",
-                            "rows": [
-                                {
-                                    "id": "btncompra",
-                                    "title": "Comprar",
-                                    "description": "Compra los mejores artículos de tecnología"
-                                },
-                                {
-                                    "id": "btnvender",
-                                    "title": "Vender",
-                                    "description": "Vende lo que ya no estés usando"
-                                }
-                            ]
-                        },
-                        {
-                            "title": "Distribución y Entrega",
-                            "rows": [
-                                {
-                                    "id": "btndireccion",
-                                    "title": "Local",
-                                    "description": "Puedes visistar nuestro local."
-                                },
-                                {
-                                    "id": "btnentrega",
-                                    "title": "Entrega",
-                                    "description": "La entrega se realiza todo los dias."
-                                }
-                            ]
-                        }
-                    ]
-                }
-            }
-        }
-    elif "btncompra" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "type": "text",
-            "text": {
-                "preview_url": False,
-                "body": "Los mejores artículos top en ofertas."
-            }
-        }
-    elif "btnvender" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "type": "text",
-            "text": {
-                "preview_url": False,
-                "body": "Excelente elección."
-            }
-        }
-    elif "btndireccion" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "type": "text",
-            "text": {
-                "preview_url": False,
-                "body": "La dirección es la siguiente."
-            }
-        }
-    elif "btnentrega" in texto:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "type": "text",
-            "text": {
-                "preview_url": False,
-                "body": "La entrega son los días miercoles en oficina."
-            }
-        }
-    else:
-        data = {
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": numero,
-            "text": {
-                "preview_url": False,
-                "body": "🚀 Hola, visita mi Github https://github.com/m1guel17 para más información.\n \n📌Por favor, ingresa un número #️⃣ para recibir información.\n \n1️⃣. Información del Curso. ❔\n2️⃣. Ubicación del local. 📍\n3️⃣. Enviar temario en PDF. 📄\n4️⃣. Audio explicando curso. 🎧\n5️⃣. Video de Introducción. ⏯️\n6️⃣. Hablar con Miguel. 🙋‍♂️\n7️⃣. Horario de Atención. 🕜 \n0️⃣. Regresar al Menú. 🔄"
-            }
-        }
+     
     data = json.dumps(data) # Convertir el diccionario en formato JSON
 
     headers = {

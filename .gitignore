@@ -2,3 +2,4 @@ instance/*
 !instance/.gitkeep
 app2.py
 app_backup.py
+app_copy.py
