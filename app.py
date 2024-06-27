@@ -13,7 +13,7 @@ db = SQLAlchemy(app)
 
 
 # Modelo de la tabla log
-class Log(db.Model):
+class UserState(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.TEXT, unique=True, nullable=False)
     flow = db.Column(db.Integer, default=0)
@@ -23,11 +23,11 @@ class Log(db.Model):
     client = db.Column(db.TEXT)
     sucursal = db.Column(db.TEXT)
 def get_user_state(number):
-    return Log.query.filter_by(number=number).first()
-def update_user_state(number, **kwargs):
+    return UserState.query.filter_by(number=number).first()
+def update_user_state( number , **kwargs):
     user_state = get_user_state(number)
     if not user_state:
-        user_state = Log(number=number)
+        user_state = UserState(number=number)
         db.session.add(user_state)
     for key, value in kwargs.items():
         setattr(user_state, key, value)
@@ -42,22 +42,7 @@ with app.app_context():  # Crear la tabla si no existe
     # db.session.add(t2)
     # db.session.commit()
 
-def get_last_flow(number):
-    try:
-        # Filtra los registros por el número dado y ordena por fecha y hora en orden descendente
-        last_log = Log.query.filter_by(number=number).order_by(Log.fecha_y_hora.desc()).first()
-        if last_log:
-            # Si encuentra un registro, devuelve el valor de flow en formato JSON
-            return jsonify({"flow": last_log.flow}), 200
-        else:
-            # Si no encuentra registros para ese número, devuelve un mensaje adecuado
-            return jsonify({"message": "No logs found for the specified number"}), 404
-    except Exception as e:
-        # Maneja cualquier excepción que pueda ocurrir durante la consulta
-        return jsonify({"error": str(e)}), 500
-def ordenar_por_fecha_y_hora(registros):  # Función para ordenar los registros por fecha y hora
-    # return sorted(registros, key = lambda x: x.id, reverse = False) # Para invertir orden de id
-    return sorted(registros, key=lambda x: x.fecha_y_hora, reverse=True)
+
 
 
 @app.route('/')
@@ -167,22 +152,13 @@ def recibir_mensaje(req):
     except Exception as e:
         return jsonify({'message': 'EVENT_RECEIVED'})
 
-def find_last_flow_by_number(number):
-    try:
-        last_log = Log.query.filter_by(number=number).order_by(Log.fecha_y_hora.desc()).first()
-        if last_log:
-            return last_log.flow
-        else:
-            return None
-    except Exception as e:
-        print("Error retrieving last flow: ", str(e))
-        return None
+
 # Ciclo entrada
 def send_txt(texto, numero):
     texto = texto.lower()
     user_state = get_user_state(numero)
     if user_state is None:
-        user_state = update_user_state(numero, flow=0,subFlow=0)
+        update_user_state(numero, flow=0,subFlow=0)
         user_state = get_user_state(numero)
 
     match user_state.flow:
@@ -215,7 +191,7 @@ def send_txt(texto, numero):
                             }
                         }
                         dni = texto
-                        subFlow = 1
+                        subFlow = 2
                         update_user_state( number=numero, subFlow=subFlow, dni=dni)
                     except Exception as e:
                         msgerror = "Disculpa tú numero de dni no parece válido. Ingresaste: " + texto + " Ingresa sólo el número de tu DNI"
@@ -228,6 +204,8 @@ def send_txt(texto, numero):
                                 "body": msgerror
                             }
                         }
+                        subFlow = 1
+                        update_user_state( number=numero, subFlow=subFlow,  )
                 case 2:  # Consultar si se puede hacer lista
                     full_name = texto
                     name = texto.split()[0]
