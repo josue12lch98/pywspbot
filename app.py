@@ -4,7 +4,7 @@ from datetime import datetime
 import json
 import http.client
 
-app = Flask(__name__)
+app = Flask(_name_)
 
 # Configuración de la base de datos SQLite
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///metapython.db'
@@ -18,6 +18,7 @@ class Log(db.Model):
     fecha_y_hora = db.Column(db.DateTime, default=datetime.utcnow)
     texto = db.Column(db.TEXT)
     number = db.Column(db.TEXT)
+    flow = db.Column(db.TEXT)
 
 
 with app.app_context():  # Crear la tabla si no existe
@@ -58,10 +59,10 @@ number_log2 = []
 
 
 # Función para agregar mensajes y guardar en la base de datos
-def agregar_txt_num_log(texto, number):
+def agregar_txt_num_log(texto, number, flow):
     mensajes_log2.append(texto)
     number_log2.append(number)
-    nuevo_registro = Log(texto=texto, number=number)  # Guardar el mensaje en la base de datos
+    nuevo_registro = Log(texto=texto, number=number, flow=flow)  # Guardar el mensaje en la base de datos
     db.session.add(nuevo_registro)
     db.session.commit()
 
@@ -125,7 +126,7 @@ def recibir_mensaje(req):
                         texto = messages["interactive"]["list_reply"]["id"]
                         numero = messages["from"]
                         send_txt(texto, numero, flow)
-                    agregar_mensajes_log(json.dumps(messages))  # Guardar log en base de datos
+                    agregar_txt_num_log(json.dumps(messages), numero, flow)  # Guardar log en base de datos
 
                 if "text" in messages:
                     texto = messages["text"]["body"]
@@ -133,7 +134,7 @@ def recibir_mensaje(req):
                     send_txt(texto, numero, flow)
                     # agregar_mensajes_log(json.dumps(texto))
                     # agregar_mensajes_log(json.dumps(numero))
-                    agregar_txt_num_log(json.dumps(messages), numero)  # Guardar log en base de datos
+                    agregar_txt_num_log(json.dumps(messages), numero, flow)  # Guardar log en base de datos
 
         # agregar_mensajes_log(json.dumps(objeto_mensaje))
         return jsonify({'message': 'EVENT_RECEIVED'})
@@ -303,7 +304,7 @@ def send_txt(texto, numero, flow):
         connection.close()
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
     # app.run(debug=True)
 
