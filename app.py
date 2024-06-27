@@ -4,7 +4,7 @@ from datetime import datetime
 import json
 import http.client
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 # Configuración de la base de datos SQLite
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///metapython.db'
