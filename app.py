@@ -400,12 +400,12 @@ def enviar_mensajes_wsp(texto, numero):
 
     headers = {
         "Content-Type" : "application/json",
-        "Authorization" : "Bearer EAAFtbtx1eJEBO5QPMqzfpMkzel5UaKE8N5qeDkFQdZC5pFr90v4v4LCfeRHOqP8T53dYMbr2qKBIEjn6K5it0reCX18mLomZAX0fSZAZBVliOeC9d0jyhexLidIbYh0ZCKa9q11BImksxGnmkl6urpMTokOi5jAw2u7nS1wVSpkkRgLXw9T0p7krq2PICbGZCoMtnjWkvHZAY88I2B8cz3giHHgt2IxxZCG0DZAkZD"
+        "Authorization" : "Bearer EAAV8kZCQDeLkBO7zt2MHThLR9X9V7OK75TnsYprLwLos8sbv1sreKraudfBRwVHZBZBpt9PESJ4m974NH6fZBew8p0RAZBNxEBjSEONYjjWZBmNIQIms38XHIFlK4r7ChWOasPq4W0uZCJEXJ4X0CajyGbzC08z8kz2UZAZApdHIcNpiiEGwZCHZBUBVt3F9qaWHhXhEK3gPduiudoWDmYKAYgZD"
     }
     connection = http.client.HTTPSConnection("graph.facebook.com")
 
     try:
-        connection.request("POST","/v18.0/259957250537628/messages", data, headers)
+        connection.request("POST","/v20.0/357679540758058/messages", data, headers)
         response = connection.getresponse()
         print(response.status, response.reason)
     except Exception as e:
