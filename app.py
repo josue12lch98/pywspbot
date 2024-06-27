@@ -182,7 +182,7 @@ def send_txt(texto, numero, flow):
     texto = texto.lower()
     user_state = get_user_state(numero)
     if user_state is None:
-        user_state = update_user_state(numero, flow=0)
+        user_state = update_user_state(numero, flow=0,subFlow=0)
 
     match user_state.flow:
         case 0:
@@ -214,8 +214,8 @@ def send_txt(texto, numero, flow):
                             }
                         }
                         dni = texto
-                        flow = 2
-                        update_user_state( number=numero, flow=flow)
+                        subFlow = 1
+                        update_user_state( number=numero, subFlow=subFlow, dni=)
                     except Exception as e:
                         msgerror = "Disculpa tú numero de dni no parece válido. Ingresaste: " + texto + " Ingresa sólo el número de tu DNI"
                         data = {
