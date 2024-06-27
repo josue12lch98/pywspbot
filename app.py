@@ -182,6 +182,9 @@ def send_txt(texto, numero, flow):
                 }
             }
             flow = 1
+            agregar_txt_num_log(texto, numero, flow)
+
+
         case 1:
             try:
                 int(texto)
@@ -196,6 +199,7 @@ def send_txt(texto, numero, flow):
                 }
                 dni = texto
                 flow = 2
+                agregar_txt_num_log(texto, numero, flow)
             except Exception as e:
                 msgerror = "Disculpa tú numero de dni no parece válido. Ingresaste: " + texto + " Ingresa sólo el número de tu DNI"
                 data = {
@@ -222,6 +226,7 @@ def send_txt(texto, numero, flow):
             }
             client = name
             flow = 3
+            agregar_txt_num_log(texto, numero, flow)
 
         case 3:
             msg = "Finalmente, detállame a qué sucursal perteneces " + name + " (Ejemplos: Lima Sur, Arequipa, Chiclayo)"
@@ -237,6 +242,7 @@ def send_txt(texto, numero, flow):
             }
             flow = 4
             sucursal = texto
+            agregar_txt_num_log(texto, numero, flow)
         case 4:
             """                
             if texto != "": 
