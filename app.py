@@ -139,7 +139,7 @@ def recibir_mensaje(req):
                         texto = messages["interactive"]["list_reply"]["id"]
                         numero = messages["from"]
                         send_txt(texto, numero, flow)
-                    agregar_txt_num_log(json.dumps(messages), numero, flow)  # Guardar log en base de datos
+
 
                 if "text" in messages:
                     texto = messages["text"]["body"]
@@ -147,7 +147,7 @@ def recibir_mensaje(req):
                     send_txt(texto, numero, flow)
                     # agregar_mensajes_log(json.dumps(texto))
                     # agregar_mensajes_log(json.dumps(numero))
-                    agregar_txt_num_log(json.dumps(messages), numero, flow)  # Guardar log en base de datos
+
 
         # agregar_mensajes_log(json.dumps(objeto_mensaje))
         return jsonify({'message': 'EVENT_RECEIVED'})
