@@ -17,6 +17,7 @@ class Log(db.Model):
     fecha_y_hora = db.Column(db.DateTime, default = datetime.utcnow)
     texto = db.Column(db.TEXT)
     number = db.Column(db.TEXT)
+    flow = db.Column(db.TEXT)
 
 with app.app_context():   # Crear la tabla si no existe
     db.create_all()
@@ -49,10 +50,10 @@ def agregar_mensajes_log(texto):
 mensajes_log2 = []
 number_log2 = []
 # Función para agregar mensajes y guardar en la base de datos
-def agregar_txt_num_log(texto, number):
+def agregar_txt_num_log(texto, number, flow):
     mensajes_log2.append(texto)
     number_log2.append(number)
-    nuevo_registro = Log(texto = texto, number = number) # Guardar el mensaje en la base de datos
+    nuevo_registro = Log(texto = texto, number = number, flow = flow) # Guardar el mensaje en la base de datos
     db.session.add(nuevo_registro)
     db.session.commit()
 
@@ -114,7 +115,7 @@ def recibir_mensaje(req):
                         texto = messages["interactive"]["list_reply"]["id"]
                         numero = messages["from"]
                         send_txt(texto, numero, flow)
-                    agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
+                    agregar_txt_num_log(json.dumps(messages), numero, flow)  #Guardar log en base de datos
 
                 if "text" in messages:
                     texto = messages["text"]["body"]
@@ -122,7 +123,7 @@ def recibir_mensaje(req):
                     send_txt(texto, numero, flow)
                     #agregar_mensajes_log(json.dumps(texto))
                     #agregar_mensajes_log(json.dumps(numero))
-                    agregar_txt_num_log(json.dumps(messages), numero)  #Guardar log en base de datos
+                    agregar_txt_num_log(json.dumps(messages), numero, flow)  #Guardar log en base de datos
         
         #agregar_mensajes_log(json.dumps(objeto_mensaje))
         return jsonify({'message':'EVENT_RECEIVED'})
@@ -271,7 +272,7 @@ def send_txt(texto, numero, flow):
                         "body": "Indicame tus datos nuevamente"
                     }
                 }
-
+                flow = 0
      
     data = json.dumps(data) # Convertir el diccionario en formato JSON
 
