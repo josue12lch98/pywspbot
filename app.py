@@ -18,7 +18,7 @@ class Log(db.Model):
     fecha_y_hora = db.Column(db.DateTime, default=datetime.utcnow)
     texto = db.Column(db.TEXT)
     number = db.Column(db.TEXT)
-    flow = db.Column(db.TEXT)
+    flow = db.Column(db.Integer)
 
 
 with app.app_context():  # Crear la tabla si no existe
