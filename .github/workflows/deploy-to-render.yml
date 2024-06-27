@@ -1,0 +1,21 @@
+name: Deploy to Render
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow when there's a push to the main branch.
+  pull_request:
+    branches:
+      - main  # Also trigger the workflow for pull requests targeting the main branch.
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Specifies the runner environment.
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # Checks out your repository under $GITHUB_WORKSPACE, so your job can access it.
+
+    - name: Deploy to Render
+      run: |
+        echo "Triggering deployment to Render..."
+        curl -X POST 'https://api.render.com/deploy/srv-cpuaquaju9rs73fvia50?key=giS3WO9rIb8'
