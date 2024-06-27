@@ -15,10 +15,23 @@ db = SQLAlchemy(app)
 # Modelo de la tabla log
 class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    fecha_y_hora = db.Column(db.DateTime, default=datetime.utcnow)
-    texto = db.Column(db.TEXT)
-    number = db.Column(db.TEXT)
-    flow = db.Column(db.Integer)
+    number = db.Column(db.TEXT, unique=True, nullable=False)
+    flow = db.Column(db.Integer, default=0)
+    subFlow=db.Column(db.Integer, default=0)
+    dni = db.Column(db.TEXT)
+    full_name = db.Column(db.TEXT)
+    client = db.Column(db.TEXT)
+    sucursal = db.Column(db.TEXT)
+def get_user_state(number):
+    return Log.query.filter_by(number=number).first()
+def update_user_state(number, **kwargs):
+    user_state = get_user_state(number)
+    if not user_state:
+        user_state = Log(number=number)
+        db.session.add(user_state)
+    for key, value in kwargs.items():
+        setattr(user_state, key, value)
+    db.session.commit()
 
 
 with app.app_context():  # Crear la tabla si no existe
@@ -132,19 +145,19 @@ def recibir_mensaje(req):
                     if tipo_interactivo == "button_reply":
                         texto = messages["interactive"]["button_reply"]["id"]
                         numero = messages["from"]
-                        send_txt(texto, numero, flow)
+                        send_txt(texto, numero)
                         # return 0
 
                     elif tipo_interactivo == "list_reply":
                         texto = messages["interactive"]["list_reply"]["id"]
                         numero = messages["from"]
-                        send_txt(texto, numero, flow)
+                        send_txt(texto, numero)
 
 
                 if "text" in messages:
                     texto = messages["text"]["body"]
                     numero = messages["from"]
-                    send_txt(texto, numero, flow)
+                    send_txt(texto, numero)
                     # agregar_mensajes_log(json.dumps(texto))
                     # agregar_mensajes_log(json.dumps(numero))
 
@@ -167,82 +180,85 @@ def find_last_flow_by_number(number):
 # Ciclo entrada
 def send_txt(texto, numero, flow):
     texto = texto.lower()
-    flow=  find_last_flow_by_number(numero)
-    if flow is None:
-        flow = 0
-    match flow:
+    user_state = get_user_state(numero)
+    if user_state is None:
+        user_state = update_user_state(numero, flow=0)
+
+    match user_state.flow:
         case 0:
-            data = {
-                "messaging_product": "whatsapp",
-                "recipient_type": "individual",
-                "to": numero,
-                "text": {
-                    "preview_url": False,
-                    "body": "Hola! 😃 Te saluda Robotín, asistente virtual G4S que ha sido creado para absolver las dudas generales de todos los colaboradores G4S Perú \n Para ayudarte de la mejor manera, por favor detállame tu número de DNI (Ejemplo: 758152334)"
-                }
-            }
-            flow = 1
-            agregar_txt_num_log(texto, numero, flow)
-
-
-        case 1:
-            try:
-                int(texto)
-                data = {
-                    "messaging_product": "whatsapp",
-                    "recipient_type": "individual",
-                    "to": numero,
-                    "text": {
-                        "preview_url": False,
-                        "body": "Así mismo, bríndame tu nombre completo (Ejemplo: Juan Luis Perez Gonzales)"
+            match user_state.subFlow:
+                case 0:
+                    data = {
+                        "messaging_product": "whatsapp",
+                        "recipient_type": "individual",
+                        "to": numero,
+                        "text": {
+                            "preview_url": False,
+                            "body": "Hola! 😃 Te saluda Robotín, asistente virtual G4S que ha sido creado para absolver las dudas generales de todos los colaboradores G4S Perú \n Para ayudarte de la mejor manera, por favor detállame tu número de DNI (Ejemplo: 758152334)"
+                        }
                     }
-                }
-                dni = texto
-                flow = 2
-                agregar_txt_num_log(texto, numero, flow)
-            except Exception as e:
-                msgerror = "Disculpa tú numero de dni no parece válido. Ingresaste: " + texto + " Ingresa sólo el número de tu DNI"
-                data = {
-                    "messaging_product": "whatsapp",
-                    "recipient_type": "individual",
-                    "to": numero,
-                    "text": {
-                        "preview_url": False,
-                        "body": msgerror
-                    }
-                }
-        case 2:  # Consultar si se puede hacer lista
-            full_name = texto
-            name = texto.split()[0]
-            msg = name + " Un gusto de conocerte por este medio (...), ¿Puedes comentarme, a qué cliente estás asignado? (Ejemplo: BCP)"
-            data = {
-                "messaging_product": "whatsapp",
-                "recipient_type": "individual",
-                "to": numero,
-                "text": {
-                    "preview_url": False,
-                    "body": msg
-                }
-            }
-            client = name
-            flow = 3
-            agregar_txt_num_log(texto, numero, flow)
+                    subFlow = 1
+                    update_user_state( number=numero, subFlow=subFlow)
 
-        case 3:
-            msg = "Finalmente, detállame a qué sucursal perteneces " + name + " (Ejemplos: Lima Sur, Arequipa, Chiclayo)"
-            # Colocar excepcion para cuando está asignado a clientes que no maneja G4S pending
-            data = {
-                "messaging_product": "whatsapp",
-                "recipient_type": "individual",
-                "to": numero,
-                "text": {
-                    "preview_url": False,
-                    "body": msg
-                }
-            }
-            flow = 4
-            sucursal = texto
-            agregar_txt_num_log(texto, numero, flow)
+
+                case 1:
+                    try:
+                        int(texto)
+                        data = {
+                            "messaging_product": "whatsapp",
+                            "recipient_type": "individual",
+                            "to": numero,
+                            "text": {
+                                "preview_url": False,
+                                "body": "Así mismo, bríndame tu nombre completo (Ejemplo: Juan Luis Perez Gonzales)"
+                            }
+                        }
+                        dni = texto
+                        flow = 2
+                        update_user_state( number=numero, flow=flow)
+                    except Exception as e:
+                        msgerror = "Disculpa tú numero de dni no parece válido. Ingresaste: " + texto + " Ingresa sólo el número de tu DNI"
+                        data = {
+                            "messaging_product": "whatsapp",
+                            "recipient_type": "individual",
+                            "to": numero,
+                            "text": {
+                                "preview_url": False,
+                                "body": msgerror
+                            }
+                        }
+                case 2:  # Consultar si se puede hacer lista
+                    full_name = texto
+                    name = texto.split()[0]
+                    msg = name + " Un gusto de conocerte por este medio (...), ¿Puedes comentarme, a qué cliente estás asignado? (Ejemplo: BCP)"
+                    data = {
+                        "messaging_product": "whatsapp",
+                        "recipient_type": "individual",
+                        "to": numero,
+                        "text": {
+                            "preview_url": False,
+                            "body": msg
+                        }
+                    }
+                    client = name
+                    flow = 3
+                    update_user_state( number=numero, flow=flow)
+
+                case 3:
+                    msg = "Finalmente, detállame a qué sucursal perteneces " + name + " (Ejemplos: Lima Sur, Arequipa, Chiclayo)"
+                    # Colocar excepcion para cuando está asignado a clientes que no maneja G4S pending
+                    data = {
+                        "messaging_product": "whatsapp",
+                        "recipient_type": "individual",
+                        "to": numero,
+                        "text": {
+                            "preview_url": False,
+                            "body": msg
+                        }
+                    }
+                    flow = 4
+
+                    update_user_state( number=numero, flow=flow)
         case 4:
             """                
             if texto != "": 

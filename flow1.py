@@ -14,9 +14,23 @@ db = SQLAlchemy(app)
 # Modelo de la tabla log
 class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    fecha_y_hora = db.Column(db.DateTime, default = datetime.utcnow)
-    texto = db.Column(db.TEXT)
-    number = db.Column(db.TEXT)
+    number = db.Column(db.TEXT, unique=True, nullable=False)
+    flow = db.Column(db.Integer, default=0)
+    dni = db.Column(db.TEXT)
+    full_name = db.Column(db.TEXT)
+    client = db.Column(db.TEXT)
+    sucursal = db.Column(db.TEXT)
+def get_user_state(number):
+    return Log.query.filter_by(number=number).first()
+def update_user_state(number, **kwargs):
+    user_state = get_user_state(number)
+    if not user_state:
+        user_state = Log(number=number)
+        db.session.add(user_state)
+    for key, value in kwargs.items():
+        setattr(user_state, key, value)
+    db.session.commit()
+
 
 with app.app_context():   # Crear la tabla si no existe
     db.create_all()
