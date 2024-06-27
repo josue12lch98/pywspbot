@@ -215,7 +215,7 @@ def send_txt(texto, numero, flow):
                         }
                         dni = texto
                         subFlow = 1
-                        update_user_state( number=numero, subFlow=subFlow, dni=)
+                        update_user_state( number=numero, subFlow=subFlow, dni=dni)
                     except Exception as e:
                         msgerror = "Disculpa tú numero de dni no parece válido. Ingresaste: " + texto + " Ingresa sólo el número de tu DNI"
                         data = {
