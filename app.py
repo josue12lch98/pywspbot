@@ -178,11 +178,12 @@ def find_last_flow_by_number(number):
         print("Error retrieving last flow: ", str(e))
         return None
 # Ciclo entrada
-def send_txt(texto, numero, flow):
+def send_txt(texto, numero):
     texto = texto.lower()
     user_state = get_user_state(numero)
     if user_state is None:
         user_state = update_user_state(numero, flow=0,subFlow=0)
+        user_state = get_user_state(numero)
 
     match user_state.flow:
         case 0:
