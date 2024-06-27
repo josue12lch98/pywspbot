@@ -4,6 +4,8 @@ from datetime import datetime
 import json
 import http.client
 
+from flow1 import handle_flow_0_subflow_0, handle_flow_0_subflow_1
+
 app = Flask(__name__)
 
 # Configuración de la base de datos SQLite
@@ -165,47 +167,11 @@ def send_txt(texto, numero):
         case 0:
             match user_state.subFlow:
                 case 0:
-                    data = {
-                        "messaging_product": "whatsapp",
-                        "recipient_type": "individual",
-                        "to": numero,
-                        "text": {
-                            "preview_url": False,
-                            "body": "Hola! 😃 Te saluda Robotín, asistente virtual G4S que ha sido creado para absolver las dudas generales de todos los colaboradores G4S Perú \n Para ayudarte de la mejor manera, por favor detállame tu número de DNI (Ejemplo: 758152334)"
-                        }
-                    }
-                    subFlow = 1
-                    update_user_state( number=numero, subFlow=subFlow)
+                    handle_flow_0_subflow_0(numero)
 
 
                 case 1:
-                    try:
-                        int(texto)
-                        data = {
-                            "messaging_product": "whatsapp",
-                            "recipient_type": "individual",
-                            "to": numero,
-                            "text": {
-                                "preview_url": False,
-                                "body": "Así mismo, bríndame tu nombre completo (Ejemplo: Juan Luis Perez Gonzales)"
-                            }
-                        }
-                        dni = texto
-                        subFlow = 2
-                        update_user_state( number=numero, subFlow=subFlow, dni=dni)
-                    except Exception as e:
-                        msgerror = "Disculpa tú numero de dni no parece válido. Ingresaste: " + texto + " Ingresa sólo el número de tu DNI"
-                        data = {
-                            "messaging_product": "whatsapp",
-                            "recipient_type": "individual",
-                            "to": numero,
-                            "text": {
-                                "preview_url": False,
-                                "body": msgerror
-                            }
-                        }
-                        subFlow = 1
-                        update_user_state( number=numero, subFlow=subFlow,  )
+                    handle_flow_0_subflow_1(numero, texto)
                 case 2:  # Consultar si se puede hacer lista
                     full_name = texto
                     name = texto.split()[0]
