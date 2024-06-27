@@ -29,7 +29,19 @@ with app.app_context():  # Crear la tabla si no existe
     # db.session.add(t2)
     # db.session.commit()
 
-
+def get_last_flow(number):
+    try:
+        # Filtra los registros por el número dado y ordena por fecha y hora en orden descendente
+        last_log = Log.query.filter_by(number=number).order_by(Log.fecha_y_hora.desc()).first()
+        if last_log:
+            # Si encuentra un registro, devuelve el valor de flow en formato JSON
+            return jsonify({"flow": last_log.flow}), 200
+        else:
+            # Si no encuentra registros para ese número, devuelve un mensaje adecuado
+            return jsonify({"message": "No logs found for the specified number"}), 404
+    except Exception as e:
+        # Maneja cualquier excepción que pueda ocurrir durante la consulta
+        return jsonify({"error": str(e)}), 500
 def ordenar_por_fecha_y_hora(registros):  # Función para ordenar los registros por fecha y hora
     # return sorted(registros, key = lambda x: x.id, reverse = False) # Para invertir orden de id
     return sorted(registros, key=lambda x: x.fecha_y_hora, reverse=True)
@@ -106,6 +118,7 @@ def recibir_mensaje(req):
         value = changes['value']
         objeto_mensaje = value['messages']
 
+
         if objeto_mensaje:
             messages = objeto_mensaje[0]
 
@@ -145,7 +158,7 @@ def recibir_mensaje(req):
 # Ciclo entrada
 def send_txt(texto, numero, flow):
     texto = texto.lower()
-
+    flow=get_last_flow(numero)
     match flow:
         case 0:
             data = {
