@@ -1,8 +1,7 @@
 
 
 
-from flask import Flask, request, jsonify
-
+from flask import Flask
 from Config import DevelopmentConfig  # Importa la configuración que necesitas
 
 app = Flask(__name__)

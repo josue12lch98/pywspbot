@@ -1,6 +1,5 @@
-from flask import Flask, request, jsonify, render_template
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from flask import Flask
+
 import json
 import http.client
 

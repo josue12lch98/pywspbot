@@ -1,7 +1,7 @@
-from flask import Flask, request, jsonify, render_template
+from flask import  request, jsonify, render_template
 
 
-from dbQuery import UserState, generic_reply, get_user_state, update_user_state
+from dbQuery import UserState, get_user_state, update_user_state
 from flow1 import handle_flow_0_subflow_0, handle_flow_0_subflow_1, handle_flow_0_subflow_2, handle_flow_0_subflow_3
 
 
