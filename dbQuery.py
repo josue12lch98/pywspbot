@@ -128,7 +128,9 @@ def send_txt(texto, numero):
                 flow = 0
 
 
-
+def ordenar_por_fecha_y_hora(registros):
+    registros_ordenados = sorted(registros, key=lambda x: x.fecha, reverse=True)
+    return registros_ordenados
 def generic_reply(data):
     data = json.dumps(data)  # Convertir el diccionario en formato JSON
 
@@ -174,9 +176,8 @@ def agregar_mensajes_log(texto):
     db.session.add(nuevo_registro)
     db.session.commit()
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
-    # app.run(debug=True)
+
+
 
 # Commands to push to production
 # git add .
