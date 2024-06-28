@@ -4,6 +4,7 @@ from datetime import datetime
 import json
 import http.client
 
+from app import db
 from flow1 import handle_flow_0_subflow_0, handle_flow_0_subflow_1, handle_flow_0_subflow_2, handle_flow_0_subflow_3
 
 app = Flask(__name__)
@@ -26,10 +27,9 @@ def update_user_state( number , **kwargs):
         db.session.add(user_state)
     for key, value in kwargs.items():
         setattr(user_state, key, value)
-    db.session.commit()
-       return jsonify({'message': 'EVENT_RECEIVED'})
-    except Exception as e:
-        return jsonify({'message': 'EVENT_RECEIVED'})
+        db.session.commit()
+
+
 
 
 # Ciclo entrada
@@ -165,7 +165,14 @@ def generic_reply(data):
     finally:
         connection.close()
 
+mensajes_log = []
 
+
+def agregar_mensajes_log(texto):
+    mensajes_log.append(texto)
+    nuevo_registro = UserState(texto=texto)  # Guardar el mensaje en la base de datos
+    db.session.add(nuevo_registro)
+    db.session.commit()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
