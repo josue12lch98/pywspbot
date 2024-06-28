@@ -1,6 +1,9 @@
 # flow_handlers.py
-from app import update_user_state, send_txt, get_user_state, generic_reply  # Importa las funciones necesarias
+ # Importa las funciones necesarias
 import re
+
+from dbQuery import update_user_state
+
 
 def handle_flow_0_subflow_0(numero):
     data = {
