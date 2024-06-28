@@ -136,7 +136,7 @@ def generic_reply(data):
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer EAAV8kZCQDeLkBO7zt2MHThLR9X9V7OK75TnsYprLwLos8sbv1sreKraudfBRwVHZBZBpt9PESJ4m974NH6fZBew8p0RAZBNxEBjSEONYjjWZBmNIQIms38XHIFlK4r7ChWOasPq4W0uZCJEXJ4X0CajyGbzC08z8kz2UZAZApdHIcNpiiEGwZCHZBUBVt3F9qaWHhXhEK3gPduiudoWDmYKAYgZD"
+        "Authorization": "Bearer EAAV8kZCQDeLkBOwQu1NSf9nGRs5AxW1ZBT9NyjzA1aHTC0ZAZColXU5Resu79lwawwLHn0VlHT7BkIIIEz2USl4pHLjOATxu803wFWPpKs6kyoaDEzZCYBwJjkuXjw2V0o5XZCVbirxI3xcKXcCaQZBi92aQpkafFFGI3oTGuHXwugmf44ZAUXMS1aoezS9i9Lg3LxW1OA72uZACxUZCFzdaoZD"
     }
     connection = http.client.HTTPSConnection("graph.facebook.com")
 
