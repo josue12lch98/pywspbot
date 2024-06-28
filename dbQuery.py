@@ -7,19 +7,10 @@ import http.client
 from flow1 import handle_flow_0_subflow_0, handle_flow_0_subflow_1, handle_flow_0_subflow_2, handle_flow_0_subflow_3
 
 app = Flask(__name__)
-
-# Configuración de la base de datos SQLite
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///metapython.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-
-# Modelo de la tabla log
 class UserState(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.TEXT, unique=True, nullable=False)
     flow = db.Column(db.Integer, default=0)
-    @app.route('/')
     subFlow=db.Column(db.Integer, default=0)
     dni = db.Column(db.TEXT)
     full_name = db.Column(db.TEXT)
@@ -27,8 +18,6 @@ class UserState(db.Model):
     sucursal = db.Column(db.TEXT)
 def get_user_state(number):
     return UserState.query.filter_by(number=number).first()
-
-
 def update_user_state( number , **kwargs):
     user_state = get_user_state(number)
     if not user_state:
@@ -37,107 +26,7 @@ def update_user_state( number , **kwargs):
     for key, value in kwargs.items():
         setattr(user_state, key, value)
     db.session.commit()
-
-
-with app.app_context():  # Crear la tabla si no existe
-    db.create_all()
-    # t1= Log(texto = "Test1")
-    # t2= Log(texto = "Test2", number = "XXXXXXXXX")
-    # db.session.add(t1)
-    # db.session.add(t2)
-    # db.session.commit()
-
-
-
-
-    db.session.add(nuevo_registro)
-    db.session.commit()
-mensajes_log2 = []
-
-
-number_log2 = []
-# Función para agregar mensajes y guardar en la base de datos
-
-
-def agregar_txt_num_log(texto, number, flow):
-    mensajes_log2.append(texto)
-    number_log2.append(number)
-    nuevo_registro = UserState(texto=texto, number=number, flow=flow)  # Guardar el mensaje en la base de datos
-    db.session.add(nuevo_registro)
-    db.session.commit()
-# variables globales
-flow = 0
-dni = ""
-full_name = ""
-name = ""
-client = ""
-
-sucursal = ""
-# Token de verificación para la configuración
-exto)  # Guardar el mensaje en la base de datos
-
-
-TOKEN = "TOKENX"
-@app.route('/webhook', methods=['GET', 'POST'])
-def webhook():
-    if request.method == 'GET':
-    challenge = verificar_token(request)
-return challenge
-    elif request.method == 'POST':
-        response = recibir_mensaje(request)
-        return response
-
-
-def verificar_token(req):
-    token = req.args.get('hub.verify_token')
-    challenge = req.args.get('hub.challenge')
-    if challenge and token == TOKEN:
-        return challenge
-    else:
-        return jsonify({'error': 'Token Invalido'}), 401
-
-
-def recibir_mensaje(req):
-    try:
-        req = request.get_json()
-        entry = req['entry'][0]
-        changes = entry['changes'][0]
-        value = changes['value']
-        objeto_mensaje = value['messages']
-
-
-        if objeto_mensaje:
-            messages = objeto_mensaje[0]
-
-            if "type" in messages:
-                tipo = messages["type"]
-                # agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
-
-                if tipo == "interactive":
-                    tipo_interactivo = messages["interactive"]["type"]
-
-                    if tipo_interactivo == "button_reply":
-                        texto = messages["interactive"]["button_reply"]["id"]
-                        numero = messages["from"]
-                        send_txt(texto, numero)
-                        # return 0
-
-                    elif tipo_interactivo == "list_reply":
-                        texto = messages["interactive"]["list_reply"]["id"]
-                        numero = messages["from"]
-                        send_txt(texto, numero)
-
-
-                if "text" in messages:
-                    texto = messages["text"]["body"]
-                    numero = messages["from"]
-                    send_txt(texto, numero)
-                    # agregar_mensajes_log(json.dumps(texto))
-                    # agregar_mensajes_log(json.dumps(numero))
-
-
-        # agregar_mensajes_log(json.dumps(objeto_mensaje))
-        return jsonify({'message': 'EVENT_RECEIVED'})
+       return jsonify({'message': 'EVENT_RECEIVED'})
     except Exception as e:
         return jsonify({'message': 'EVENT_RECEIVED'})
 

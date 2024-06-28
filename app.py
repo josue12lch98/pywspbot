@@ -29,25 +29,6 @@ db = SQLAlchemy(app)
 
 
 # Modelo de la tabla log
-class UserState(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    number = db.Column(db.TEXT, unique=True, nullable=False)
-    flow = db.Column(db.Integer, default=0)
-    subFlow=db.Column(db.Integer, default=0)
-    dni = db.Column(db.TEXT)
-    full_name = db.Column(db.TEXT)
-    client = db.Column(db.TEXT)
-    sucursal = db.Column(db.TEXT)
-def get_user_state(number):
-    return UserState.query.filter_by(number=number).first()
-def update_user_state( number , **kwargs):
-    user_state = get_user_state(number)
-    if not user_state:
-        user_state = UserState(number=number)
-        db.session.add(user_state)
-    for key, value in kwargs.items():
-        setattr(user_state, key, value)
-    db.session.commit()
 
 
 with app.app_context():  # Crear la tabla si no existe
