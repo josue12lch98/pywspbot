@@ -10,10 +10,10 @@ def init_app(app):
     def index():
         # Obtener todos los registros de la base de datos
         registros = UserState.query.all()
-
         return render_template('index.html', registros=registros);
 
     @app.route('/webhook', methods=['GET', 'POST'])
+    
     def webhook():
         if request.method == 'GET':
             challenge = verificar_token(request)
@@ -21,15 +21,14 @@ def init_app(app):
         elif request.method == 'POST':
             response = recibir_mensaje(request)
             return response
+        
     def verificar_token(req):
         token = req.args.get('hub.verify_token')
         challenge = req.args.get('hub.challenge')
-        if challenge and token == 'token':
+        if challenge and token == 'token': #Reemplazar con variable de entorno
             return challenge
         else:
             return jsonify({'error': 'Token Invalido'}), 401
-
-
 
     def recibir_mensaje(req):
         try:
@@ -45,8 +44,7 @@ def init_app(app):
 
                 if "type" in messages:
                     tipo = messages["type"]
-                    # agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
-
+                    
                     if tipo == "interactive":
                         tipo_interactivo = messages["interactive"]["type"]
 
@@ -54,28 +52,20 @@ def init_app(app):
                             texto = messages["interactive"]["button_reply"]["id"]
                             numero = messages["from"]
                             send_txt(texto, numero)
-                            # return 0
-
+                            
                         elif tipo_interactivo == "list_reply":
                             texto = messages["interactive"]["list_reply"]["id"]
                             numero = messages["from"]
                             send_txt(texto, numero)
-
-
+                            
                     if "text" in messages:
                         texto = messages["text"]["body"]
                         numero = messages["from"]
                         send_txt(texto, numero)
-                        # agregar_mensajes_log(json.dumps(texto))
-                        # agregar_mensajes_log(json.dumps(numero))
-
-
-            # agregar_mensajes_log(json.dumps(objeto_mensaje))
+                        
             return jsonify({'message': 'EVENT_RECEIVED'})
         except Exception as e:
             return jsonify({'message': 'EVENT_RECEIVED'})
-
-
 
 # Ciclo entrada
 def send_txt(texto, numero):
@@ -98,10 +88,9 @@ def send_txt(texto, numero):
 
                 case 3:
                     handle_flow_0_subflow_3(numero, texto)
-        case 4:
-
-            flow = 5
-        case 5:
+        case 1:
+            print("d")
+        case 2:
             if "btnsi" in texto:
                 data = {
                     "messaging_product": "whatsapp",
@@ -122,4 +111,3 @@ def send_txt(texto, numero):
                         "body": "Indicame tus datos nuevamente"
                     }
                 }
-                flow = 0
