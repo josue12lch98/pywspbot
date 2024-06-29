@@ -13,10 +13,11 @@ class UserState(db.Model):
     subFlow=db.Column(db.Integer, default=0)
     dni = db.Column(db.TEXT)
     full_name = db.Column(db.TEXT)
-    client = db.Column(db.TEXT)
     sucursal = db.Column(db.TEXT)
+    
 def get_user_state(number):
     return UserState.query.filter_by(number=number).first()
+
 def update_user_state( number , **kwargs):
     user_state = get_user_state(number)
     if not user_state:

@@ -16,6 +16,7 @@ def handle_flow_0_subflow_0(numero):
       # Asume que existe una función para enviar mensajes
     update_user_state(numero, subFlow=1)
     generic_reply(data)
+    
     add = {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
@@ -51,8 +52,8 @@ def handle_flow_0_subflow_1(numero, texto):
                 "body": msgerror
             }
         }
-        update_user_state(numero, subFlow=1)
-        
+        update_user_state(numero, subFlow=1) # considerar retirar el subflow 1 puesto que igual va a regresar a 1
+                
     generic_reply(data)
 
 def handle_flow_0_subflow_2(numero, texto):
@@ -128,3 +129,5 @@ def handle_flow_0_subflow_3(numero, texto):
     subFlow = 4
     update_user_state(number=numero, subFlow=subFlow, sucursal=sucursal)
     
+def handle_flow_0_subflow_3(numero, texto):
+    print("")
