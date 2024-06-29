@@ -15,10 +15,8 @@ class UserState(db.Model):
     full_name = db.Column(db.TEXT)
     client = db.Column(db.TEXT)
     sucursal = db.Column(db.TEXT)
-    
 def get_user_state(number):
     return UserState.query.filter_by(number=number).first()
-
 def update_user_state( number , **kwargs):
     user_state = get_user_state(number)
     if not user_state:
@@ -33,7 +31,7 @@ def generic_reply(data):
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer EAAOdZCMIRR5IBO8y5ddn9PgPRdTMmlk5yA0vZC0jofUDAH2VqiCGFI5T74snjDJJOsX5iRm5tf0kMA5EityYN7ivWpNLyfreRL0ib7DU2rc1eZAZB92XZCZAaL2ZA79ZCkBb8ZAXbkOnPbbZBUaEULC50fnHodQr8TXVRJwhJfohZAqAIDevg4QksuDt15cVMD9Rx0yz2rUZBDf9zVnZBzHlMiIJP"
+        "Authorization": "Bearer EAAOdZCMIRR5IBO1MgV6gnAKadbnGZCCOL92lnB235Efu3F4sN4cZABQWIXs3uZChWzkNXxvWsmu5vkyhE6OIBhDQ2exD8pixuD4h39KD8k6ZBUDlTcSunnDTmcoUINVMTdFozm2fMTFFa0l29j3dTh47XDOq2o4ExkVlKPWDbT9nhGNFJwubbDDcX7bpM5h4ZAAwI4ZBEZABHsxGIIuiyEYZC"
     }
     connection = http.client.HTTPSConnection("graph.facebook.com")
 
@@ -45,3 +43,13 @@ def generic_reply(data):
         print(e)
     finally:
         connection.close()
+
+
+
+
+
+
+# Commands to push to production
+# git add .
+# git commit -m "xxx"
+#  git push
