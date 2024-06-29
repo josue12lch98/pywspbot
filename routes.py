@@ -106,24 +106,5 @@ def send_txt(texto, numero):
                     handle_flow_1_subflow_1(numero)
                 case _:
                     print("")
-        case 2:
-            if "btnsi" in texto:
-                data = {
-                    "messaging_product": "whatsapp",
-                    "recipient_type": "individual",
-                    "to": numero,
-                    "text": {
-                        "preview_url": False,
-                        "body": "Nice"
-                    }
-                }
-            else:
-                data = {
-                    "messaging_product": "whatsapp",
-                    "recipient_type": "individual",
-                    "to": numero,
-                    "text": {
-                        "preview_url": False,
-                        "body": "Indicame tus datos nuevamente"
-                    }
-                }
+        case _:
+            print("")

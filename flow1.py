@@ -60,7 +60,7 @@ def handle_flow_1_subflow_1(numero):
     }
     generic_reply(data)
     
-    ded = {
+    data = {
         "messaging_product": "whatsapp",
         "to": numero,
         "type": "interactive",
@@ -87,6 +87,11 @@ def handle_flow_1_subflow_1(numero):
                                 "id": "idpag",
                                 "title": "¿Cuánto me van a pagar?",
                                 "description": "Vende lo que ya no estés usando"
+                            },
+                            {
+                                "id": "idcon",
+                                "title": "Consulta sobre los descuentos de mi pago",
+                                "description": "Vende lo que ya no estés usando"
                             }
                         ]
                     },
@@ -109,5 +114,5 @@ def handle_flow_1_subflow_1(numero):
             }
         }
     }
-    generic_reply(ded)
+    generic_reply(data)
     update_user_state(numero, subFlow=2) # considerar retirar el subflow 1 puesto que igual va a regresar a 1
