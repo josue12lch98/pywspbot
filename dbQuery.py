@@ -14,6 +14,7 @@ class UserState(db.Model):
     dni = db.Column(db.TEXT)
     full_name = db.Column(db.TEXT)
     sucursal = db.Column(db.TEXT)
+    json = db.Column(db.TEXT)
     
 def get_user_state(number):
     return UserState.query.filter_by(number=number).first()

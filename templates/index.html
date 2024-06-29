@@ -32,6 +32,7 @@
             <th>DNI</th>
             <th>Nombre_completo</th>
             <th>Sucursal</th>
+            <th>json</th>
         </tr>
         {%for registro in registros %}
             <tr>
@@ -42,6 +43,7 @@
                 <td>{{registro.dni}}</td>
                 <td>{{registro.full_name}}</td>
                 <td>{{registro.sucursal}}</td>
+                <td>{{registro.json}}</td>
             </tr>
         {% endfor %}
     </table>

@@ -1,5 +1,5 @@
 from flask import  request, jsonify, render_template
-
+import json
 
 from dbQuery import UserState, get_user_state, update_user_state
 from flow1 import handle_flow_0_subflow_0, handle_flow_0_subflow_1, handle_flow_0_subflow_2, handle_flow_0_subflow_3
@@ -52,6 +52,7 @@ def init_app(app):
                             texto = messages["interactive"]["button_reply"]["id"]
                             numero = messages["from"]
                             send_txt(texto, numero)
+                            update_user_state(number = numero, json = json.dumps(messages))
                             
                         elif tipo_interactivo == "list_reply":
                             texto = messages["interactive"]["list_reply"]["id"]
