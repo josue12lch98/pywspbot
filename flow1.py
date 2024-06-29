@@ -194,64 +194,96 @@ def handle_flow_1_subflow_1(numero):
 def handle_flow_1_subflow_11(numero): # Lista en flow 1 - 1 para ingresar A
     data = {
         "messaging_product": "whatsapp",
-        #"recipient_type": "individual",
         "to": numero,
         "type": "interactive",
         "interactive": {
             "type": "list",
             "body": {
-                "text": "A continuación, elige la opción que requieres:"
+                "text": "Mi solicitud hace referencia a:"
             },
             "footer": {
                 "text": "Selecciona alguna de las opciones para poder ayudarte"
             },
             "action":{
-                "button": "Mi solucitud hace Referencia a:",
+                "button": "Ver Opciones",
                 "sections": [
                     {
                         "title": "1. MIS PAGOS",
                         "rows": [
                             {
-                                "id": "id_payments",
-                                "title": "1. MIS PAGOS",
+                                "id": "btncompra",
+                                "title": "Comprar",
                                 "description": "Compra los mejores artículos de tecnología"
                             },
                             {
-                                "id": "id_info",
-                                "title": "2. INFORMACIÓN SOBRE BENEFICIOS G4S Y OTROS",
+                                "id": "btnvender",
+                                "title": "Vender",
                                 "description": "Vende lo que ya no estés usando"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "2. INFORMACIÓN SOBRE BENEFICIOS G4S Y OTROS",
+                        "rows": [
+                            {
+                                "id": "btndireccion",
+                                "title": "Local",
+                                "description": "Puedes visistar nuestro local."
                             },
                             {
-                                "id": "id_sol",
-                                "title": "3. PETICIONES",
-                                "description": "Vende lo que ya no estés usando"
+                                "id": "btnentrega",
+                                "title": "Entrega",
+                                "description": "La entrega se realiza todo los dias."
+                            }
+                        ]
+                    },
+                    {
+                        "title": "3. PETICIONES",
+                        "rows": [
+                            {
+                                "id": "btndireccion",
+                                "title": "Local",
+                                "description": "Puedes visistar nuestro local."
                             },
                             {
-                                "id": "id_tram",
-                                "title": "4. TRÁMITES",
-                                "description": "Vende lo que ya no estés usando"
+                                "id": "btnentrega",
+                                "title": "Entrega",
+                                "description": "La entrega se realiza todo los dias."
+                            }
+                        ]
+                    },
+                    {
+                        "title": "4. TRÁMITES",
+                        "rows": [
+                            {
+                                "id": "btndireccion",
+                                "title": "Local",
+                                "description": "Puedes visistar nuestro local."
                             },
                             {
-                                "id": "id_access",
-                                "title": "5. ACCESO A APLICACIONES",
-                                "description": "Vende lo que ya no estés usando"
+                                "id": "btnentrega",
+                                "title": "Entrega",
+                                "description": "La entrega se realiza todo los dias."
+                            }
+                        ]
+                    },
+                    {
+                        "title": "5. ACCESO A APLICACIONES",
+                        "rows": [
+                            {
+                                "id": "btndireccion",
+                                "title": "Local",
+                                "description": "Puedes visistar nuestro local."
+                            },
+                            {
+                                "id": "btnentrega",
+                                "title": "Entrega",
+                                "description": "La entrega se realiza todo los dias."
                             }
                         ]
                     }
                 ]
             }
-        }
-    }
-    
-    
-    
-    data = {
-        "messaging_product": "whatsapp",
-        "recipient_type": "individual",
-        "to": numero,
-        "text": {
-            "preview_url": False,
-            "body":  "A continuación, elige la opción que requieres:"
         }
     }
     generic_reply(data)
