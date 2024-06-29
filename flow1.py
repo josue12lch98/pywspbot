@@ -21,8 +21,8 @@ def handle_flow_0_subflow_0(numero):
 
 def handle_flow_0_subflow_1(numero, texto):
 
-    patron = r"\d{8}"  # Expresión regular para validar un DNI
-    if re.match(patron, texto):
+    patron = r'^\d{8}$'  # Expresión regular para validar un DNI
+    if re.fullmatch(patron, texto):
       # Intenta convertir el texto a int, suponiendo que es el DNI
         data = {
             "messaging_product": "whatsapp",
