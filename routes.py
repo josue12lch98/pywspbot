@@ -58,11 +58,13 @@ def init_app(app):
                             texto = messages["interactive"]["list_reply"]["id"]
                             numero = messages["from"]
                             send_txt(texto, numero)
+                            update_user_state(number = numero, json = json.dumps(messages))
                             
                     if "text" in messages:
                         texto = messages["text"]["body"]
                         numero = messages["from"]
                         send_txt(texto, numero)
+                        update_user_state(number = numero, json = json.dumps(messages))
                         
             return jsonify({'message': 'EVENT_RECEIVED'})
         except Exception as e:
