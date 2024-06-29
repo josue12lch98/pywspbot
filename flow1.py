@@ -59,6 +59,8 @@ def handle_flow_1_subflow_1(numero):
         }
     }
     generic_reply(data)
+    
+    
 
 def handle_flow_1_subflow_11(numero): # Lista en flow 1 - 1 para ingresar A
     data = {
@@ -77,16 +79,31 @@ def handle_flow_1_subflow_11(numero): # Lista en flow 1 - 1 para ingresar A
                 "button": "Ver Opciones",
                 "sections": [
                     {
-                        "title": "Compra y Venta",
+                        "title": "1. MIS PAGOS",
                         "rows": [
                             {
-                                "id": "btncompra",
-                                "title": "Comprar",
+                                "id": "idcron",
+                                "title": "Cronograma de Pagos",
                                 "description": "Compra los mejores artículos de tecnología"
                             },
                             {
-                                "id": "btnvender",
-                                "title": "Vender",
+                                "id": "idpag",
+                                "title": "¿Cuánto me van a pagar?",
+                                "description": "Vende lo que ya no estés usando"
+                            },
+                            {
+                                "id": "idcon",
+                                "title": "Consulta sobre los descuentos de mi pago",
+                                "description": "Vende lo que ya no estés usando"
+                            },
+                            {
+                                "id": "idpago",
+                                "title": "Detalles de pago",
+                                "description": "Vende lo que ya no estés usando"
+                            },
+                            {
+                                "id": "idothers",
+                                "title": "Otras consultas",
                                 "description": "Vende lo que ya no estés usando"
                             }
                         ]

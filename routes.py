@@ -104,7 +104,6 @@ def send_txt(texto, numero):
                     handle_flow_1_subflow_0(numero, name.capitalize())
                 case 1:
                     handle_flow_1_subflow_1(numero)
-                    handle_flow_1_subflow_11(numero)
                 case _:
                     print("")
         case 2:

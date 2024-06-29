@@ -2,7 +2,7 @@ from flask import Flask
 from __init__ import db
 import json
 import http.client
-
+import logging
 
 app = Flask(__name__)
 
@@ -36,7 +36,9 @@ def generic_reply(data):
         "Authorization": "Bearer EAAOdZCMIRR5IBO1MgV6gnAKadbnGZCCOL92lnB235Efu3F4sN4cZABQWIXs3uZChWzkNXxvWsmu5vkyhE6OIBhDQ2exD8pixuD4h39KD8k6ZBUDlTcSunnDTmcoUINVMTdFozm2fMTFFa0l29j3dTh47XDOq2o4ExkVlKPWDbT9nhGNFJwubbDDcX7bpM5h4ZAAwI4ZBEZABHsxGIIuiyEYZC"
     }
     connection = http.client.HTTPSConnection("graph.facebook.com")
-
+    
+    logging.info("sending message")
+    
     try:
         connection.request("POST", "/v19.0/378273298696469/messages", data, headers)
         response = connection.getresponse()
