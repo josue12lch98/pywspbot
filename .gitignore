@@ -1,5 +1,6 @@
 instance/*
 !instance/.gitkeep
+venv/*
 app2.py
 app_backup.py
 Flow.sai

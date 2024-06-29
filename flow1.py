@@ -90,21 +90,6 @@ def handle_flow_1_subflow_11(numero): # Lista en flow 1 - 1 para ingresar A
                                 "id": "idpag",
                                 "title": "¿Cuánto me van a pagar?",
                                 "description": "Vende lo que ya no estés usando"
-                            },
-                            {
-                                "id": "idcon",
-                                "title": "Consulta sobre los descuentos de mi pago",
-                                "description": "Vende lo que ya no estés usando"
-                            },
-                            {
-                                "id": "idpago",
-                                "title": "Detalles de pago",
-                                "description": "Vende lo que ya no estés usando"
-                            },
-                            {
-                                "id": "idothers",
-                                "title": "Otras consultas",
-                                "description": "Vende lo que ya no estés usando"
                             }
                         ]
                     },
