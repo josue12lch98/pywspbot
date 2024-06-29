@@ -85,18 +85,12 @@ def handle_flow_1_subflow_1(numero):
                             },
                             {
                                 "id": "idpag",
-                                "title": "¿Cuánto me van a pagar?",
-                                "description": "Vende lo que ya no estés usando"
-                            },
-                            {
-                                "id": "idcon",
-                                "title": "Consulta sobre los descuentos de mi pago",
-                                "description": "Vende lo que ya no estés usando"
+                                "title": "¿Cuánto me van a pagar?"
                             }
                         ]
                     },
                     {
-                        "title": "Distribución y Entrega",
+                        "title": " ",
                         "rows": [
                             {
                                 "id": "btndireccion",
