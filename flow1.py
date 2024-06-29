@@ -80,11 +80,14 @@ def handle_flow_1_subflow_1(numero):
                         "rows": [
                             {
                                 "id": "idcron",
-                                "title": "Cronograma de Pagos",
-                                "description": "Compra los mejores artículos de tecnología"
+                                "title": "Cronograma de Pagos"
                             },
                             {
                                 "id": "idpag",
+                                "title": "¿Cuánto me van a pagar?"
+                            },
+                            {
+                                "id": "dasdasd",
                                 "title": "¿Cuánto me van a pagar?"
                             }
                         ]
