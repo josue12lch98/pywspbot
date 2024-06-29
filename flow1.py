@@ -88,7 +88,11 @@ def handle_flow_1_subflow_1(numero):
                             },
                             {
                                 "id": "dasdasd",
-                                "title": "¿Cuánto me van a pagar?"
+                                "title": "Consulta sobre los descuentos de mi pago"
+                            },
+                            {
+                                "id": "asdasdasda",
+                                "title": "Detalles de pago"
                             }
                         ]
                     },
