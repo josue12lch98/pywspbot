@@ -25,6 +25,23 @@ def update_user_state( number , **kwargs):
         setattr(user_state, key, value)
         db.session.commit()
 
+def generic_reply(data):
+    data = json.dumps(data)  # Convertir el diccionario en formato JSON
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer EAAV8kZCQDeLkBO7zt2MHThLR9X9V7OK75TnsYprLwLos8sbv1sreKraudfBRwVHZBZBpt9PESJ4m974NH6fZBew8p0RAZBNxEBjSEONYjjWZBmNIQIms38XHIFlK4r7ChWOasPq4W0uZCJEXJ4X0CajyGbzC08z8kz2UZAZApdHIcNpiiEGwZCHZBUBVt3F9qaWHhXhEK3gPduiudoWDmYKAYgZD"
+    }
+    connection = http.client.HTTPSConnection("graph.facebook.com")
+
+    try:
+        connection.request("POST", "/v20.0/357679540758058/messages", data, headers)
+        response = connection.getresponse()
+        print(response.status, response.reason)
+    except Exception as e:
+        print(e)
+    finally:
+        connection.close()
 
 
 
