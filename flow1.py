@@ -59,11 +59,8 @@ def handle_flow_1_subflow_1(numero):
         }
     }
     generic_reply(data)
-
-    """
-def handle_flow_1_subflow_11(numero): # Lista en flow 1 - 1 para ingresar A
-    """
-    data = {
+    
+    ded = {
         "messaging_product": "whatsapp",
         "to": numero,
         "type": "interactive",
@@ -90,21 +87,6 @@ def handle_flow_1_subflow_11(numero): # Lista en flow 1 - 1 para ingresar A
                                 "id": "idpag",
                                 "title": "¿Cuánto me van a pagar?",
                                 "description": "Vende lo que ya no estés usando"
-                            },
-                            {
-                                "id": "idcon",
-                                "title": "Consulta sobre los descuentos de mi pago",
-                                "description": "Vende lo que ya no estés usando"
-                            },
-                            {
-                                "id": "idpago",
-                                "title": "Detalles de pago",
-                                "description": "Vende lo que ya no estés usando"
-                            },
-                            {
-                                "id": "idothers",
-                                "title": "Otras consultas",
-                                "description": "Vende lo que ya no estés usando"
                             }
                         ]
                     },
@@ -127,5 +109,5 @@ def handle_flow_1_subflow_11(numero): # Lista en flow 1 - 1 para ingresar A
             }
         }
     }
-    generic_reply(data)
+    generic_reply(ded)
     update_user_state(numero, subFlow=2) # considerar retirar el subflow 1 puesto que igual va a regresar a 1
