@@ -2,7 +2,7 @@ from flask import  request, jsonify, render_template
 import json
 
 from dbQuery import UserState, get_user_state, update_user_state
-from flow1 import handle_flow_0_subflow_0, handle_flow_0_subflow_1, handle_flow_0_subflow_2, handle_flow_0_subflow_3
+from flow1 import handle_flow_0_subflow_0, handle_flow_0_subflow_1, handle_flow_0_subflow_2, handle_flow_0_subflow_3, handle_flow_1_subflow_0, handle_flow_1_subflow_1, handle_flow_1_subflow_11
 
 
 def init_app(app):
@@ -51,20 +51,22 @@ def init_app(app):
                         if tipo_interactivo == "button_reply":
                             texto = messages["interactive"]["button_reply"]["id"]
                             numero = messages["from"]
+                            flow_ = int(texto.split()[0])
+                            subflow_ = int(texto.split()[1])
+                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, json = json.dumps(req))
                             send_txt(texto, numero)
-                            update_user_state(number = numero, json = json.dumps(req))
                             
                         elif tipo_interactivo == "list_reply":
                             texto = messages["interactive"]["list_reply"]["id"]
                             numero = messages["from"]
-                            send_txt(texto, numero)
                             update_user_state(number = numero, json = json.dumps(req))
+                            send_txt(texto, numero)
                             
                     if "text" in messages:
                         texto = messages["text"]["body"]
                         numero = messages["from"]
-                        send_txt(texto, numero)
                         update_user_state(number = numero, json = json.dumps(req))
+                        send_txt(texto, numero)
                         
             return jsonify({'message': 'EVENT_RECEIVED'})
         except Exception as e:
@@ -90,12 +92,21 @@ def send_txt(texto, numero):
                 case 3:
                     name = user_state.full_name
                     dni = user_state.dni
-                    handle_flow_0_subflow_3(numero, texto, name, dni)
-                case 404:
+                    handle_flow_0_subflow_3(numero, texto, name, dni)  
+                case _:
                     print("")
                     
         case 1:
-            print("d")
+            match user_state.subFlow:
+                case 0:
+                    name = user_state.full_name
+                    name = name.split()[0]
+                    handle_flow_1_subflow_0(numero, name.capitalize())
+                case 1:
+                    handle_flow_1_subflow_1(numero)
+                    handle_flow_1_subflow_11(numero)
+                case _:
+                    print("")
         case 2:
             if "btnsi" in texto:
                 data = {

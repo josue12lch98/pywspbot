@@ -109,14 +109,14 @@ def handle_flow_0_subflow_3(numero, texto, name, dni):
                         {
                             "type": "reply",
                             "reply": {
-                                "id": "btnsi",
+                                "id": "1 0",
                                 "title": "Si"
                             }
                         },
                         {
                             "type": "reply",
                             "reply": {
-                                "id": "btnno",
+                                "id": "0 2",
                                 "title": "No"
                             }
                         }
@@ -128,5 +128,131 @@ def handle_flow_0_subflow_3(numero, texto, name, dni):
     
     subFlow = 4
     update_user_state(number=numero, subFlow=subFlow, sucursal=texto)
+
+###########################################################
+# Flow 1
+def handle_flow_1_subflow_0(numero, name):
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": numero,
+        "type": "interactive",
+        "interactive": {
+            "type": "button",
+            "body": {
+                "text": "Antes de comenzar, coméntame " + name + "¿Estás teniendo problemas para iniciar tu marcación en Javelin?"
+            },
+            "footer": {
+                "text": "Selecciona solo una de las opciones"
+            },
+            "action": {
+                "buttons": [
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "1 404",
+                            "title": "Si"
+                        }
+                    },
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "1 1",
+                            "title": "No"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+    generic_reply(data)
+
+
+def handle_flow_1_subflow_1(numero):
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": numero,
+        "text": {
+            "preview_url": False,
+            "body":  "Perfecto, estamos felices de que seas parte de la correcta gestión en Javelin, juntos estamos logrando la EXCELENCIA OPERACIONAL"
+        }
+    }
+    generic_reply(data)
+    
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": numero,
+        "text": {
+            "preview_url": False,
+            "body":  "Para poder registrar tu reclamo o consulta, necesito que me ayudes a escoger un tema."
+        }
+    }
+    generic_reply(data)
+
+def handle_flow_1_subflow_11(numero): # Lista en flow 1 - 1 para ingresar A
+    data = {
+        "messaging_product": "whatsapp",
+        #"recipient_type": "individual",
+        "to": numero,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "body": {
+                "text": "A continuación, elige la opción que requieres:"
+            },
+            "footer": {
+                "text": "Selecciona alguna de las opciones para poder ayudarte"
+            },
+            "action":{
+                "button": "Mi solucitud hace Referencia a:",
+                "sections": [
+                    {
+                        "title": "1. MIS PAGOS",
+                        "rows": [
+                            {
+                                "id": "id_payments",
+                                "title": "1. MIS PAGOS",
+                                "description": "Compra los mejores artículos de tecnología"
+                            },
+                            {
+                                "id": "id_info",
+                                "title": "2. INFORMACIÓN SOBRE BENEFICIOS G4S Y OTROS",
+                                "description": "Vende lo que ya no estés usando"
+                            },
+                            {
+                                "id": "id_sol",
+                                "title": "3. PETICIONES",
+                                "description": "Vende lo que ya no estés usando"
+                            },
+                            {
+                                "id": "id_tram",
+                                "title": "4. TRÁMITES",
+                                "description": "Vende lo que ya no estés usando"
+                            },
+                            {
+                                "id": "id_access",
+                                "title": "5. ACCESO A APLICACIONES",
+                                "description": "Vende lo que ya no estés usando"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
     
     
+    
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": numero,
+        "text": {
+            "preview_url": False,
+            "body":  "A continuación, elige la opción que requieres:"
+        }
+    }
+    generic_reply(data)
+    update_user_state(numero, subFlow=2) # considerar retirar el subflow 1 puesto que igual va a regresar a 1
