@@ -81,13 +81,13 @@ def send_txt(texto, numero):
                 case 0:
                     handle_flow_0_subflow_0(numero)
                 case 1:
-
                     handle_flow_0_subflow_1(numero, texto)
-                case 2:  # Consultar si se puede hacer lista
+                case 2:  
                     handle_flow_0_subflow_2(numero, texto)
-
                 case 3:
                     handle_flow_0_subflow_3(numero, texto)
+                    
+                    
         case 1:
             print("d")
         case 2:
