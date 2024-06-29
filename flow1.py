@@ -128,7 +128,4 @@ def handle_flow_0_subflow_3(numero, texto):
         }
     generic_reply(buttton)
     subFlow = 4
-    update_user_state(number=numero, subFlow=subFlow, sucursal=sucursal)
-    
-def handle_flow_0_subflow_3(numero, texto):
-    print("")
+    update_user_state(number=numero, subFlow=subFlow, sucursal="x")
