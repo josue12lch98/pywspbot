@@ -2,8 +2,8 @@ from flask import  request, jsonify, render_template
 import json
 
 from dbQuery import UserState, get_user_state, update_user_state
-from flow1 import handle_flow_0_subflow_0, handle_flow_0_subflow_1, handle_flow_0_subflow_2, handle_flow_0_subflow_3, handle_flow_1_subflow_0, handle_flow_1_subflow_1, handle_flow_1_subflow_11
-
+from flow0 import handle_flow_0_subflow_0, handle_flow_0_subflow_1, handle_flow_0_subflow_2, handle_flow_0_subflow_3
+from flow1 import *
 
 def init_app(app):
     @app.route('/')
