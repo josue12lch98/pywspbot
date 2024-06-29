@@ -10,70 +10,70 @@ def init_app(app):
     def index():
         # Obtener todos los registros de la base de datos
         registros = UserState.query.all()
-        registros_ordenados = ordenar_por_fecha_y_hora(registros)
-        return render_template('index.html', registros=registros_ordenados);
 
-@app.route('/webhook', methods=['GET', 'POST'])
-def webhook():
-    if request.method == 'GET':
-        challenge = verificar_token(request)
-        return challenge
-    elif request.method == 'POST':
-        response = recibir_mensaje(request)
-        return response
-def verificar_token(req):
-    token = req.args.get('hub.verify_token')
-    challenge = req.args.get('hub.challenge')
-    if challenge and token == 'token':
-        return challenge
-    else:
-        return jsonify({'error': 'Token Invalido'}), 401
+        return render_template('index.html', registros=registros);
 
-
-
-def recibir_mensaje(req):
-    try:
-        req = request.get_json()
-        entry = req['entry'][0]
-        changes = entry['changes'][0]
-        value = changes['value']
-        objeto_mensaje = value['messages']
+    @app.route('/webhook', methods=['GET', 'POST'])
+    def webhook():
+        if request.method == 'GET':
+            challenge = verificar_token(request)
+            return challenge
+        elif request.method == 'POST':
+            response = recibir_mensaje(request)
+            return response
+    def verificar_token(req):
+        token = req.args.get('hub.verify_token')
+        challenge = req.args.get('hub.challenge')
+        if challenge and token == 'token':
+            return challenge
+        else:
+            return jsonify({'error': 'Token Invalido'}), 401
 
 
-        if objeto_mensaje:
-            messages = objeto_mensaje[0]
 
-            if "type" in messages:
-                tipo = messages["type"]
-                # agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
+    def recibir_mensaje(req):
+        try:
+            req = request.get_json()
+            entry = req['entry'][0]
+            changes = entry['changes'][0]
+            value = changes['value']
+            objeto_mensaje = value['messages']
 
-                if tipo == "interactive":
-                    tipo_interactivo = messages["interactive"]["type"]
 
-                    if tipo_interactivo == "button_reply":
-                        texto = messages["interactive"]["button_reply"]["id"]
+            if objeto_mensaje:
+                messages = objeto_mensaje[0]
+
+                if "type" in messages:
+                    tipo = messages["type"]
+                    # agregar_mensajes_log(json.dumps(messages))  #Guardar log en base de datos
+
+                    if tipo == "interactive":
+                        tipo_interactivo = messages["interactive"]["type"]
+
+                        if tipo_interactivo == "button_reply":
+                            texto = messages["interactive"]["button_reply"]["id"]
+                            numero = messages["from"]
+                            send_txt(texto, numero)
+                            # return 0
+
+                        elif tipo_interactivo == "list_reply":
+                            texto = messages["interactive"]["list_reply"]["id"]
+                            numero = messages["from"]
+                            send_txt(texto, numero)
+
+
+                    if "text" in messages:
+                        texto = messages["text"]["body"]
                         numero = messages["from"]
                         send_txt(texto, numero)
-                        # return 0
-
-                    elif tipo_interactivo == "list_reply":
-                        texto = messages["interactive"]["list_reply"]["id"]
-                        numero = messages["from"]
-                        send_txt(texto, numero)
+                        # agregar_mensajes_log(json.dumps(texto))
+                        # agregar_mensajes_log(json.dumps(numero))
 
 
-                if "text" in messages:
-                    texto = messages["text"]["body"]
-                    numero = messages["from"]
-                    send_txt(texto, numero)
-                    # agregar_mensajes_log(json.dumps(texto))
-                    # agregar_mensajes_log(json.dumps(numero))
-
-
-        # agregar_mensajes_log(json.dumps(objeto_mensaje))
-        return jsonify({'message': 'EVENT_RECEIVED'})
-    except Exception as e:
-        return jsonify({'message': 'EVENT_RECEIVED'})
+            # agregar_mensajes_log(json.dumps(objeto_mensaje))
+            return jsonify({'message': 'EVENT_RECEIVED'})
+        except Exception as e:
+            return jsonify({'message': 'EVENT_RECEIVED'})
 
 
 
@@ -92,7 +92,6 @@ def send_txt(texto, numero):
                     handle_flow_0_subflow_0(numero)
 
 
-                case 1:
                     handle_flow_0_subflow_1(numero, texto)
                 case 2:  # Consultar si se puede hacer lista
                     handle_flow_0_subflow_2(numero, texto)

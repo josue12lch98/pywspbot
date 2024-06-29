@@ -1,10 +1,7 @@
 from flask import Flask
+from __init__ import db
 
-import json
-import http.client
 
-from app import db
-from flow1 import handle_flow_0_subflow_0, handle_flow_0_subflow_1, handle_flow_0_subflow_2, handle_flow_0_subflow_3
 
 app = Flask(__name__)
 

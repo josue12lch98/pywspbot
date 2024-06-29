@@ -16,16 +16,6 @@ db = SQLAlchemy(app)
 # Resto del código de Flask...
 
 
-app = Flask(__name__)
-
-# Configuración de la base de datos SQLite
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///metapython.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-
-# Modelo de la tabla log
-
 
 with app.app_context():  # Crear la tabla si no existe
     db.create_all()
@@ -64,11 +54,3 @@ TOKEN = "TOKENX"
 
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
-    # app.run(debug=True)
-
-# Commands to push to production
-# git add .
-# git commit -m "xxx"
-#  git push
