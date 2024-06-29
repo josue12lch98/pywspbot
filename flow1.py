@@ -1,6 +1,6 @@
 import re
 
-from dbQuery import update_user_state, get_user_state, generic_reply
+from dbQuery import update_user_state, generic_reply
 
 
 def handle_flow_0_subflow_0(numero):
@@ -75,12 +75,11 @@ def handle_flow_0_subflow_2(numero, texto):
     generic_reply(data)
         
 ## poner este mensaje Listo, ${myState.nombre}.\n Gracias por confirmar tu DNI: ${myState.dni}, sucursal a la que perteneces: ${myState.sucursal}. `+ `Para continuar, necesito que me confirmes que tus datos son los correctos.`) cargando todos los datos ingresados
-def handle_flow_0_subflow_3(numero, texto):
+def handle_flow_0_subflow_3(numero, texto, name, dni):
     sucursal = texto
-    userState = get_user_state(numero)
-    name = userState.name
+    name = name.split()[0]
     
-    msg = "¡Listo " + name.capitalize() + " Gracias por confirmar tu DNI: " + userState.dni + ", sucursal a la que perteneces: " + sucursal + " \nPara continuar, necesito que me confirmes que tus datos son los correctos."
+    msg = "¡Listo " + name.capitalize() + " Gracias por confirmar tu DNI: " + dni + ", sucursal a la que perteneces: " + sucursal + " \nPara continuar, necesito que me confirmes que tus datos son los correctos."
     data = {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
@@ -90,8 +89,8 @@ def handle_flow_0_subflow_3(numero, texto):
             "body": msg
         }
     }
-    
     generic_reply(data)
+
     buttton = {
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
@@ -126,5 +125,8 @@ def handle_flow_0_subflow_3(numero, texto):
             }
         }
     generic_reply(buttton)
+    
     subFlow = 4
-    update_user_state(number=numero, subFlow=subFlow, sucursal= sucursal)
+    update_user_state(number=numero, subFlow=subFlow, sucursal=texto)
+    
+    

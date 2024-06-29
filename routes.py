@@ -52,19 +52,19 @@ def init_app(app):
                             texto = messages["interactive"]["button_reply"]["id"]
                             numero = messages["from"]
                             send_txt(texto, numero)
-                            update_user_state(number = numero, json = json.dumps(messages))
+                            update_user_state(number = numero, json = json.dumps(req))
                             
                         elif tipo_interactivo == "list_reply":
                             texto = messages["interactive"]["list_reply"]["id"]
                             numero = messages["from"]
                             send_txt(texto, numero)
-                            update_user_state(number = numero, json = json.dumps(messages))
+                            update_user_state(number = numero, json = json.dumps(req))
                             
                     if "text" in messages:
                         texto = messages["text"]["body"]
                         numero = messages["from"]
                         send_txt(texto, numero)
-                        update_user_state(number = numero, json = json.dumps(messages))
+                        update_user_state(number = numero, json = json.dumps(req))
                         
             return jsonify({'message': 'EVENT_RECEIVED'})
         except Exception as e:
@@ -88,7 +88,9 @@ def send_txt(texto, numero):
                 case 2:  
                     handle_flow_0_subflow_2(numero, texto)
                 case 3:
-                    handle_flow_0_subflow_3(numero, texto)
+                    name = user_state.full_name
+                    dni = user_state.dni
+                    handle_flow_0_subflow_3(numero, texto, name, dni)
                 case 404:
                     print("")
                     
