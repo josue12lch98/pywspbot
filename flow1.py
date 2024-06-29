@@ -2,7 +2,7 @@
  # Importa las funciones necesarias
 import re
 
-from dbQuery import update_user_state
+from dbQuery import update_user_state, get_user_state
 
 
 def handle_flow_0_subflow_0(numero):

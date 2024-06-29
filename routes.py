@@ -90,7 +90,7 @@ def send_txt(texto, numero):
             match user_state.subFlow:
                 case 0:
                     handle_flow_0_subflow_0(numero)
-
+                case 1:
 
                     handle_flow_0_subflow_1(numero, texto)
                 case 2:  # Consultar si se puede hacer lista
