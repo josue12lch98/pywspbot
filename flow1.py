@@ -76,7 +76,7 @@ def handle_flow_1_subflow_1(numero):
                 "button": "Ver Opciones",
                 "sections": [
                     {
-                        "title": "1. MIS PAGOS",
+                        "title": "MIS PAGOS",
                         "rows": [
                             {
                                 "id": "id_crono",
@@ -85,10 +85,6 @@ def handle_flow_1_subflow_1(numero):
                             {
                                 "id": "id_how",
                                 "title": "¿Cuánto me van a pagar?"
-                            },
-                            {
-                                "id": "id_consult",
-                                "title": "Consulta sobre los descuentos de mi pago"
                             }
                         ]
                     },
