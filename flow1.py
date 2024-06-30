@@ -102,28 +102,9 @@ def handle_flow_1_subflow_1(numero):
                                 "title": "PETICIONES"
                             }
                         ]
-                    },
-                    {
-                        "title": "========================================================",
-                        "rows": [
-                            {
-                                "id": "1 1 4",
-                                "title": "TRÁMITES"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "========================================================",
-                        "rows": [
-                            {
-                                "id": "1 1 5",
-                                "title": "ACCESO A APLICACIONES"
-                            }
-                        ]
                     }
                 ]
             }
         }
     }
     generic_reply(data)
-    update_user_state(numero)
