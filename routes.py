@@ -66,6 +66,7 @@ def init_app(app):
                             flow_ = int(texto.split()[0])
                             subflow_ = int(texto.split()[1])
                             subFlow2_ = int(texto.split()[2])
+                            subFlow2_ = int(texto.split()[3])
                             update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, json = json.dumps(req))
                             send_txt(texto, numero)
                             
@@ -84,7 +85,7 @@ def send_txt(texto, numero):
     texto = texto.lower()
     user_state = get_user_state(numero)
     if user_state is None:
-        update_user_state(numero, flow=0,subFlow=0)
+        update_user_state(numero, flow=0,subFlow=0,subFlow2=0,subFlow3=0)
         user_state = get_user_state(numero)
 
     match user_state.flow:
