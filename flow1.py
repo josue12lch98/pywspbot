@@ -59,8 +59,8 @@ def handle_flow_1_subflow_1(numero):
         }
     }
     generic_reply(data)
-    """
     
+    """
     data = {
         "messaging_product": "whatsapp",
         "to": numero,
@@ -110,7 +110,7 @@ def handle_flow_1_subflow_1(numero):
             }
         }
     }
-    
+     """
     data = {
         "messaging_product": "whatsapp",
         #"recipient_type": "individual",
@@ -140,12 +140,27 @@ def handle_flow_1_subflow_1(numero):
                         "title": "Distribución y Entrega",
                         "rows": [
                             {
-                                "id": "btndireccion",
+                                "id": "1 1 3",
                                 "title": "Local",
                                 "description": "Puedes visistar nuestro local."
                             },
                             {
-                                "id": "btnentrega",
+                                "id": "1 1 4",
+                                "title": "Entrega",
+                                "description": "La entrega se realiza todo los dias."
+                            }
+                        ]
+                    },
+                    {
+                        "title": "ddd y Entrega",
+                        "rows": [
+                            {
+                                "id": "1 1 5",
+                                "title": "Local",
+                                "description": "Puedes visistar nuestro local."
+                            },
+                            {
+                                "id": "1 1 6",
                                 "title": "Entrega",
                                 "description": "La entrega se realiza todo los dias."
                             }
@@ -179,5 +194,5 @@ def handle_flow_1_subflow_1(numero):
         }
     }
     generic_reply(data)
-    
+    """
     

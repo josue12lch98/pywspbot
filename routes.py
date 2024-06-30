@@ -63,6 +63,7 @@ def init_app(app):
                             numero = messages["from"]
                             flow_ = int(texto.split()[0])
                             subflow_ = int(texto.split()[1])
+                            subFlow2_ = int(texto.split()[2])
                             update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, json = json.dumps(req))
                             send_txt(texto, numero)
                             
@@ -112,6 +113,14 @@ def send_txt(texto, numero):
                         match user_state.subFlow2:
                             case 1:
                                 handle_flow_1_subflow_1_1(numero)
+                            case 2:
+                                handle_flow_1_subflow_1_2(numero)
+                            case 3:
+                                handle_flow_1_subflow_1_3(numero)
+                            case 4:
+                                handle_flow_1_subflow_1_4(numero)
+                            case 5:
+                                handle_flow_1_subflow_1_5(numero)
                     
                 case _:
                     print("")
