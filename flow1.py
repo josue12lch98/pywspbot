@@ -77,16 +77,19 @@ def handle_flow_1_subflow_1(numero):
                 "button": "Ver Opciones",
                 "sections": [
                     {
-                        "title": "========================================================",
+                        "title": "Hss",
                         "rows": [
                             {
+                                "id": "1 1 1", # FLOW / SUBFLOW / SUBFLOW2
+                                "title": "MIS PAGOS"
+                            },{
                                 "id": "1 1 1", # FLOW / SUBFLOW / SUBFLOW2
                                 "title": "MIS PAGOS"
                             }
                         ]
                     },
                     {
-                        "title": "========================================================",
+                        "title": "XS",
                         "rows": [
                             {
                                 "id": "1 1 2",
@@ -95,13 +98,45 @@ def handle_flow_1_subflow_1(numero):
                         ]
                     },
                     {
-                        "title": "========================================================",
+                        "title": "xxxx",
                         "rows": [
                             {
                                 "id": "1 1 3",
                                 "title": "PETICIONES"
                             }
                         ]
+                    }
+                ]
+            }
+        }
+    }
+    generic_reply(data)
+    
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": numero,
+        "type": "interactive",
+        "interactive": {
+            "type": "button",
+            "body": {
+                "text": "H"
+            },
+            "action": {
+                "buttons": [
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "1 404 0",
+                            "title": "Si"
+                        }
+                    },
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "1 1 0",
+                            "title": "No"
+                        }
                     }
                 ]
             }
