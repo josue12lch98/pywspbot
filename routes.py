@@ -4,6 +4,7 @@ import json
 from dbQuery import UserState, get_user_state, update_user_state
 from flow0 import handle_flow_0_subflow_0, handle_flow_0_subflow_1, handle_flow_0_subflow_2, handle_flow_0_subflow_3
 from flow1 import *
+from flow1_1_ import *
 
 def init_app(app):
     @app.route('/')
@@ -53,13 +54,16 @@ def init_app(app):
                             numero = messages["from"]
                             flow_ = int(texto.split()[0])
                             subflow_ = int(texto.split()[1])
-                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, json = json.dumps(req))
+                            subFlow2_ = int(texto.split()[2])
+                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, json = json.dumps(req))
                             send_txt(texto, numero)
                             
                         elif tipo_interactivo == "list_reply":
                             texto = messages["interactive"]["list_reply"]["id"]
                             numero = messages["from"]
-                            update_user_state(number = numero, json = json.dumps(req))
+                            flow_ = int(texto.split()[0])
+                            subflow_ = int(texto.split()[1])
+                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, json = json.dumps(req))
                             send_txt(texto, numero)
                             
                     if "text" in messages:
@@ -104,6 +108,12 @@ def send_txt(texto, numero):
                     handle_flow_1_subflow_0(numero, name.capitalize())
                 case 1:
                     handle_flow_1_subflow_1(numero)
+                    
+                    if user_state.subFlow2 != 0:
+                        match user_state.subFlow2:
+                            case 1:
+                                handle_flow_1_subflow_1_1(numero)
+                    
                 case _:
                     print("")
         case _:

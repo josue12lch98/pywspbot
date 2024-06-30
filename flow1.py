@@ -19,14 +19,14 @@ def handle_flow_1_subflow_0(numero, name):
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 404",
+                            "id": "1 404 0",
                             "title": "Si"
                         }
                     },
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 1",
+                            "id": "1 1 0",
                             "title": "No"
                         }
                     }
@@ -59,7 +59,8 @@ def handle_flow_1_subflow_1(numero):
         }
     }
     generic_reply(data)
-    
+    """
+    """
     data = {
         "messaging_product": "whatsapp",
         "to": numero,
@@ -76,28 +77,47 @@ def handle_flow_1_subflow_1(numero):
                 "button": "Ver Opciones",
                 "sections": [
                     {
-                        "title": "MIS PAGOS",
+                        "title": "========================================================",
                         "rows": [
                             {
-                                "id": "id_crono",
-                                "title": "Cronograma de Pagos"
-                            },
-                            {
-                                "id": "id_how",
-                                "title": "¿Cuánto me van a pagar?"
+                                "id": "1 1 1", # FLOW / SUBFLOW / SUBFLOW2
+                                "title": "MIS PAGOS"
                             }
                         ]
                     },
                     {
-                        "title": " ",
+                        "title": "========================================================",
                         "rows": [
                             {
-                                "id": "id_detail",
-                                "title": "Detalles de pago"
-                            },
+                                "id": "1 1 2",
+                                "title": "INFORMACIÓN SOBRE BENEFICIOS G4S Y OTROS"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "========================================================",
+                        "rows": [
                             {
-                                "id": "id_others",
-                                "title": "Otras Consultas"
+                                "id": "1 1 3",
+                                "title": "PETICIONES"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "========================================================",
+                        "rows": [
+                            {
+                                "id": "1 1 4",
+                                "title": "TRÁMITES"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "========================================================",
+                        "rows": [
+                            {
+                                "id": "1 1 5",
+                                "title": "ACCESO A APLICACIONES"
                             }
                         ]
                     }
@@ -106,4 +126,4 @@ def handle_flow_1_subflow_1(numero):
         }
     }
     generic_reply(data)
-    update_user_state(numero, subFlow=2) # considerar retirar el subflow 1 puesto que igual va a regresar a 1
+    update_user_state(numero)
