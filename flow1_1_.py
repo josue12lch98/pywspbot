@@ -24,6 +24,8 @@ def handle_flow_1_subflow_1_2(numero):
         }
     }
     generic_reply(data)
+    
+    
     update_user_state(numero, subFlow = 1, subFlow2 = 0) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
       
 def handle_flow_1_subflow_1_3(numero):

@@ -108,8 +108,9 @@ def send_txt(texto, numero):
                     name = name.split()[0]
                     handle_flow_1_subflow_0(numero, name.capitalize())
                 case 1:
-                    handle_flow_1_subflow_1(numero)
-                    if user_state.subFlow2 != 0:
+                    if user_state.subFlow2 == 0:
+                        handle_flow_1_subflow_1(numero)
+                    else:
                         match user_state.subFlow2:
                             case 1:
                                 handle_flow_1_subflow_1_1(numero)
@@ -121,7 +122,8 @@ def send_txt(texto, numero):
                                 handle_flow_1_subflow_1_4(numero)
                             case 5:
                                 handle_flow_1_subflow_1_5(numero)
-                    
+                            case 6:
+                                handle_flow_1_subflow_1_6(numero)
                 case _:
                     print("")
         case _:

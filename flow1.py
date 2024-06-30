@@ -71,9 +71,6 @@ def handle_flow_1_subflow_1(numero):
             "body": {
                 "text": "Selecciona alguna opción"
             },
-            "footer": {
-                "text": "Selecciona alguna de las opciones para poder ayudarte"
-            },
             "action":{
                 "buttons": [
                     {
@@ -95,6 +92,45 @@ def handle_flow_1_subflow_1(numero):
                         "reply": {
                             "id": "1 1 3",
                             "title": "PETICIONES"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+    generic_reply(data)
+    
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": numero,
+        "type": "interactive",
+        "interactive": {
+            "type": "button",
+            "body": {
+                "text": "Selecciona alguna opción"
+            },
+            "action":{
+                "buttons": [
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "1 1 4",
+                            "title": "TRÁMITES"
+                        }
+                    },
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "1 1 5",
+                            "title": "ACCESO A APLICACIONES"
+                        }
+                    },
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "1 1 6",
+                            "title": "OTROS"
                         }
                     }
                 ]
