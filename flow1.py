@@ -79,35 +79,29 @@ def handle_flow_1_subflow_1(numero):
                         "title": "1. MIS PAGOS",
                         "rows": [
                             {
-                                "id": "idcron",
+                                "id": "id_crono",
                                 "title": "Cronograma de Pagos"
                             },
                             {
-                                "id": "idpag",
+                                "id": "id_how",
                                 "title": "¿Cuánto me van a pagar?"
                             },
                             {
-                                "id": "dasdasd",
+                                "id": "id_consult",
                                 "title": "Consulta sobre los descuentos de mi pago"
                             },
-                            {
-                                "id": "asdasdasda",
-                                "title": "Detalles de pago"
-                            }
                         ]
                     },
                     {
                         "title": " ",
                         "rows": [
                             {
-                                "id": "btndireccion",
-                                "title": "Local",
-                                "description": "Puedes visistar nuestro local."
+                                "id": "id_detail",
+                                "title": "Detalles de pago"
                             },
                             {
-                                "id": "btnentrega",
-                                "title": "Entrega",
-                                "description": "La entrega se realiza todo los dias."
+                                "id": "id_others",
+                                "title": "Otras Consultas"
                             }
                         ]
                     }
