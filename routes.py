@@ -108,7 +108,6 @@ def send_txt(texto, numero):
                     handle_flow_1_subflow_0(numero, name.capitalize())
                 case 1:
                     handle_flow_1_subflow_1(numero)
-                    
                     if user_state.subFlow2 != 0:
                         match user_state.subFlow2:
                             case 1:

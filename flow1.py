@@ -60,7 +60,7 @@ def handle_flow_1_subflow_1(numero):
     }
     generic_reply(data)
     """
-    """
+    
     data = {
         "messaging_product": "whatsapp",
         "to": numero,
@@ -110,8 +110,54 @@ def handle_flow_1_subflow_1(numero):
             }
         }
     }
-    generic_reply(data)
     
+    data = {
+        "messaging_product": "whatsapp",
+        #"recipient_type": "individual",
+        "to": numero,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "action":{
+                "button": "Ver Opciones",
+                "sections": [
+                    {
+                        "title": "Compra y Venta",
+                        "rows": [
+                            {
+                                "id": "1 1 1",
+                                "title": "Comprar",
+                                "description": "Compra los mejores artículos de tecnología"
+                            },
+                            {
+                                "id": "1 1 2",
+                                "title": "Vender",
+                                "description": "Vende lo que ya no estés usando"
+                            }
+                        ]
+                    },
+                    {
+                        "title": "Distribución y Entrega",
+                        "rows": [
+                            {
+                                "id": "btndireccion",
+                                "title": "Local",
+                                "description": "Puedes visistar nuestro local."
+                            },
+                            {
+                                "id": "btnentrega",
+                                "title": "Entrega",
+                                "description": "La entrega se realiza todo los dias."
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+    
+    generic_reply(data)
+    """
     data = {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
@@ -119,23 +165,13 @@ def handle_flow_1_subflow_1(numero):
         "type": "interactive",
         "interactive": {
             "type": "button",
-            "body": {
-                "text": "H"
-            },
             "action": {
                 "buttons": [
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 404 0",
-                            "title": "Si"
-                        }
-                    },
-                    {
-                        "type": "reply",
-                        "reply": {
                             "id": "1 1 0",
-                            "title": "No"
+                            "title": "MIS PAGOS"
                         }
                     }
                 ]
@@ -143,3 +179,5 @@ def handle_flow_1_subflow_1(numero):
         }
     }
     generic_reply(data)
+    
+    
