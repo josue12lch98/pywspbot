@@ -5,6 +5,7 @@ from dbQuery import UserState, get_user_state, update_user_state
 from flow0 import handle_flow_0_subflow_0, handle_flow_0_subflow_1, handle_flow_0_subflow_2, handle_flow_0_subflow_3
 from flow1 import *
 from flow1_1_ import *
+from flow1_1_2_ import *
 
 def init_app(app):
     @app.route('/')
@@ -55,7 +56,8 @@ def init_app(app):
                             flow_ = int(texto.split()[0])
                             subflow_ = int(texto.split()[1])
                             subFlow2_ = int(texto.split()[2])
-                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, json = json.dumps(req))
+                            subFlow3_ = int(texto.split()[3])
+                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, json = json.dumps(req))
                             send_txt(texto, numero)
                             
                         elif tipo_interactivo == "list_reply":
@@ -64,7 +66,7 @@ def init_app(app):
                             flow_ = int(texto.split()[0])
                             subflow_ = int(texto.split()[1])
                             subFlow2_ = int(texto.split()[2])
-                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, json = json.dumps(req))
+                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, json = json.dumps(req))
                             send_txt(texto, numero)
                             
                     if "text" in messages:
@@ -101,7 +103,7 @@ def send_txt(texto, numero):
                 case _:
                     print("")
                     
-        case 1:
+        case 1: # Button si de confirmación de datos correctos define el cambio de flujo de 0 a 1
             match user_state.subFlow:
                 case 0:
                     name = user_state.full_name
@@ -115,7 +117,20 @@ def send_txt(texto, numero):
                             case 1:
                                 handle_flow_1_subflow_1_1(numero)
                             case 2:
-                                handle_flow_1_subflow_1_2(numero)
+                                if user_state.subFlow3 == 0:
+                                    handle_flow_1_subflow_1_2(numero)
+                                else:
+                                    match user_state.subFlow3:
+                                        case 1:
+                                            handle_flow_1_subflow_1_2_1(numero)
+                                        case 2:
+                                            handle_flow_1_subflow_1_2_2(numero)
+                                        case 3:
+                                            handle_flow_1_subflow_1_2_3(numero)
+                                        case 4:
+                                            handle_flow_1_subflow_1_2_4(numero)
+                                        case _:
+                                            print("")
                             case 3:
                                 handle_flow_1_subflow_1_3(numero)
                             case 4:

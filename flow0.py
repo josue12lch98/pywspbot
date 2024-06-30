@@ -109,14 +109,14 @@ def handle_flow_0_subflow_3(numero, texto, name, dni):
                         {
                             "type": "reply",
                             "reply": {
-                                "id": "1 0 0",
+                                "id": "1 0 0 0", # Flujo / Sub flow / Sub flow 2 / Sub flow 3
                                 "title": "Si"
                             }
                         },
                         {
                             "type": "reply",
                             "reply": {
-                                "id": "0 2 0",
+                                "id": "0 2 0 0",
                                 "title": "No"
                             }
                         }

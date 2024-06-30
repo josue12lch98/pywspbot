@@ -19,14 +19,14 @@ def handle_flow_1_subflow_0(numero, name):
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 404 0",
+                            "id": "1 404 0 0",
                             "title": "Si"
                         }
                     },
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 1 0",
+                            "id": "1 1 0 0",
                             "title": "No"
                         }
                     }
@@ -61,7 +61,7 @@ def handle_flow_1_subflow_1(numero):
     generic_reply(data)
     
 
-    data = {
+    btns1 = {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
         "to": numero,
@@ -76,21 +76,21 @@ def handle_flow_1_subflow_1(numero):
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 1 1",
+                            "id": "1 1 1 0",
                             "title": "MIS PAGOS"
                         }
                     },
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 1 2",
+                            "id": "1 1 2 0",
                             "title": "G4S"
                         }
                     },
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 1 3",
+                            "id": "1 1 3 0",
                             "title": "PETICIONES"
                         }
                     }
@@ -98,9 +98,9 @@ def handle_flow_1_subflow_1(numero):
             }
         }
     }
-    generic_reply(data)
+    generic_reply(btns1)
     
-    data = {
+    btns2 = {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
         "to": numero,
@@ -115,21 +115,21 @@ def handle_flow_1_subflow_1(numero):
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 1 4",
+                            "id": "1 1 4 0",
                             "title": "TRÁMITES"
                         }
                     },
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 1 5",
+                            "id": "1 1 5 0",
                             "title": "ACCESO A APLICACIONES"
                         }
                     },
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 1 6",
+                            "id": "1 1 6 0",
                             "title": "OTROS"
                         }
                     }
@@ -137,5 +137,5 @@ def handle_flow_1_subflow_1(numero):
             }
         }
     }
-    generic_reply(data)
+    generic_reply(btns2)
     
