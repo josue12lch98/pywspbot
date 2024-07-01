@@ -2,7 +2,7 @@ from dbQuery import update_user_state, generic_reply
 import inspect
 
 def handle_flow_1_subflow_1_2_1(numero, name, b):
-    if b != "":
+    if b == "":
         data = {
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
