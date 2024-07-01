@@ -31,11 +31,13 @@
             <th>SubFlujo</th>
             <th>SubFlujo2</th>
             <th>SubFlujo3</th>
+            <th>SubFlujo4</th>
             <th>DNI</th>
             <th>Nombre_completo</th>
             <th>Sucursal</th>
             <th>json</th>
             <th>Last_func_exec</th>
+            <th>error_log</th>
         </tr>
         {%for registro in registros %}
             <tr>
@@ -45,11 +47,13 @@
                 <td>{{registro.subFlow}}</td>
                 <td>{{registro.subFlow2}}</td>
                 <td>{{registro.subFlow3}}</td>
+                <td>{{registro.subFlow4}}</td>
                 <td>{{registro.dni}}</td>
                 <td>{{registro.full_name}}</td>
                 <td>{{registro.sucursal}}</td>
                 <td>{{registro.json}}</td>
                 <td>{{registro.func}}</td>
+                <td>{{registro.error}}</td>
             </tr>
         {% endfor %}
     </table>

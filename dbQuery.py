@@ -19,6 +19,7 @@ class UserState(db.Model):
     sucursal = db.Column(db.TEXT)
     json = db.Column(db.TEXT)
     func = db.Column(db.TEXT, default="")
+    error = db.Column(db.TEXT, default="")
 
 
 
