@@ -38,6 +38,7 @@
             <th>Sucursal</th>
             <th>json</th>
             <th>Last_func_exec</th>
+            <th>Flag_b</th>
         </tr>
         {%for registro in registros %}
             <tr>
@@ -54,6 +55,7 @@
                 <td>{{registro.sucursal}}</td>
                 <td>{{registro.json}}</td>
                 <td>{{registro.func}}</td>
+                <td>{{registro.Flag_b}}</td>
             </tr>
         {% endfor %}
     </table>

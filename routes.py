@@ -101,6 +101,8 @@ def send_txt(texto, numero):
         update_user_state(numero, flow=0,subFlow=0,subFlow2=0,subFlow3=0,subFlow4=0,subFlow5=0)
         user_state = get_user_state(numero)
 
+    b = user_state.Flag_b
+    
     match user_state.flow:
         case 0:
             match user_state.subFlow:
@@ -139,16 +141,14 @@ def send_txt(texto, numero):
                                             name = user_state.full_name
                                             name = name.split()[0]
                                             if user_state.subFlow4 == 0:
-                                                handle_flow_1_subflow_1_2_1(numero, name)
+                                                handle_flow_1_subflow_1_2_1(numero, name, b)
+                                                handle_flow_1_subflow_1_2_1_1(numero)
                                             else:
                                                 match user_state.subFlow4:
                                                     case 1:
-                                                        if user_state.subFlow5 == 0:
-                                                            handle_flow_1_subflow_1_2_1_1(numero)
-                                                        else:
-                                                            match user_state.subFlow5:
-                                                                case 1:
-                                                                    handle_flow_1_subflow_1_2_1_1_1(numero)
+                                                        match user_state.subFlow5:
+                                                            case 0:
+                                                                handle_flow_1_subflow_1_2_1_1_1(numero)
                                                     case _:
                                                         handle_flow_1_subflow_1_2_1_x(numero, user_state.subFlow4)
                                         case 2:
