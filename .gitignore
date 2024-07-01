@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-instance/*
-!instance/.gitkeep
-app2.py
-app_backup.py
-<<<<<<< HEAD
+
 =======
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -167,7 +162,3 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
->>>>>>> dd2b3c60138359c29ba946d68f622e6050d101c9
-=======
-app_copy.py
->>>>>>> 548d70e468673aae9c90ebf7be911df26a7d0d2f
