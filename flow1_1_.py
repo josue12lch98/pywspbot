@@ -72,7 +72,7 @@ def handle_flow_1_subflow_1_2(numero):
         }
     }
     generic_reply(data)
-    update_user_state(func = str(inspect.currentframe().f_code.co_name))
+    update_user_state(number=numero, func = str(inspect.currentframe().f_code.co_name))
     
 def handle_flow_1_subflow_1_3(numero):
     data = {

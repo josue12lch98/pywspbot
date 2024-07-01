@@ -57,7 +57,7 @@ def init_app(app):
                             subflow_ = int(texto.split()[1])
                             subFlow2_ = int(texto.split()[2])
                             subFlow3_ = int(texto.split()[3])
-                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, json = json.dumps(req))
+                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_)
                             send_txt(texto, numero)
                             
                         elif tipo_interactivo == "list_reply":
@@ -66,16 +66,17 @@ def init_app(app):
                             flow_ = int(texto.split()[0])
                             subflow_ = int(texto.split()[1])
                             subFlow2_ = int(texto.split()[2])
-                            subFlow2_ = int(texto.split()[3])
-                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, json = json.dumps(req))
+                            subFlow3_ = int(texto.split()[3])
+                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_)
                             send_txt(texto, numero)
                             
                     if "text" in messages:
                         texto = messages["text"]["body"]
                         numero = messages["from"]
-                        update_user_state(number = numero, json = json.dumps(req))
+                        update_user_state(number = numero)
                         send_txt(texto, numero)
-                        
+            update_user_state(number = numero, json = json.dumps(req)) 
+                       
             return jsonify({'message': 'EVENT_RECEIVED'})
         except Exception as e:
             return jsonify({'message': 'EVENT_RECEIVED'})
