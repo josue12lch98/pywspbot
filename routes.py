@@ -80,7 +80,7 @@ def init_app(app):
                        
             return jsonify({'message': 'EVENT_RECEIVED'})
         except Exception as e:
-            update_user_state(json = str(e)) 
+            update_user_state(number = numero, json = str(e)) 
             return jsonify({'message': 'EVENT_RECEIVED'})
 
 # Ciclo entrada
