@@ -6,6 +6,7 @@ from flow0 import *
 from flow1 import *
 from flow1_1_ import *
 from flow1_1_2_ import *
+from flow1_1_2_1_ import *
 
 def init_app(app):
     @app.route('/')
@@ -33,13 +34,12 @@ def init_app(app):
             return jsonify({'error': 'Token Invalido'}), 401
 
     def recibir_mensaje(req):
-        n=""
         try:
             req = request.get_json()
-            entry = req['entry'][0]
-            changes = entry['changes'][0]
-            value = changes['value']
-            objeto_mensaje = value['messages']
+            entry = req["entry"][0]
+            changes = entry["changes"][0]
+            value = changes["value"]
+            objeto_mensaje = value["messages"]
             
             if objeto_mensaje:
                 messages = objeto_mensaje[0]
@@ -53,7 +53,6 @@ def init_app(app):
                         if tipo_interactivo == "button_reply":
                             texto = messages["interactive"]["button_reply"]["id"]
                             numero = messages["from"]
-                            n = numero # Could be dumped if not needed
                             flow_ = int(texto.split()[0])
                             subflow_ = int(texto.split()[1])
                             subFlow2_ = int(texto.split()[2])
@@ -65,7 +64,6 @@ def init_app(app):
                         elif tipo_interactivo == "list_reply":
                             texto = messages["interactive"]["list_reply"]["id"]
                             numero = messages["from"]
-                            n = numero # Could be dumped if not needed
                             flow_ = int(texto.split()[0])
                             subflow_ = int(texto.split()[1])
                             subFlow2_ = int(texto.split()[2])
@@ -77,13 +75,12 @@ def init_app(app):
                     if "text" in messages:
                         texto = messages["text"]["body"]
                         numero = messages["from"]
-                        n = numero # Could be dumped if not needed
                         update_user_state(number = numero)
                         send_txt(texto, numero)
+            
             update_user_state(number = numero, json = json.dumps(messages)) 
             return jsonify({'message': 'EVENT_RECEIVED'})
         except Exception as e:
-            update_user_state(number = n, error = str(e)) 
             return jsonify({'message': 'EVENT_RECEIVED'})
 
 # Ciclo entrada
@@ -134,7 +131,7 @@ def send_txt(texto, numero):
                                             else:
                                                 match user_state.subFlow4:
                                                     case 1:
-                                                        print("")
+                                                        handle_flow_1_subflow_1_2_1_1(numero)
                                         case 2:
                                             handle_flow_1_subflow_1_2_2(numero)
                                         case 3:
