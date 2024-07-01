@@ -112,14 +112,14 @@ def send_txt(texto, numero):
                 case 0:
                     name = user_state.full_name
                     name = name.split()[0]
-                    handle_flow_1_subflow_0(numero, name.capitalize())
+                    handle_flow_1_subflow_0(numero, name.capitalize()) # Consulta si/no problemas javelin
                 case 1:
                     if user_state.subFlow2 == 0:
-                        handle_flow_1_subflow_1(numero)
+                        handle_flow_1_subflow_1(numero) # Lista reclamo/consulta (5 opciones)
                     else:
                         match user_state.subFlow2:
                             case 1:
-                                handle_flow_1_subflow_1_1(numero)
+                                handle_flow_1_subflow_1_1(numero) # Lista botones para mis pagos
                             case 2:
                                 if user_state.subFlow3 == 0:
                                     handle_flow_1_subflow_1_2(numero)
