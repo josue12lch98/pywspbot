@@ -39,9 +39,6 @@ def handle_flow_1_subflow_0(numero, name):
     update_user_state(number=numero, func = str(inspect.currentframe().f_code.co_name))
 
 def handle_flow_1_subflow_1(numero):
-
-
-
     list = {
         "messaging_product" : "whatsapp",
         "to": numero,
@@ -93,7 +90,7 @@ def handle_flow_1_subflow_1(numero):
         }
     }
     generic_reply(list)
-
+    
     update_user_state(number=numero, func = str(inspect.currentframe().f_code.co_name))
 
 def handle_flow_1_subflow_404(numero):

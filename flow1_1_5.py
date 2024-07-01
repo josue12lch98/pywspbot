@@ -1,7 +1,7 @@
 from dbQuery import update_user_state, generic_reply
 import inspect
 
-def handle_flow_1_subflow_1_1_1(numero):
+def handle_flow_1_subflow_1_1_5(numero):
     list = {
         "messaging_product": "whatsapp",
         "to": numero,
@@ -9,8 +9,7 @@ def handle_flow_1_subflow_1_1_1(numero):
         "interactive": {
             "type": "list",
             "body": {
-                "text":  "1️⃣Quiero saber la fecha de pago de gratificación \n\n " +
-                "2️⃣Quiero saber la fecha de pago de vacaciones\n\n"
+                "text":  "👇 Selecciona una opción para más detalles:"
 
             },
             "footer": {
@@ -23,17 +22,25 @@ def handle_flow_1_subflow_1_1_1(numero):
                         "title": "Section 1",
                         "rows": [
                             {
-                                "id": "1 1 1 1 1",
+                                "id": "1 1 5 1 1 1",
                                 "title": "Opción 1",
-                                "description": "Quiero saber la fecha de pago de gratificación"
+                                "description": "¿Cómo registro asistencia?"
                             },
                             {
-                                "id": "1 1 1 1 2",
+                                "id": "1 1 5 1 1 2",
                                 "title": "Opción 2",
-                                "description": "Quiero saber la fecha de pago de vacaciones"
+                                "description": "¿Cómo accedo/marco?"
+                            },  {
+                                "id": "1 1 5 1 1 2",
+                                "title": "Opción 3",
+                                "description": "Actualización de datos"
                             }, {
-                                "id": "1 1 1 1 0",
-                                "title": "Menú Pagos",
+                                "id": "1 1 5 1 1 2",
+                                "title": "Opción 4",
+                                "description": "Cambio de contraseña"
+                            },{
+                                "id": "1 1 5 0 0 0",
+                                "title": "Menú Aplicaciones",
                                 "description": ""
                             }
                         ]

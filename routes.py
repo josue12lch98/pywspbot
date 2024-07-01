@@ -9,6 +9,8 @@ from flow1_1_1 import *
 from flow1_1_1_1 import *
 from flow1_1_2_ import *
 from flow1_1_2_1_ import *
+from flow1_1_5 import handle_flow_1_subflow_1_1_5
+
 
 def init_app(app):
     @app.route('/')
@@ -87,6 +89,7 @@ def send_txt(texto, numero):
     texto = texto.lower()
     user_state = get_user_state(numero)
     if user_state is None:
+        update_user_state(numero, flow=0,subFlow=0,subFlow2=0,subFlow3=0,subFlow4=0,subFlow5=0)
         user_state = get_user_state(numero)
 
     match user_state.flow:
@@ -130,13 +133,13 @@ def send_txt(texto, numero):
                                     case 2:
                                         match user_state.subFlow4:
                                             case 0:
-                                                handle_flow_1_subflow_1_1_2(numero, )
+                                                handle_flow_1_subflow_1_1_2(numero)
                                             case _:
                                                 handle_database_manteniment(numero)
                                     case 3:
                                         match user_state.subFlow4:
                                             case 0:
-                                                handle_flow_1_subflow_1_1_3(numero, )
+                                                handle_flow_1_subflow_1_1_3(numero)
                                             case _:
                                                 handle_database_manteniment(numero)
                                     case 4:
@@ -151,36 +154,28 @@ def send_txt(texto, numero):
                                                 handle_contact_asesor(numero)
                                             case _:
                                                 handle_database_manteniment(numero)
-                                    case 6:
-                                        match user_state.subFlow4:
-                                            case 0:
-                                                handle_flow_1_subflow_1_1_3(numero)
-                                            case _:
-                                                handle_database_manteniment(numero)
+
                             case 2:
                                 if user_state.subFlow3 == 0:
                                     handle_flow_1_subflow_1_2(numero)
                                 else:
                                     match user_state.subFlow3:
                                         case 1:
+                                            name = user_state.full_name
+                                            name = name.split()[0]
                                             if user_state.subFlow4 == 0:
                                                 name = user_state.full_name
                                                 name = name.split()[0]
                                                 handle_flow_1_subflow_1_2_1(numero, name)
-                                                data = {
-                                                    "messaging_product": "whatsapp",
-                                                    "recipient_type": "individual",
-                                                    "to": numero,
-                                                    "text": {
-                                                        "preview_url": False,
-                                                        "body":  "user_state.subFlow4" + str(user_state.subFlow4)
-                                                    }
-                                                }
-                                                generic_reply(data)
                                             else:
                                                 match user_state.subFlow4:
                                                     case 1:
-                                                        handle_flow_1_subflow_1_2_1_1(numero)
+                                                        if user_state.subFlow5 == 0:
+                                                            handle_flow_1_subflow_1_2_1_1(numero)
+                                                        else:
+                                                            match user_state.subFlow5:
+                                                                case 1:
+                                                                    handle_flow_1_subflow_1_2_1_1_1(numero)
                                                     case _:
                                                         handle_flow_1_subflow_1_2_1_x(numero, user_state.subFlow4)
                                         case 2:
@@ -192,13 +187,115 @@ def send_txt(texto, numero):
                                         case _:
                                             handle_flow_1_subflow_1_2_x(numero, user_state.subFlow3)
                             case 3:
-                                handle_flow_1_subflow_1_3(numero)## Lista botones para peticiones
+
+                                match user_state.subFlow3:
+                                    case 0:
+                                        handle_flow_1_subflow_1_3(numero)  # 1 1 3 0 0 -  Menú Peticiones
+                                    case 1:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_database_manteniment(numero)
+
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 2:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_database_manteniment(numero)
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 3:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_database_manteniment(numero)
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 4:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_database_manteniment(numero, )
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 5:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_database_manteniment(numero)
+                                            case _:
+                                                handle_database_manteniment(numero)
                             case 4:
-                                handle_flow_1_subflow_1_4(numero) # Lista botones para trámites
-                            case 5:
-                                handle_flow_1_subflow_1_5(numero) # Lista botones para acceso a aplicaciones
+
+                                match user_state.subFlow3:
+                                    case 0:
+                                        handle_flow_1_subflow_1_4(numero)  # 1 1 4 0 0 -  Menú Trámites
+                                    case 1:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_contact_asesor(numero)
+
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 2:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_contact_asesor(numero)
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 3:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_contact_asesor(numero)
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 4:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_contact_asesor(numero, )
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 5:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_contact_asesor(numero)
+                                            case _:
+                                                handle_database_manteniment(numero) # Lista botones para trámites
+                            case 4:
+
+                                match user_state.subFlow3:
+                                    case 0:
+                                        handle_flow_1_subflow_1_5(numero)  # 1 1 5 0 0 -  Menú Aplicaciones
+                                    case 1:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_flow_1_subflow_1_1_5(numero)
+
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 2:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_flow_1_subflow_1_1_5(numero)
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 3:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_flow_1_subflow_1_1_5(numero)
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 4:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_flow_1_subflow_1_1_5(numero, )
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 5:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_flow_1_subflow_1_1_5(numero)
+                                            case _:
+                                                handle_database_manteniment(numero)  # Lista botones para trámites
                             case 6:
-                                handle_contact_asesor(numero) # Lista botones para acceso a aplicaciones
+                                handle_contact_asesor(numero)
 
                 case 404:
                     handle_flow_1_subflow_404(numero)
