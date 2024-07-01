@@ -120,20 +120,11 @@ def send_txt(texto, numero):
                                 if user_state.subFlow3 == 0:
                                     handle_flow_1_subflow_1_2(numero)
                                 else:
-                                    data = {
-                                        "messaging_product": "whatsapp",
-                                        "recipient_type": "individual",
-                                        "to": numero,
-                                        "text": {
-                                            "preview_url": False,
-                                            "body":  "user_state.subFlow3" + str(user_state.subFlow3)
-                                        }
-                                    }
-
-                                    generic_reply(data)
                                     match user_state.subFlow3:
                                         case 1:
                                             if user_state.subFlow4 == 0:
+                                                name = user_state.full_name
+                                                name = name.split()[0]
                                                 handle_flow_1_subflow_1_2_1(numero, name)
                                                 data = {
                                                     "messaging_product": "whatsapp",
