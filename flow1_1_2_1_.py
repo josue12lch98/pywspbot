@@ -65,7 +65,7 @@ def handle_flow_1_subflow_1_2_1_1_1(numero):
         "to": numero,
         "text": {
             "preview_url": False,
-            "body": "A aprtir de la experiencia que acabas de tener ¿En qué medida te encuentras satisfecho(a) con la *atención* brindada? \n1) Malo \n2) Regular\n3) Bueno \n4) Muy bueno \n5) Excelente "
+            "body": "A partir de la experiencia que acabas de tener ¿En qué medida te encuentras satisfecho(a) con la *atención* brindada? \n1) Malo \n2) Regular\n3) Bueno \n4) Muy bueno \n5) Excelente "
         }
     }
     generic_reply(data)

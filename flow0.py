@@ -133,7 +133,8 @@ def handle_flow_0_subflow_404(numero):
         "to": numero,
         "text": {
             "preview_url": False,
-            "body": "Saliendo del bucle Inicio \nExit"
+            "body": "Tus datos no son correctos"
         }
     }
     generic_reply(data)
+    update_user_state(number=numero, Flow = 0, subFlow =0, func = str(inspect.currentframe().f_code.co_name))

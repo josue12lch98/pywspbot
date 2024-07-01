@@ -23,7 +23,7 @@ def handle_flow_1_subflow_1_2_1(numero, name):
         }
     }
     generic_reply(data)
-    update_user_state(numero, subFlow2 = 2, subFlow3 = 1, subFlow4 = 1, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de BENEFICIOS
+    update_user_state(numero, subFlow2 = 2, subFlow3 = 1, subFlow4 = 1, subFlow5 = 1, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de BENEFICIOS
 
 def handle_flow_1_subflow_1_2_2(numero):
     data = {

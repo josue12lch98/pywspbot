@@ -53,12 +53,20 @@ def init_app(app):
                         if tipo_interactivo == "button_reply":
                             texto = messages["interactive"]["button_reply"]["id"]
                             numero = messages["from"]
-                            flow_ = int(texto.split()[0])
-                            subflow_ = int(texto.split()[1])
-                            subFlow2_ = int(texto.split()[2])
-                            subFlow3_ = int(texto.split()[3])
-                            subFlow4_ = int(texto.split()[4])
-                            subFlow5_ = int(texto.split()[5])
+                            try :
+                                flow_ = int(texto.split()[0])
+                                subflow_ = int(texto.split()[1])
+                                subFlow2_ = int(texto.split()[2])
+                                subFlow3_ = int(texto.split()[3])
+                                subFlow4_ = int(texto.split()[4])
+                                subFlow5_ = int(texto.split()[5])
+                            except:
+                                flow_ = int(texto.split()[0])
+                                subflow_ = int(texto.split()[1])
+                                subFlow2_ = int(texto.split()[2])
+                                subFlow3_ = int(texto.split()[3])
+                                subFlow4_ = int(texto.split()[4])
+                                subFlow5_ = int(texto.split()[5])
                             update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_, subFlow5 = subFlow5_)
                             send_txt(texto, numero)
                             
