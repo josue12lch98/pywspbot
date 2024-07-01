@@ -28,7 +28,7 @@ def handle_flow_1_subflow_0(numero, name):
                         "type": "reply",
                         "reply": {
                             "id": "1 1 0 0 0",
-                            "title": "No,todo bien"
+                            "title": "No, todo bien"
                         }
                     }
                 ]
@@ -49,8 +49,8 @@ def handle_flow_1_subflow_1(numero):
         "interactive": {
             "type": "list",
             "body": {
-                "text": "Estamos felices de que seas parte de la correcta gestión en Javelin, juntos estamos logrando la EXCELENCIA OPERACIONAL."+
-                        "Menú principal\n\n" +
+                "text": "Estamos felices de que seas parte de la correcta gestión en Javelin, juntos estamos logrando la EXCELENCIA OPERACIONAL.\n\n"+
+                        "*Menú principal*\n\n" +
                         "1️⃣ Mis pagos. \n\n " +
                 "2️⃣ Información sobre beneficios G4S y otros.  (Convenios, seguros, Beneficios, programas, asignación familiar, AFP, capacitaciones y retenciones judiciales)\n\n" +
                 "3️⃣ Peticiones\n\n" +

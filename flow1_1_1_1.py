@@ -1,50 +1,47 @@
 from dbQuery import update_user_state, generic_reply
 import inspect
 
-def handle_flow_1_subflow_1_1_1(numero, user_state):
-    list = {
+def handle_database_manteniment(numero, user_state):
+    buttton = {
         "messaging_product": "whatsapp",
+        "recipient_type": "individual",
         "to": numero,
         "type": "interactive",
         "interactive": {
-            "type": "list",
+            "type": "button",
             "body": {
-                "text":  "1️⃣Quiero saber la fecha de pago de gratificación \n\n " +
-                "2️⃣Quiero saber la fecha de pago de vacaciones\n\n"
-
-            },
-            "footer": {
-                "text": "Elige un tema para tu reclamo o consulta."
+                "text": "Estamos actualizando la base de datos, por favor, intenta más tarde. \n Selecciona asesor si quieres que te pongamos en contacto con uno"
             },
             "action": {
-                "button": "Ver Opciones",
-                "sections": [
+                "buttons": [
                     {
-                        "title": "Section 1",
-                        "rows": [
-                            {
-                                "id": "1 1 1 1 1",
-                                "title": "Opción 1",
-                                "description": "Quiero saber la fecha de pago de gratificación"
-                            },
-                            {
-                                "id": "1 1 1 1 2",
-                                "title": "Opción 2",
-                                "description": "Quiero saber la fecha de pago de vacaciones"
-                            }, {
-                                "id": "1 1 1 1 0",
-                                "title": "Menú Pagos",
-                                "description": ""
-                            }
-                        ]
+                        "type": "reply",
+                        "reply": {
+                            "id": "6 1 2 1 1",  # Flujo / Sub flow / Sub flow 2 / Sub flow 3
+                            "title": "Asesor"
+                        }
+                    },
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "1 1 2 1 2",
+                            "title": "No"
+                        }
+                    },
+                    {
+                        "type": "reply",
+                        "reply": {
+                            "id": "1 1 2 1 3",
+                            "title": "Menú Principal"
+                        }
                     }
                 ]
             }
         }
     }
-    generic_reply(list)
-    update_user_state(numero, subFlow = 1, subFlow2 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
-    
+    generic_reply(buttton)
+
+
 def handle_flow_1_subflow_1_2(numero):
     data = {
         "messaging_product": "whatsapp",
