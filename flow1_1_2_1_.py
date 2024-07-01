@@ -31,7 +31,7 @@ def handle_flow_1_subflow_1_2_1_1(numero):
                         "type": "reply",
                         "reply": {
                             "id": "1 1 2 1 3",
-                            "title": "No"
+                            "title": "Hacer otra pregunta"
                         }
                     }
                 ]

@@ -77,7 +77,7 @@ def init_app(app):
                         numero = messages["from"]
                         update_user_state(number = numero)
                         send_txt(texto, numero)
-            update_user_state(number = numero, json = json.dumps(req)) 
+            update_user_state(number = numero, json = json.dumps(messages)) 
                        
             return jsonify({'message': 'EVENT_RECEIVED'})
         except Exception as e:
