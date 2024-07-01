@@ -53,7 +53,7 @@ def handle_flow_1_subflow_1_1(numero):
                             {
                                 "id": "1 1 1 0 0",
                                 "title": "Menú principal",
-                                "description": " "
+                                "description": ""
                             }
                         ]
                     }
