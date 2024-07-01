@@ -139,8 +139,8 @@ def send_txt(texto, numero):
                                 handle_flow_1_subflow_1_4(numero)
                             case 5:
                                 handle_flow_1_subflow_1_5(numero)
-                            case 6:
-                                handle_flow_1_subflow_1_6(numero)
+                            case _:
+                                print(" ")
                 case _:
                     print("")
         case _:
