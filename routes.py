@@ -132,6 +132,8 @@ def send_txt(texto, numero):
                                                 match user_state.subFlow4:
                                                     case 1:
                                                         handle_flow_1_subflow_1_2_1_1(numero)
+                                                    case _:
+                                                        handle_flow_1_subflow_1_2_1_x(numero, user_state.subFlow4)
                                         case 2:
                                             handle_flow_1_subflow_1_2_2(numero)
                                         case 3:
@@ -139,7 +141,7 @@ def send_txt(texto, numero):
                                         case 4:
                                             handle_flow_1_subflow_1_2_4(numero)
                                         case _:
-                                            print("")
+                                            handle_flow_1_subflow_1_2_x(numero, user_state.subFlow3)
                             case 3:
                                 handle_flow_1_subflow_1_3(numero)
                             case 4:

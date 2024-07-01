@@ -41,3 +41,16 @@ def handle_flow_1_subflow_1_2_1_1(numero):
     }
     generic_reply(buttton)
     update_user_state(numero, func = str(inspect.currentframe().f_code.co_name))
+    
+    
+def handle_flow_1_subflow_1_2_1_x(numero, x):
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": numero,
+        "text": {
+            "preview_url": False,
+            "body": "Excepción no match para _handle_flow_1_subflow_1_2_1_x_ en subFlow4:" + str(x)
+        }
+    }
+    generic_reply(data)
