@@ -70,6 +70,7 @@ def init_app(app):
                             subFlow2_ = int(texto.split()[2])
                             subFlow3_ = int(texto.split()[3])
                             subFlow4_ = int(texto.split()[4])
+                            subFlow5_ = int(texto.split()[5])
                             update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_, subFlow5 = subFlow5_)
                             send_txt(texto, numero)
                             
