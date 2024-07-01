@@ -1,4 +1,5 @@
 from dbQuery import update_user_state, generic_reply
+import inspect
 
 def handle_flow_1_subflow_1_2_1(numero):
     data = {
@@ -11,7 +12,7 @@ def handle_flow_1_subflow_1_2_1(numero):
         }
     }
     generic_reply(data)
-    update_user_state(numero, subFlow2 = 2, subFlow3 = 0) # Retirar 0 cuando tengamos la lógica completa de BENEFICIOS
+    update_user_state(numero, subFlow2 = 2, subFlow3 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de BENEFICIOS
 
 def handle_flow_1_subflow_1_2_2(numero):
     data = {
@@ -24,7 +25,7 @@ def handle_flow_1_subflow_1_2_2(numero):
         }
     }
     generic_reply(data)
-    update_user_state(numero, subFlow = 2, subFlow3 = 0) # Retirar 0 cuando tengamos la lógica completa de AFP
+    update_user_state(numero, subFlow = 2, subFlow3 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de AFP
 
 def handle_flow_1_subflow_1_2_3(numero):
     data = {
@@ -37,7 +38,7 @@ def handle_flow_1_subflow_1_2_3(numero):
         }
     }
     generic_reply(data)
-    update_user_state(numero, subFlow = 2, subFlow3 = 0) # Retirar 0 cuando tengamos la lógica completa de Capa
+    update_user_state(numero, subFlow = 2, subFlow3 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de Capa
 
 def handle_flow_1_subflow_1_2_4(numero):
     data = {
@@ -50,7 +51,7 @@ def handle_flow_1_subflow_1_2_4(numero):
         }
     }
     generic_reply(data)
-    update_user_state(numero, subFlow = 2, subFlow3 = 0) # Retirar 0 cuando tengamos la lógica completa de Abono
+    update_user_state(numero, subFlow = 2, subFlow3 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de Abono
 
 
 

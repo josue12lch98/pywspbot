@@ -2,6 +2,7 @@ from flask import Flask
 from __init__ import db
 import json
 import http.client
+import inspect
 
 app = Flask(__name__)
 
@@ -30,7 +31,9 @@ def update_user_state( number , **kwargs):
     for key, value in kwargs.items():
         setattr(user_state, key, value)
         db.session.commit()
-
+    #db.session.add(UserState(func = str(inspect.currentframe().f_code.co_name)))
+    #db.session.commit()
+    
 def generic_reply(data):
     data = json.dumps(data)  # Convertir el diccionario en formato JSON
 

@@ -1,4 +1,5 @@
 from dbQuery import update_user_state, generic_reply
+import inspect
 
 def handle_flow_1_subflow_0(numero, name):
     data = {
@@ -35,7 +36,7 @@ def handle_flow_1_subflow_0(numero, name):
         }
     }
     generic_reply(data)
-
+    update_user_state(func = str(inspect.currentframe().f_code.co_name))
 
 def handle_flow_1_subflow_1(numero):
     data = {
@@ -138,4 +139,5 @@ def handle_flow_1_subflow_1(numero):
         }
     }
     generic_reply(btns2)
+    update_user_state(func = str(inspect.currentframe().f_code.co_name))
     
