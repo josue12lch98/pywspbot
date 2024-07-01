@@ -32,12 +32,19 @@ def update_user_state( number , **kwargs):
     for key, value in kwargs.items():
         setattr(user_state, key, value)
         db.session.commit()
-    current_frame = inspect.currentframe() 
+    
+    """
+    user_state = get_user_state(number)
+    
+    current_frame = inspect.currentframe()
     caller_frame = current_frame.f_back
     parent_frame = caller_frame.f_code.co_name
     
+    setattr(user_state, key, value)
+    
     db.session.add(UserState(func = str(parent_frame)))
     db.session.commit()
+    """ 
     
 def generic_reply(data):
     data = json.dumps(data)  # Convertir el diccionario en formato JSON

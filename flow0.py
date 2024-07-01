@@ -73,7 +73,7 @@ def handle_flow_0_subflow_2(numero, texto):
 
     subFlow = 3
     generic_reply(data)
-    update_user_state(number=numero, subFlow=subFlow, name=name, full_name=full_name)
+    update_user_state(number=numero, subFlow=subFlow, name=name, full_name=full_name, func = str(inspect.currentframe().f_code.co_name))
         
 ## poner este mensaje Listo, ${myState.nombre}.\n Gracias por confirmar tu DNI: ${myState.dni}, sucursal a la que perteneces: ${myState.sucursal}. `+ `Para continuar, necesito que me confirmes que tus datos son los correctos.`) cargando todos los datos ingresados
 def handle_flow_0_subflow_3(numero, texto, name, dni):
@@ -128,5 +128,5 @@ def handle_flow_0_subflow_3(numero, texto, name, dni):
     generic_reply(buttton)
     
     subFlow = 4
-    update_user_state(number=numero, subFlow=subFlow, sucursal=texto)
+    update_user_state(number=numero, subFlow=subFlow, sucursal=texto, func = str(inspect.currentframe().f_code.co_name))
 
