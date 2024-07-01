@@ -24,29 +24,29 @@ def handle_flow_1_subflow_1_1(numero):
                         "title": "Section 1",
                         "rows": [
                             {
-                                "id": "1 1 1 0 0",
+                                "id": "1 1 1 1 0",
                                 "title": "Cronograma de Pagos",
                                 "description": ""
                             },
                             {
-                                "id": "1 1 1 1 0",
+                                "id": "1 1 1 2 0",
                                 "title": "¿Cuanto me van Pagar?",
                                 "description": ""
                             },
                             {
-                                "id": "1 1 1 2 0",
+                                "id": "1 1 1 3 0",
                                 "title": "Consulta descuentos",
 
                                 "description": ""
                             },
                             {
-                                "id": "1 1 1 3 0",
+                                "id": "1 1 1 4 0",
                                 "title": "Detalles de pago",
                                 "description": ""
                             },
 
                             {
-                                "id": "1 1 1 4 0",
+                                "id": "1 1 1 5 0",
                                 "title": "Otras consulta",
                                 "description": ""
                             },

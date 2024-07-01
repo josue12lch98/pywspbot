@@ -44,45 +44,66 @@ def handle_flow_1_subflow_1_1_1(numero, user_state):
     }
     generic_reply(list)
     update_user_state(numero, subFlow = 1, subFlow2 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
-    
-def handle_flow_1_subflow_1_2(numero):
-    data = {
+
+
+def handle_flow_1_subflow_1_1_2(numero, user_state):
+    list = {
         "messaging_product": "whatsapp",
         "to": numero,
         "type": "interactive",
         "interactive": {
             "type": "list",
             "body": {
-                "text": "Información sobre beneficios G4S y otros"
+                "text": " 1️⃣ Cálculo de CTS \n\n " +
+                "2️⃣ Cálculo de GRATIFICACIÓN\n\n" +
+                "3️⃣ Cálculo de LIQUIDACIÓN\n\n" +
+                "4️⃣ Cálculo de VACACIONES\n\n" +
+                "5️⃣ Cálculo de HORAS EXTRAS\n\n" +
+                "6️⃣ NO ME PAGARON\n\n"
+
             },
             "footer": {
-                "text": "Selecciona alguna de las opciones para poder ayudarte"
+                "text": "Elige un tema para tu reclamo o consulta."
             },
-            "action":{
+            "action": {
                 "button": "Ver Opciones",
                 "sections": [
                     {
                         "title": "Section 1",
                         "rows": [
                             {
-                                "id": "1 1 2 1 0",
-                                "title": "Beneficios G4S"
+                                "id": "1 1 1 2 1",
+                                "title": "Cálculo de CTS",
+                                "description": ""
                             },
                             {
-                                "id": "1 1 2 2 0",
-                                "title": "AFP"
+                                "id": "1 1 1 2 2",
+                                "title": "Cálculo de GRATIFICACIÓN",
+                                "description": ""
                             },
                             {
-                                "id": "1 1 2 3 0",
-                                "title": "Capacitaciones"
+                                "id": "1 1 1 2 3",
+                                "title": "Cálculo de LIQUIDACIÓN",
+                                "description": ""
                             },
                             {
-                                "id": "1 1 2 4 0",
-                                "title": "Abono retención judicial"
+                                "id": "1 1 1 2 4",
+                                "title": "Cálculo de VACACIONES",
+                                "description": ""
                             },
                             {
-                                "id": "1 1 2 5 0",
-                                "title": "Otras consultas"
+                                "id": "1 1 1 2 5",
+                                "title": "Cálculo de HORAS EXTRAS",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 6",
+                                "title": "NO ME PAGARON",
+                                "description": ""
+                            }, {
+                                "id": "1 1 1 0 0",
+                                "title": "Menú principal",
+                                "description": ""
                             }
                         ]
                     }
@@ -90,44 +111,285 @@ def handle_flow_1_subflow_1_2(numero):
             }
         }
     }
-    generic_reply(data)
-    update_user_state(numero, subFlow = 1, subFlow2 = 2, func = str(inspect.currentframe().f_code.co_name))
-    
-def handle_flow_1_subflow_1_3(numero):
-    data = {
-        "messaging_product": "whatsapp",
-        "recipient_type": "individual",
-        "to": numero,
-        "text": {
-            "preview_url": False,
-            "body":  "Ingresar lista/botones para PETICIONES"
-        }
-    }
-    generic_reply(data)
-    update_user_state(numero, subFlow = 1, subFlow2 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
-    
-def handle_flow_1_subflow_1_4(numero):
-    data = {
-        "messaging_product": "whatsapp",
-        "recipient_type": "individual",
-        "to": numero,
-        "text": {
-            "preview_url": False,
-            "body":  "Ingresar lista/botones para TRÁMITES"
-        }
-    }
-    generic_reply(data)
-    update_user_state(numero, subFlow = 1, subFlow2 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
+    generic_reply(list)
+    update_user_state(numero, subFlow=1, subFlow2=0, func=str(
+        inspect.currentframe().f_code.co_name))  # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
 
-def handle_flow_1_subflow_1_5(numero):
-    data = {
+def handle_flow_1_subflow_1_1_2(numero, user_state):
+    list = {
         "messaging_product": "whatsapp",
-        "recipient_type": "individual",
         "to": numero,
-        "text": {
-            "preview_url": False,
-            "body":  "Ingresar lista/botones para ACCESOS A APLICACIONES"
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "body": {
+                "text": " 1️⃣ Cálculo de CTS \n\n " +
+                "2️⃣ Cálculo de GRATIFICACIÓN\n\n" +
+                "3️⃣ Cálculo de LIQUIDACIÓN\n\n" +
+                "4️⃣ Cálculo de VACACIONES\n\n" +
+                "5️⃣ Cálculo de HORAS EXTRAS\n\n" +
+                "6️⃣ NO ME PAGARON\n\n"
+
+            },
+            "footer": {
+                "text": "Elige un tema para tu reclamo o consulta."
+            },
+            "action": {
+                "button": "Ver Opciones",
+                "sections": [
+                    {
+                        "title": "Section 1",
+                        "rows": [
+                            {
+                                "id": "1 1 1 2 1",
+                                "title": "Cálculo de CTS",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 2",
+                                "title": "Cálculo de GRATIFICACIÓN",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 3",
+                                "title": "Cálculo de LIQUIDACIÓN",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 4",
+                                "title": "Cálculo de VACACIONES",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 5",
+                                "title": "Cálculo de HORAS EXTRAS",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 6",
+                                "title": "NO ME PAGARON",
+                                "description": ""
+                            }, {
+                                "id": "1 1 1 0 0",
+                                "title": "Menú principal",
+                                "description": ""
+                            }
+                        ]
+                    }
+                ]
+            }
         }
     }
-    generic_reply(data)
-    update_user_state(numero, subFlow = 1, subFlow2 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
+    generic_reply(list)
+    update_user_state(numero, subFlow=1, subFlow2=0, func=str(
+        inspect.currentframe().f_code.co_name))  # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
+
+
+def handle_flow_1_subflow_1_1_2(numero, user_state):
+    list = {
+        "messaging_product": "whatsapp",
+        "to": numero,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "body": {
+                "text": " 1️⃣ Cálculo de CTS \n\n " +
+                "2️⃣ Cálculo de GRATIFICACIÓN\n\n" +
+                "3️⃣ Cálculo de LIQUIDACIÓN\n\n" +
+                "4️⃣ Cálculo de VACACIONES\n\n" +
+                "5️⃣ Cálculo de HORAS EXTRAS\n\n" +
+                "6️⃣ NO ME PAGARON\n\n"
+
+            },
+            "footer": {
+                "text": "Elige un tema para tu reclamo o consulta."
+            },
+            "action": {
+                "button": "Ver Opciones",
+                "sections": [
+                    {
+                        "title": "Section 1",
+                        "rows": [
+                            {
+                                "id": "1 1 1 2 1",
+                                "title": "Cálculo de CTS",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 2",
+                                "title": "Cálculo de GRATIFICACIÓN",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 3",
+                                "title": "Cálculo de LIQUIDACIÓN",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 4",
+                                "title": "Cálculo de VACACIONES",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 5",
+                                "title": "Cálculo de HORAS EXTRAS",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 6",
+                                "title": "NO ME PAGARON",
+                                "description": ""
+                            }, {
+                                "id": "1 1 1 0 0",
+                                "title": "Menú principal",
+                                "description": ""
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+    generic_reply(list)
+    update_user_state(numero, subFlow=1, subFlow2=0, func=str(
+        inspect.currentframe().f_code.co_name))  # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
+
+
+def handle_flow_1_subflow_1_1_2(numero, user_state):
+    list = {
+        "messaging_product": "whatsapp",
+        "to": numero,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "body": {
+                "text": " 1️⃣ Cálculo de CTS \n\n " +
+                "2️⃣ Cálculo de GRATIFICACIÓN\n\n" +
+                "3️⃣ Cálculo de LIQUIDACIÓN\n\n" +
+                "4️⃣ Cálculo de VACACIONES\n\n" +
+                "5️⃣ Cálculo de HORAS EXTRAS\n\n" +
+                "6️⃣ NO ME PAGARON\n\n"
+
+            },
+            "footer": {
+                "text": "Elige un tema para tu reclamo o consulta."
+            },
+            "action": {
+                "button": "Ver Opciones",
+                "sections": [
+                    {
+                        "title": "Section 1",
+                        "rows": [
+                            {
+                                "id": "1 1 1 2 1",
+                                "title": "Cálculo de CTS",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 2",
+                                "title": "Cálculo de GRATIFICACIÓN",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 3",
+                                "title": "Cálculo de LIQUIDACIÓN",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 4",
+                                "title": "Cálculo de VACACIONES",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 5",
+                                "title": "Cálculo de HORAS EXTRAS",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 6",
+                                "title": "NO ME PAGARON",
+                                "description": ""
+                            }, {
+                                "id": "1 1 1 0 0",
+                                "title": "Menú principal",
+                                "description": ""
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+    generic_reply(list)
+    update_user_state(numero, subFlow=1, subFlow2=0, func=str(
+        inspect.currentframe().f_code.co_name))  # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
+def handle_flow_1_subflow_1_1_2(numero, user_state):
+    list = {
+        "messaging_product": "whatsapp",
+        "to": numero,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "body": {
+                "text": " 1️⃣ Cálculo de CTS \n\n " +
+                "2️⃣ Cálculo de GRATIFICACIÓN\n\n" +
+                "3️⃣ Cálculo de LIQUIDACIÓN\n\n" +
+                "4️⃣ Cálculo de VACACIONES\n\n" +
+                "5️⃣ Cálculo de HORAS EXTRAS\n\n" +
+                "6️⃣ NO ME PAGARON\n\n"
+
+            },
+            "footer": {
+                "text": "Elige un tema para tu reclamo o consulta."
+            },
+            "action": {
+                "button": "Ver Opciones",
+                "sections": [
+                    {
+                        "title": "Section 1",
+                        "rows": [
+                            {
+                                "id": "1 1 1 2 1",
+                                "title": "Cálculo de CTS",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 2",
+                                "title": "Cálculo de GRATIFICACIÓN",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 3",
+                                "title": "Cálculo de LIQUIDACIÓN",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 4",
+                                "title": "Cálculo de VACACIONES",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 5",
+                                "title": "Cálculo de HORAS EXTRAS",
+                                "description": ""
+                            },
+                            {
+                                "id": "1 1 1 2 6",
+                                "title": "NO ME PAGARON",
+                                "description": ""
+                            }, {
+                                "id": "1 1 1 0 0",
+                                "title": "Menú principal",
+                                "description": ""
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+    generic_reply(list)
+    update_user_state(numero, subFlow=1, subFlow2=0, func=str(
+        inspect.currentframe().f_code.co_name))  # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
+
+

@@ -121,7 +121,7 @@ def send_txt(texto, numero):
                                     case 0:
                                         handle_flow_1_subflow_1_1(numero) # 1 1 1 0 0 -  Menú Gastos
                                     case 1:
-                                        match user_state.subFlow4 :
+                                        match user_state.subFlow4:
                                             case 0 :
                                                 handle_flow_1_subflow_1_1_1(numero,user_state)
                                             case _:
