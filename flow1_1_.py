@@ -34,23 +34,23 @@ def handle_flow_1_subflow_1_2(numero):
                         "title": "Section 1",
                         "rows": [
                             {
-                                "id": "1 1 2 1 0",
+                                "id": "1 1 2 1 0 0",
                                 "title": "Beneficios G4S"
                             },
                             {
-                                "id": "1 1 2 2 0",
+                                "id": "1 1 2 2 0 0",
                                 "title": "AFP"
                             },
                             {
-                                "id": "1 1 2 3 0",
+                                "id": "1 1 2 3 0 0",
                                 "title": "Capacitaciones"
                             },
                             {
-                                "id": "1 1 2 4 0",
+                                "id": "1 1 2 4 0 0",
                                 "title": "Abono retención judicial"
                             },
                             {
-                                "id": "1 1 2 5 0",
+                                "id": "1 1 2 5 0 0",
                                 "title": "Otras consultas"
                             }
                         ]

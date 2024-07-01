@@ -58,7 +58,8 @@ def init_app(app):
                             subFlow2_ = int(texto.split()[2])
                             subFlow3_ = int(texto.split()[3])
                             subFlow4_ = int(texto.split()[4])
-                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_)
+                            subFlow5_ = int(texto.split()[5])
+                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_, subFlow5 = subFlow5_)
                             send_txt(texto, numero)
                             
                         elif tipo_interactivo == "list_reply":
@@ -69,7 +70,7 @@ def init_app(app):
                             subFlow2_ = int(texto.split()[2])
                             subFlow3_ = int(texto.split()[3])
                             subFlow4_ = int(texto.split()[4])
-                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_)
+                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_, subFlow5 = subFlow5_)
                             send_txt(texto, numero)
                             
                     if "text" in messages:
@@ -88,7 +89,7 @@ def send_txt(texto, numero):
     texto = texto.lower()
     user_state = get_user_state(numero)
     if user_state is None:
-        update_user_state(numero, flow=0,subFlow=0,subFlow2=0,subFlow3=0,subFlow4=0)
+        update_user_state(numero, flow=0,subFlow=0,subFlow2=0,subFlow3=0,subFlow4=0,subFlow5=0)
         user_state = get_user_state(numero)
 
     match user_state.flow:
@@ -130,20 +131,15 @@ def send_txt(texto, numero):
                                             name = name.split()[0]
                                             if user_state.subFlow4 == 0:
                                                 handle_flow_1_subflow_1_2_1(numero, name)
-                                                data = {
-                                                    "messaging_product": "whatsapp",
-                                                    "recipient_type": "individual",
-                                                    "to": numero,
-                                                    "text": {
-                                                        "preview_url": False,
-                                                        "body":  "user_state.subFlow4" + str(user_state.subFlow4)
-                                                    }
-                                                }
-                                                generic_reply(data)
                                             else:
                                                 match user_state.subFlow4:
                                                     case 1:
-                                                        handle_flow_1_subflow_1_2_1_1(numero)
+                                                        if user_state.subFlow5 == 0:
+                                                            handle_flow_1_subflow_1_2_1_1(numero)
+                                                        else:
+                                                            match user_state.subFlow5:
+                                                                case 1:
+                                                                    handle_flow_1_subflow_1_2_1_1_1(numero)
                                                     case _:
                                                         handle_flow_1_subflow_1_2_1_x(numero, user_state.subFlow4)
                                         case 2:
