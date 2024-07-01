@@ -57,7 +57,8 @@ def init_app(app):
                             subflow_ = int(texto.split()[1])
                             subFlow2_ = int(texto.split()[2])
                             subFlow3_ = int(texto.split()[3])
-                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_)
+                            subFlow4_ = int(texto.split()[4])
+                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_)
                             send_txt(texto, numero)
                             
                         elif tipo_interactivo == "list_reply":
@@ -67,7 +68,8 @@ def init_app(app):
                             subflow_ = int(texto.split()[1])
                             subFlow2_ = int(texto.split()[2])
                             subFlow3_ = int(texto.split()[3])
-                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_)
+                            subFlow4_ = int(texto.split()[4])
+                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_)
                             send_txt(texto, numero)
                             
                     if "text" in messages:
@@ -124,7 +126,7 @@ def send_txt(texto, numero):
                                 else:
                                     match user_state.subFlow3:
                                         case 1:
-                                            handle_flow_1_subflow_1_2_1(numero)
+                                            handle_flow_1_subflow_1_2_1(numero, name)
                                         case 2:
                                             handle_flow_1_subflow_1_2_2(numero)
                                         case 3:
