@@ -1,7 +1,7 @@
 import re
 
 from dbQuery import update_user_state, generic_reply
-
+import inspect #inspect.currentframe().f_code.co_name
 
 def handle_flow_0_subflow_0(numero):
     data = {
@@ -14,9 +14,7 @@ def handle_flow_0_subflow_0(numero):
         }
     }
       # Asume que existe una función para enviar mensajes
-    update_user_state(numero, subFlow=1)
     generic_reply(data)
-    
     add = {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
@@ -27,6 +25,8 @@ def handle_flow_0_subflow_0(numero):
         }
     }
     generic_reply(add)
+    
+    update_user_state(numero, subFlow=1, func = str(inspect.currentframe().f_code.co_name))
 
 def handle_flow_0_subflow_1(numero, texto):
     patron = r'^\d{8}$'  # Expresión regular para validar un DNI
@@ -40,6 +40,7 @@ def handle_flow_0_subflow_1(numero, texto):
                 "body": "Así mismo, bríndame tu nombre completo (Ejemplo: Juan Luis Perez Gonzales)"
             }
         }
+        generic_reply(data)
         update_user_state(numero, subFlow=2, dni=texto)
     else:
         msgerror = "Disculpa tú número de dni no parece válido. \nIngresaste: " + texto + "\nIngresa sólo el número de tu DNI sin letras o espacios."
@@ -52,9 +53,9 @@ def handle_flow_0_subflow_1(numero, texto):
                 "body": msgerror
             }
         }
-        update_user_state(numero, subFlow=1) # considerar retirar el subflow 1 puesto que igual va a regresar a 1
+        generic_reply(data)
+        update_user_state(numero, subFlow=1, func = str(inspect.currentframe().f_code.co_name)) # considerar retirar el subflow 1 puesto que igual va a regresar a 1
                 
-    generic_reply(data)
 
 def handle_flow_0_subflow_2(numero, texto):
     full_name = texto
@@ -71,8 +72,8 @@ def handle_flow_0_subflow_2(numero, texto):
     }
 
     subFlow = 3
-    update_user_state(number=numero, subFlow=subFlow, name=name, full_name=full_name)
     generic_reply(data)
+    update_user_state(number=numero, subFlow=subFlow, name=name, full_name=full_name, func = str(inspect.currentframe().f_code.co_name))
         
 ## poner este mensaje Listo, ${myState.nombre}.\n Gracias por confirmar tu DNI: ${myState.dni}, sucursal a la que perteneces: ${myState.sucursal}. `+ `Para continuar, necesito que me confirmes que tus datos son los correctos.`) cargando todos los datos ingresados
 def handle_flow_0_subflow_3(numero, texto, name, dni):

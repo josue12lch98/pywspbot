@@ -2,7 +2,6 @@ from flask import Flask
 from __init__ import db
 import json
 import http.client
-import logging
 
 app = Flask(__name__)
 
@@ -17,7 +16,9 @@ class UserState(db.Model):
     full_name = db.Column(db.TEXT)
     sucursal = db.Column(db.TEXT)
     json = db.Column(db.TEXT)
-    
+    func = db.Column(db.TEXT, default="")
+
+
 def get_user_state(number):
     return UserState.query.filter_by(number=number).first()
 

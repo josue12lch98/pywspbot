@@ -35,6 +35,7 @@
             <th>Nombre_completo</th>
             <th>Sucursal</th>
             <th>json</th>
+            <th>Last_func_exec</th>
         </tr>
         {%for registro in registros %}
             <tr>
@@ -48,6 +49,7 @@
                 <td>{{registro.full_name}}</td>
                 <td>{{registro.sucursal}}</td>
                 <td>{{registro.json}}</td>
+                <td>{{registro.func}}</td>
             </tr>
         {% endfor %}
     </table>
