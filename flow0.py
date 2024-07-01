@@ -54,9 +54,8 @@ def handle_flow_0_subflow_1(numero, texto):
             }
         }
         generic_reply(data)
-        update_user_state(numero, subFlow=1, func = str(inspect.currentframe().f_code.co_name)) # considerar retirar el subflow 1 puesto que igual va a regresar a 1
-                
-
+        update_user_state(numero, func = str(inspect.currentframe().f_code.co_name))
+        
 def handle_flow_0_subflow_2(numero, texto):
     full_name = texto
     name = texto.split()[0]
@@ -75,7 +74,6 @@ def handle_flow_0_subflow_2(numero, texto):
     subFlow = 3
     update_user_state(number=numero, subFlow=subFlow, name=name, full_name=full_name, func = str(inspect.currentframe().f_code.co_name))
         
-## poner este mensaje Listo, ${myState.nombre}.\n Gracias por confirmar tu DNI: ${myState.dni}, sucursal a la que perteneces: ${myState.sucursal}. `+ `Para continuar, necesito que me confirmes que tus datos son los correctos.`) cargando todos los datos ingresados
 def handle_flow_0_subflow_3(numero, texto, name, dni):
     sucursal = texto
     name = name.split()[0]
@@ -126,9 +124,7 @@ def handle_flow_0_subflow_3(numero, texto, name, dni):
             }
         }
     generic_reply(buttton)
-    
-    subFlow = 4
-    update_user_state(number=numero, subFlow=subFlow, sucursal=texto, func = str(inspect.currentframe().f_code.co_name))
+    update_user_state(number=numero, sucursal=texto, func = str(inspect.currentframe().f_code.co_name))
 
 def handle_flow_0_subflow_404(numero):
     data = {

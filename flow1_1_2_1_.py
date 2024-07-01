@@ -1,5 +1,6 @@
 from dbQuery import update_user_state, generic_reply
 import inspect
+
 def handle_flow_1_subflow_1_2_1_1(numero):
     buttton = {
         "messaging_product": "whatsapp",
@@ -39,3 +40,4 @@ def handle_flow_1_subflow_1_2_1_1(numero):
         }
     }
     generic_reply(buttton)
+    update_user_state(numero, func = str(inspect.currentframe().f_code.co_name))

@@ -126,7 +126,12 @@ def send_txt(texto, numero):
                                 else:
                                     match user_state.subFlow3:
                                         case 1:
-                                            handle_flow_1_subflow_1_2_1(numero, name)
+                                            if user_state.subFlow4 == 0:
+                                                handle_flow_1_subflow_1_2_1(numero, name)
+                                            else:
+                                                match user_state.subFlow4:
+                                                    case 1:
+                                                        print("")
                                         case 2:
                                             handle_flow_1_subflow_1_2_2(numero)
                                         case 3:
