@@ -126,10 +126,6 @@ def send_txt(texto, numero):
                                                 handle_flow_1_subflow_1_1_1(numero,user_state)
                                             case _:
                                                 handle_database_manteniment(numero, user_state)
-                                    case 1:
-                                        handle_flow_1_subflow_1_1_2(numero, user_state)
-                                    case 2:
-                                        handle_flow_1_subflow_1_1_3(numero, user_state)
 
                             case 2:
                                 if user_state.subFlow3 == 0:
