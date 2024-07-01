@@ -14,12 +14,11 @@ class UserState(db.Model):
     subFlow2=db.Column(db.Integer, default=0)
     subFlow3=db.Column(db.Integer, default=0)
     subFlow4=db.Column(db.Integer, default=0)
-    dni = db.Column(db.TEXT, nullable=False)
-    full_name = db.Column(db.TEXT, nullable=False)
-    sucursal = db.Column(db.TEXT, nullable=False)
-    json = db.Column(db.TEXT, nullable=True)
-    func = db.Column(db.TEXT, default="", nullable=False)
-    error = db.Column(db.TEXT, default="", nullable=True)
+    dni = db.Column(db.TEXT)
+    full_name = db.Column(db.TEXT)
+    sucursal = db.Column(db.TEXT)
+    json = db.Column(db.TEXT)
+    func = db.Column(db.TEXT, default="")
 
 
 
@@ -64,6 +63,11 @@ def generic_reply(data):
         print(e)
     finally:
         connection.close()
+
+
+
+
+
 
 # Commands to push to production
 # git add .

@@ -37,7 +37,6 @@
             <th>Sucursal</th>
             <th>json</th>
             <th>Last_func_exec</th>
-            <th>error_log</th>
         </tr>
         {%for registro in registros %}
             <tr>
@@ -53,7 +52,6 @@
                 <td>{{registro.sucursal}}</td>
                 <td>{{registro.json}}</td>
                 <td>{{registro.func}}</td>
-                <td>{{registro.error}}</td>
             </tr>
         {% endfor %}
     </table>
