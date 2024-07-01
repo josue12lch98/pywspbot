@@ -1,7 +1,7 @@
 from dbQuery import update_user_state, generic_reply
 import inspect
 
-def handle_flow_1_subflow_1_1(numero, user_state):
+def handle_flow_1_subflow_1_1(numero):
     list = {
         "messaging_product": "whatsapp",
         "to": numero,
@@ -34,19 +34,19 @@ def handle_flow_1_subflow_1_1(numero, user_state):
                                 "description": ""
                             },
                             {
-                                "id": "1 1 1 1 0",
+                                "id": "1 1 1 2 0",
                                 "title": "Consulta descuentos",
 
                                 "description": ""
                             },
                             {
-                                "id": "1 1 1 2 0",
+                                "id": "1 1 1 3 0",
                                 "title": "Detalles de pago",
                                 "description": ""
                             },
 
                             {
-                                "id": "1 1 1 3 0",
+                                "id": "1 1 1 4 0",
                                 "title": "Otras consulta",
                                 "description": ""
                             },

@@ -112,18 +112,30 @@ def send_txt(texto, numero):
                     name = name.split()[0]
                     handle_flow_1_subflow_0(numero, name.capitalize()) # Consulta si/no problemas javelin
                 case 1:
-                    if user_state.subFlow2 == 0:
+                    if user_state.subFlow2 == 0: # 1 1 0 0 0 Menú principal
                         handle_flow_1_subflow_1(numero) # Lista reclamo/consulta (5 opciones)
                     else:
                         match user_state.subFlow2:
                             case 1: # 1 1 1 0 0
                                 match user_state.subFlow3:
                                     case 0:
-                                        handle_flow_1_subflow_1_1(numero,user_state)
+                                        handle_flow_1_subflow_1_1(numero,user_state) # 1 1 1 0 0 -  Menú Gastos
                                     case 1:
                                         match user_state.subFlow4 :
                                             case 0 :
                                                 handle_flow_1_subflow_1_1_1(numero,user_state)
+                                            case _:
+                                                handle_database_manteniment(numero, user_state)
+                                    case 1:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_flow_1_subflow_1_1_1(numero, user_state)
+                                            case _:
+                                                handle_database_manteniment(numero, user_state)
+                                    case 2:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_flow_1_subflow_1_1_1(numero, user_state)
                                             case _:
                                                 handle_database_manteniment(numero, user_state)
 
