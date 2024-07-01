@@ -2,7 +2,7 @@ from flask import Flask
 from __init__ import db
 import json
 import http.client
-
+import inspect
 
 app = Flask(__name__)
 
@@ -11,13 +11,20 @@ class UserState(db.Model):
     number = db.Column(db.TEXT, unique=True, nullable=False)
     flow = db.Column(db.Integer, default=0)
     subFlow=db.Column(db.Integer, default=0)
-    thirdFlow=db.Column(db.Integer, default=0)
+    subFlow2=db.Column(db.Integer, default=0)
+    subFlow3=db.Column(db.Integer, default=0)
+    subFlow4=db.Column(db.Integer, default=0)
     dni = db.Column(db.TEXT)
     full_name = db.Column(db.TEXT)
-    client = db.Column(db.TEXT)
     sucursal = db.Column(db.TEXT)
+    json = db.Column(db.TEXT)
+    func = db.Column(db.TEXT, default="")
+
+
+
 def get_user_state(number):
     return UserState.query.filter_by(number=number).first()
+
 def update_user_state( number , **kwargs):
     user_state = get_user_state(number)
     if not user_state:
@@ -32,7 +39,7 @@ def generic_reply(data):
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer EAAV8kZCQDeLkBO4bpDntLWRvLuapcPeZBDvSZCPWkQ0xREDZCqr03NX61rZBJKnYh3o2JZAZB3Kqbj9g1yshfZAcwEscI2GpFiZBEFp3pDFMigk84seaKBVFYhzlMVqYWBJOoOlhnSEMwSoQx4Q61pX89B5QIjWLlkR08rzgPoCrQDWCBXivAwM1OVDj2yQqMyTTY46dzmiVb9u07oPmR2CEZD"
+        "Authorization": "Bearer EAAV8kZCQDeLkBOxJ9VhGMKegW1m0KnCxc9YZAUGOHtPyMfe3DEmL6X8ZAZCqs6RQQ7tSIjLnvjjZCPZAZBfLSLFeaI1MOt7oATt2iptx8Evcrmjr5Mzua22mc5Ftx6oXX5GzzYaCin371vSbpuxy3ZBzd20OLZB8bzocGEZBAaGczFLyeh7y2dvRG428BpJdYtKbapZAEf0NzauQWUavSOAa4kZD"
     }
     connection = http.client.HTTPSConnection("graph.facebook.com")
 

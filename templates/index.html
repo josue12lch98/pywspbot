@@ -26,13 +26,28 @@
     <table>
         <tr>
             <th>id</th>
+<<<<<<< HEAD
             <th>Fecha y Hora</th>
             <th>Mensaje</th>
             -<th>Numero</th>
+=======
+            <th>Numero</th>
+            <th>Flujo</th>
+            <th>SubFlujo</th>
+            <th>SubFlujo2</th>
+            <th>SubFlujo3</th>
+            <th>SubFlujo4</th>
+            <th>DNI</th>
+            <th>Nombre_completo</th>
+            <th>Sucursal</th>
+            <th>json</th>
+            <th>Last_func_exec</th>
+>>>>>>> 4d5dafade47fa82f21fe7560781b0d20a90137d5
         </tr>
         {%for registro in registros %}
             <tr>
                 <td>{{registro.id}}</td>
+<<<<<<< HEAD
                 <td>{{registro.fecha_y_hora}}</td>
                 <td>{{registro.texto}}</td>
                 <td>{{registro.number}}</td>
@@ -55,6 +70,19 @@
                 <td>{{registro.fecha_y_hora}}</td>
                 <td>{{registro.texto}}</td>
                 <td>{{registro.number}}</td>
+=======
+                <td>{{registro.number}}</td>
+                <td>{{registro.flow}}</td>
+                <td>{{registro.subFlow}}</td>
+                <td>{{registro.subFlow2}}</td>
+                <td>{{registro.subFlow3}}</td>
+                <td>{{registro.subFlow4}}</td>
+                <td>{{registro.dni}}</td>
+                <td>{{registro.full_name}}</td>
+                <td>{{registro.sucursal}}</td>
+                <td>{{registro.json}}</td>
+                <td>{{registro.func}}</td>
+>>>>>>> 4d5dafade47fa82f21fe7560781b0d20a90137d5
             </tr>
         {% endfor %}
     </table>
