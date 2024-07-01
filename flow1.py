@@ -10,7 +10,7 @@ def handle_flow_1_subflow_0(numero, name):
         "interactive": {
             "type": "button",
             "body": {
-                "text": "Antes de comenzar, coméntame " + name + "¿Estás teniendo problemas para iniciar tu marcación en Javelin?"
+                "text": "Antes de comenzar, coméntame " + name + " ¿Estás teniendo problemas para iniciar tu marcación en Javelin?"
             },
             "footer": {
                 "text": "Selecciona solo una de las opciones"
@@ -21,14 +21,14 @@ def handle_flow_1_subflow_0(numero, name):
                         "type": "reply",
                         "reply": {
                             "id": "1 404 0 0 0",
-                            "title": "Si"
+                            "title": "Tengo problemas"
                         }
                     },
                     {
                         "type": "reply",
                         "reply": {
                             "id": "1 1 0 0 0",
-                            "title": "No"
+                            "title": "No,todo bien"
                         }
                     }
                 ]
@@ -39,6 +39,9 @@ def handle_flow_1_subflow_0(numero, name):
     update_user_state(number=numero, func = str(inspect.currentframe().f_code.co_name))
 
 def handle_flow_1_subflow_1(numero):
+
+
+
     list = {
         "messaging_product" : "whatsapp",
         "to": numero,
@@ -46,7 +49,13 @@ def handle_flow_1_subflow_1(numero):
         "interactive": {
             "type": "list",
             "body": {
-                "text": "Perfecto, estamos felices de que seas parte de la correcta gestión en Javelin, juntos estamos logrando la EXCELENCIA OPERACIONAL"
+                "text": "Estamos felices de que seas parte de la correcta gestión en Javelin, juntos estamos logrando la EXCELENCIA OPERACIONAL."+
+                        "Menú principal\n\n" +
+                        "1️⃣ Mis pagos. \n\n " +
+                "2️⃣ Información sobre beneficios G4S y otros.  (Convenios, seguros, Beneficios, programas, asignación familiar, AFP, capacitaciones y retenciones judiciales)\n\n" +
+                "3️⃣ Peticiones\n\n" +
+                "4️⃣ Trámites\n\n" +
+                "5️⃣ Acceso a aplicaciones\n\n"
             },
             "footer": {
                 "text": "Elige un tema para tu reclamo o consulta."
@@ -94,7 +103,7 @@ def handle_flow_1_subflow_404(numero):
         "to": numero,
         "text": {
             "preview_url": False,
-            "body": "Saliendo del consulta Marcación Javelin \nExit"
+            "body": "En breve te contactaremos con un asesor para ayudarte con tu problema."
         }
     }
     generic_reply(data)

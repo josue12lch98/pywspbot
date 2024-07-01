@@ -5,6 +5,7 @@ from dbQuery import UserState, get_user_state, update_user_state
 from flow0 import *
 from flow1 import *
 from flow1_1_ import *
+from flow1_1_1 import *
 from flow1_1_2_ import *
 from flow1_1_2_1_ import *
 
@@ -114,8 +115,17 @@ def send_txt(texto, numero):
                         handle_flow_1_subflow_1(numero) # Lista reclamo/consulta (5 opciones)
                     else:
                         match user_state.subFlow2:
-                            case 1:
-                                handle_flow_1_subflow_1_1(numero) # Lista botones para mis pagos
+                            case 1: # 1 1 1 0 0
+                                match user_state.subFlow3:
+                                    case 0:
+                                        handle_flow_1_subflow_1_1(numero,user_state) # Lista botones para mis pagos
+                                    case 1:
+                                        handle_flow_1_subflow_1_1_1(numero,user_state) # Lista botones para mis pagos
+                                    case 1:
+                                        handle_flow_1_subflow_1_1_2(numero, user_state)
+                                    case 2:
+                                        handle_flow_1_subflow_1_1_3(numero, user_state)
+
                             case 2:
                                 if user_state.subFlow3 == 0:
                                     handle_flow_1_subflow_1_2(numero)
@@ -151,11 +161,11 @@ def send_txt(texto, numero):
                                         case _:
                                             handle_flow_1_subflow_1_2_x(numero, user_state.subFlow3)
                             case 3:
-                                handle_flow_1_subflow_1_3(numero)
+                                handle_flow_1_subflow_1_3(numero)## Lista botones para peticiones
                             case 4:
-                                handle_flow_1_subflow_1_4(numero)
+                                handle_flow_1_subflow_1_4(numero) # Lista botones para trámites
                             case 5:
-                                handle_flow_1_subflow_1_5(numero)
+                                handle_flow_1_subflow_1_5(numero) # Lista botones para acceso a aplicaciones
                             case _:
                                 print(" ")
                 case 404:
