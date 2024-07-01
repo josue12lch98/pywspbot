@@ -12,7 +12,7 @@ def handle_flow_1_subflow_1_1(numero):
         }
     }
     generic_reply(data)
-    update_user_state(numero, subFlow = 1, subFlow2 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
+    update_user_state(numero, subFlow = 1, subFlow2 = 0) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
     
 def handle_flow_1_subflow_1_2(numero):
     data = {
@@ -72,7 +72,7 @@ def handle_flow_1_subflow_1_2(numero):
         }
     }
     generic_reply(data)
-    update_user_state(number=numero, func = str(inspect.currentframe().f_code.co_name))
+    update_user_state(number=numero)
     
 def handle_flow_1_subflow_1_3(numero):
     data = {
@@ -85,7 +85,7 @@ def handle_flow_1_subflow_1_3(numero):
         }
     }
     generic_reply(data)
-    update_user_state(numero, subFlow = 1, subFlow2 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
+    update_user_state(numero, subFlow = 1, subFlow2 = 0) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
     
 def handle_flow_1_subflow_1_4(numero):
     data = {
@@ -98,7 +98,7 @@ def handle_flow_1_subflow_1_4(numero):
         }
     }
     generic_reply(data)
-    update_user_state(numero, subFlow = 1, subFlow2 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
+    update_user_state(numero, subFlow = 1, subFlow2 = 0) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
 
 def handle_flow_1_subflow_1_5(numero):
     data = {
@@ -111,7 +111,7 @@ def handle_flow_1_subflow_1_5(numero):
         }
     }
     generic_reply(data)
-    update_user_state(numero, subFlow = 1, subFlow2 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
+    update_user_state(numero, subFlow = 1, subFlow2 = 0) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
 
 def handle_flow_1_subflow_1_6(numero):
     data = {
@@ -124,4 +124,4 @@ def handle_flow_1_subflow_1_6(numero):
         }
     }
     generic_reply(data)
-    update_user_state(numero, subFlow = 1, subFlow2 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
+    update_user_state(numero, subFlow = 1, subFlow2 = 0) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros

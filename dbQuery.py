@@ -20,6 +20,7 @@ class UserState(db.Model):
     func = db.Column(db.TEXT, default="")
 
 
+
 def get_user_state(number):
     return UserState.query.filter_by(number=number).first()
 
@@ -31,8 +32,12 @@ def update_user_state( number , **kwargs):
     for key, value in kwargs.items():
         setattr(user_state, key, value)
         db.session.commit()
-    #db.session.add(UserState(func = str(inspect.currentframe().f_code.co_name)))
-    #db.session.commit()
+    current_frame = inspect.currentframe() 
+    caller_frame = current_frame.f_back
+    parent_frame = caller_frame.f_code.co_name
+    
+    db.session.add(UserState(func = str(parent_frame)))
+    db.session.commit()
     
 def generic_reply(data):
     data = json.dumps(data)  # Convertir el diccionario en formato JSON
