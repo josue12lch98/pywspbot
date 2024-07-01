@@ -1,7 +1,7 @@
 from dbQuery import update_user_state, generic_reply
 import inspect
 
-def handle_database_manteniment(numero, user_state):
+def handle_database_manteniment(numero):
     buttton = {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
@@ -21,17 +21,11 @@ def handle_database_manteniment(numero, user_state):
                             "title": "Asesor"
                         }
                     },
+
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 1 2 1 2",
-                            "title": "No"
-                        }
-                    },
-                    {
-                        "type": "reply",
-                        "reply": {
-                            "id": "1 1 2 1 3",
+                            "id": "1 1 0 0 0",
                             "title": "Menú Principal"
                         }
                     }

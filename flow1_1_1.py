@@ -1,7 +1,7 @@
 from dbQuery import update_user_state, generic_reply
 import inspect
 
-def handle_flow_1_subflow_1_1_1(numero, user_state):
+def handle_flow_1_subflow_1_1_1(numero):
     list = {
         "messaging_product": "whatsapp",
         "to": numero,
@@ -46,7 +46,7 @@ def handle_flow_1_subflow_1_1_1(numero, user_state):
     update_user_state(numero, subFlow = 1, subFlow2 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
 
 
-def handle_flow_1_subflow_1_1_2(numero, user_state):
+def handle_flow_1_subflow_1_1_2(numero):
     list = {
         "messaging_product": "whatsapp",
         "to": numero,
@@ -115,7 +115,7 @@ def handle_flow_1_subflow_1_1_2(numero, user_state):
     update_user_state(numero, subFlow=1, subFlow2=0, func=str(
         inspect.currentframe().f_code.co_name))  # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
 
-def handle_flow_1_subflow_1_1_3(numero, user_state):
+def handle_flow_1_subflow_1_1_3(numero):
     list = {
         "messaging_product": "whatsapp",
         "to": numero,
@@ -169,7 +169,7 @@ def handle_flow_1_subflow_1_1_3(numero, user_state):
         inspect.currentframe().f_code.co_name))  # Retirar 0 cuando tengamos la lógica completa de 2. Imfo G4S y otros
 
 
-def handle_flow_1_subflow_1_1_4(numero, user_state):
+def handle_flow_1_subflow_1_1_4(numero):
     list = {
         "messaging_product": "whatsapp",
         "to": numero,

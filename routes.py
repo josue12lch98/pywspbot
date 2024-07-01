@@ -123,22 +123,40 @@ def send_txt(texto, numero):
                                     case 1:
                                         match user_state.subFlow4:
                                             case 0 :
-                                                handle_flow_1_subflow_1_1_1(numero,user_state)
+                                                handle_flow_1_subflow_1_1_1(numero)
+
                                             case _:
-                                                handle_database_manteniment(numero, user_state)
-                                    case 1:
-                                        match user_state.subFlow4:
-                                            case 0:
-                                                handle_flow_1_subflow_1_1_2(numero, user_state)
-                                            case _:
-                                                handle_database_manteniment(numero, user_state)
+                                                handle_database_manteniment(numero)
                                     case 2:
                                         match user_state.subFlow4:
                                             case 0:
-                                                handle_flow_1_subflow_1_1_3(numero, user_state)
+                                                handle_flow_1_subflow_1_1_2(numero, )
                                             case _:
-                                                handle_database_manteniment(numero, user_state)
-
+                                                handle_database_manteniment(numero)
+                                    case 3:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_flow_1_subflow_1_1_3(numero, )
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 4:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_flow_1_subflow_1_1_4(numero, )
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 5:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_contact_asesor(numero)
+                                            case _:
+                                                handle_database_manteniment(numero)
+                                    case 6:
+                                        match user_state.subFlow4:
+                                            case 0:
+                                                handle_flow_1_subflow_1_1_3(numero)
+                                            case _:
+                                                handle_database_manteniment(numero)
                             case 2:
                                 if user_state.subFlow3 == 0:
                                     handle_flow_1_subflow_1_2(numero)
