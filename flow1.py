@@ -20,14 +20,14 @@ def handle_flow_1_subflow_0(numero, name):
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 404 0 0",
+                            "id": "1 404 0 0 0",
                             "title": "Si"
                         }
                     },
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 1 0 0",
+                            "id": "1 1 0 0 0",
                             "title": "No"
                         }
                     }
@@ -86,4 +86,15 @@ def handle_flow_1_subflow_1(numero):
     generic_reply(list)
     
     update_user_state(number=numero, func = str(inspect.currentframe().f_code.co_name))
-    
+
+def handle_flow_1_subflow_404(numero):
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": numero,
+        "text": {
+            "preview_url": False,
+            "body": "Saliendo del consulta Marcación Javelin \nExit"
+        }
+    }
+    generic_reply(data)

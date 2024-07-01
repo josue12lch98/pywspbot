@@ -117,7 +117,7 @@ def handle_flow_0_subflow_3(numero, texto, name, dni):
                         {
                             "type": "reply",
                             "reply": {
-                                "id": "0 2 0 0 0",
+                                "id": "0 404 0 0 0",
                                 "title": "No"
                             }
                         }
@@ -130,3 +130,14 @@ def handle_flow_0_subflow_3(numero, texto, name, dni):
     subFlow = 4
     update_user_state(number=numero, subFlow=subFlow, sucursal=texto, func = str(inspect.currentframe().f_code.co_name))
 
+def handle_flow_0_subflow_404(numero):
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": numero,
+        "text": {
+            "preview_url": False,
+            "body": "Saliendo del bucle Inicio \nExit"
+        }
+    }
+    generic_reply(data)

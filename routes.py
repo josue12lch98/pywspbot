@@ -2,7 +2,7 @@ from flask import  request, jsonify, render_template
 import json
 
 from dbQuery import UserState, get_user_state, update_user_state
-from flow0 import handle_flow_0_subflow_0, handle_flow_0_subflow_1, handle_flow_0_subflow_2, handle_flow_0_subflow_3
+from flow0 import *
 from flow1 import *
 from flow1_1_ import *
 from flow1_1_2_ import *
@@ -39,8 +39,7 @@ def init_app(app):
             changes = entry['changes'][0]
             value = changes['value']
             objeto_mensaje = value['messages']
-
-
+            
             if objeto_mensaje:
                 messages = objeto_mensaje[0]
 
@@ -81,7 +80,7 @@ def init_app(app):
                        
             return jsonify({'message': 'EVENT_RECEIVED'})
         except Exception as e:
-            update_user_state(json = e) 
+            update_user_state(json = str(e)) 
             return jsonify({'message': 'EVENT_RECEIVED'})
 
 # Ciclo entrada
@@ -89,7 +88,7 @@ def send_txt(texto, numero):
     texto = texto.lower()
     user_state = get_user_state(numero)
     if user_state is None:
-        update_user_state(numero, flow=0,subFlow=0,subFlow2=0,subFlow3=0)
+        update_user_state(numero, flow=0,subFlow=0,subFlow2=0,subFlow3=0,subFlow4=0)
         user_state = get_user_state(numero)
 
     match user_state.flow:
@@ -105,8 +104,8 @@ def send_txt(texto, numero):
                     name = user_state.full_name
                     dni = user_state.dni
                     handle_flow_0_subflow_3(numero, texto, name, dni)  
-                case _:
-                    print("")
+                case 404:
+                    handle_flow_0_subflow_404(numero)
                     
         case 1: # Button si de confirmación de datos correctos define el cambio de flujo de 0 a 1
             match user_state.subFlow:
@@ -144,7 +143,7 @@ def send_txt(texto, numero):
                                 handle_flow_1_subflow_1_5(numero)
                             case _:
                                 print(" ")
-                case _:
-                    print("")
+                case 404:
+                    handle_flow_1_subflow_404(numero)
         case _:
             print("")
