@@ -16,7 +16,6 @@ def init_app(app):
         return render_template('index.html', registros=registros);
 
     @app.route('/webhook', methods=['GET', 'POST'])
-
     def webhook():
         if request.method == 'GET':
             challenge = verificar_token(request)
