@@ -40,7 +40,17 @@ def handle_database_manteniment(numero, user_state):
         }
     }
     generic_reply(buttton)
-
+def handle_contact_asesor (numero):
+    data = {
+        "messaging_product": "whatsapp",
+        "recipient_type": "individual",
+        "to": numero,
+        "text": {
+            "preview_url": False,
+            "body": "En breve te pondremos en contacto con un asesor."
+        }
+    }
+    generic_reply(data)
 
 def handle_flow_1_subflow_1_2(numero):
     data = {
