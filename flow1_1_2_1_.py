@@ -18,7 +18,7 @@ def handle_flow_1_subflow_1_2_1_1(numero):
                         "type": "reply",
                         "reply": {
                             "id": "1 1 2 1 1 1 0", # Flujo / Sub flow / Sub flow 2 / Sub flow 3
-                            "title": "Si"
+                            "title": "Sí"
                         }
                     },
                     {
@@ -31,8 +31,8 @@ def handle_flow_1_subflow_1_2_1_1(numero):
                     {
                         "type": "reply",
                         "reply": {
-                            "id": "1 1 2 1 1 3 0",
-                            "title": "Hacer otra pregunta"
+                            "id": "1 1 0 0 0 0 0",
+                            "title": "Hacer otra consulta"
                         }
                     }
                 ]
