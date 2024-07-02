@@ -47,7 +47,61 @@ def handle_flow_1_subflow_1_2(numero):
         "interactive": {
             "type": "list",
             "body": {
-                "text": "Información sobre beneficios G4S y otros"
+                "text": ""🔧 TP Services" + "\n Por favor, selecciona el trámite relacionado con AFP que deseas realizar:\n" +
+    "1️⃣ Tipo de AFP\n" +
+    "2️⃣ Solicitud de traslado AFP-AFP\n" +
+    "3️⃣ Afiliación de ONP a AFP\n""
+            },
+            "footer": {
+                "text": "Selecciona alguna de las opciones para poder ayudarte"
+            },
+            "action":{
+                "button": "Ver Opciones",
+                "sections": [
+                    {
+                        "title": "Section 1",
+                        "rows": [
+                            {
+                                "id": "1 1 2 1 0",
+                                "title": "Beneficios G4S"
+                            },
+                            {
+                                "id": "1 1 2 2 0",
+                                "title": "AFP"
+                            },
+                            {
+                                "id": "1 1 2 3 0",
+                                "title": "Capacitaciones"
+                            },
+                            {
+                                "id": "1 1 2 4 0",
+                                "title": "Abono retención judicial"
+                            },
+                            {
+                                "id": "1 1 2 5 0",
+                                "title": "Otras consultas"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+    generic_reply(lista)
+    update_user_state(numero, subFlow = 1, subFlow2 = 2, func = str(inspect.currentframe().f_code.co_name))
+
+    def handle_flow_1_subflow_1_2(numero):
+    lista = {
+        "messaging_product": "whatsapp",
+        "to": numero,
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "body": {
+                "text": ""🔧 TP Services" + "\n Por favor, selecciona el trámite relacionado con AFP que deseas realizar:\n" +
+    "1️⃣ Tipo de AFP\n" +
+    "2️⃣ Solicitud de traslado AFP-AFP\n" +
+    "3️⃣ Afiliación de ONP a AFP\n""
             },
             "footer": {
                 "text": "Selecciona alguna de las opciones para poder ayudarte"

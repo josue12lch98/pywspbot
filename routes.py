@@ -69,7 +69,7 @@ def init_app(app):
 
                             update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_)
                             try:
-                                subFlow6_ = int(texto.split()[5])
+                                subFlow6_ = int(texto.split()[6])
                             except Exception as e:
                                 subFlow6_ = 0
                             update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_, subFlow5 = subFlow5_, subFlow6 = subFlow6_)
@@ -89,7 +89,7 @@ def init_app(app):
                                 subFlow5_ = 0
 
                             try:
-                                subFlow6_ = int(texto.split()[5])
+                                subFlow6_ = int(texto.split()[6])
                             except Exception as e:
                                 subFlow6_ = 0
                             update_user_state(number=numero, flow=flow_, subFlow=subflow_, subFlow2=subFlow2_,
@@ -189,7 +189,7 @@ def send_txt(texto, numero):
                                             name = user_state.full_name
                                             name = name.split()[0]
                                             if user_state.subFlow4 == 0:
-                                                handle_flow_1_subflow_1_2_1(numero, name, b)
+                                                handle_flow_1_subflow_1_2_1(numero, name, b) ## Encuesta  1 1 2 1 0
                                                 handle_flow_1_subflow_1_2_1_1(numero)
                                             else:
                                                 match user_state.subFlow4:
@@ -211,14 +211,22 @@ def send_txt(texto, numero):
                                                                 print("")
                                                     case _:
                                                         handle_flow_1_subflow_1_2_1_x(numero, user_state.subFlow4)
-                                        case 2:
-                                            handle_flow_1_subflow_1_2_2(numero)
+                                        case 2: ## 1 1 2 2 0
+                                            match user_state.subFlow4:
+                                                case 0:
+                                                    handle_flow_1_subflow_1_2_2(numero)
+                                                case 1:
+                                                    handle_flow_1_subflow_1_2_3(numero,user_state)
+
                                         case 3:
-                                            handle_flow_1_subflow_1_2_3(numero)
+                                            handle_flow_1_subflow_1_2_3(numero, user_state)
+                                            handle_flow_1_subflow_1_2_1_1(numero)
                                         case 4:
-                                            handle_flow_1_subflow_1_2_4(numero)
-                                        case _:
-                                            handle_flow_1_subflow_1_2_x(numero, user_state.subFlow3)
+                                            handle_flow_1_subflow_1_2_4(numero, user_state)
+                                            handle_flow_1_subflow_1_2_1_1(numero)
+                                        case 5:
+                                            handle_flow_1_subflow_1_2_1_1_2_2(numero)
+
                             case 3:
 
                                 match user_state.subFlow3:
