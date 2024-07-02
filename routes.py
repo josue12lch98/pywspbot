@@ -218,10 +218,13 @@ def send_txt(texto, numero):
                                                     handle_flow_1_subflow_1_2_2(numero)
                                                 case 1:
                                                     handle_flow_1_subflow_1_2_1_1_1_1_1(numero)
+                                                    handle_flow_1_subflow_1_2_1_1(numero)
                                                 case 2:
                                                     handle_flow_1_subflow_1_2_1_1_2(numero)
+                                                    handle_flow_1_subflow_1_2_1_1(numero)
                                                 case 3:
                                                     handle_flow_1_subflow_1_2_1_1_1_3(numero)
+                                                    handle_flow_1_subflow_1_2_1_1(numero)
 
                                         case 3:
                                             handle_flow_1_subflow_1_2_3(numero, user_state)
