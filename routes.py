@@ -258,7 +258,7 @@ def send_txt(texto, numero):
                                     case 4:
                                         match user_state.subFlow4:
                                             case 0:
-                                                handle_contact_asesor(numero, )
+                                                handle_contact_asesor(numero )
                                             case _:
                                                 handle_database_manteniment(numero)
                                     case 5:
@@ -267,7 +267,7 @@ def send_txt(texto, numero):
                                                 handle_contact_asesor(numero)
                                             case _:
                                                 handle_database_manteniment(numero) # Lista botones para trámites
-                            case 4:
+                            case 5:
 
                                 match user_state.subFlow3:
                                     case 0:
