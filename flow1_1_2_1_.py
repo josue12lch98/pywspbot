@@ -114,6 +114,7 @@ def handle_flow_1_subflow_1_2_1_1_1_1(numero):
         }
     }
     generic_reply(data)
+    print("")
     
 
 def handle_flow_1_subflow_1_2_1_1_2_2(numero):
