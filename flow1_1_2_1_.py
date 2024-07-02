@@ -86,7 +86,7 @@ def handle_flow_1_subflow_1_2_1_1_1(numero):
                                 "id": "1 1 2 1 1 1 3",
                                 "title": "Bueno"
                             },
-                            {
+                            {g
                                 "id": "1 1 2 1 1 1 4",
                                 "title": "Muy bueno"
                             },
@@ -100,6 +100,7 @@ def handle_flow_1_subflow_1_2_1_1_1(numero):
             }
         }
     }
+    update_user_state(numero, func = str(inspect.currentframe().f_code.co_name))
     generic_reply(data)
     
 
@@ -114,8 +115,10 @@ def handle_flow_1_subflow_1_2_1_1_1_1(numero):
         }
     }
     generic_reply(data)
+
     update_user_state(numero,flow=0,subflow=0,subflow2=0,subflow3=0,subflow4=0,subflow5=0,subflow6=0,  func = str(inspect.currentframe().f_code.co_name))
     print("")
+
     
 
 def handle_flow_1_subflow_1_2_1_1_2_2(numero):
@@ -129,6 +132,7 @@ def handle_flow_1_subflow_1_2_1_1_2_2(numero):
         }
     }
     generic_reply(data)
+    update_user_state(numero, func = str(inspect.currentframe().f_code.co_name))
 
 def handle_flow_1_subflow_1_2_1_1_2_3(numero):
     data = {
@@ -141,3 +145,4 @@ def handle_flow_1_subflow_1_2_1_1_2_3(numero):
         }
     }
     generic_reply(data)
+    update_user_state(numero, func = str(inspect.currentframe().f_code.co_name))
