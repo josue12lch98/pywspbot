@@ -100,6 +100,7 @@ def handle_flow_1_subflow_1_2_1_1_1(numero):
             }
         }
     }
+    update_user_state(numero, func = str(inspect.currentframe().f_code.co_name))
     generic_reply(data)
     
 
@@ -114,7 +115,7 @@ def handle_flow_1_subflow_1_2_1_1_1_1(numero):
         }
     }
     generic_reply(data)
-    print("")
+    update_user_state(numero, flow = 0, subFlow = 0, subFlow2 = 0, subFlow3 = 0, subFlow4 = 0, subFlow5 = 0, subFlow6 = 0, func = str(inspect.currentframe().f_code.co_name))
     
 
 def handle_flow_1_subflow_1_2_1_1_2_2(numero):
@@ -128,6 +129,7 @@ def handle_flow_1_subflow_1_2_1_1_2_2(numero):
         }
     }
     generic_reply(data)
+    update_user_state(numero, func = str(inspect.currentframe().f_code.co_name))
 
 def handle_flow_1_subflow_1_2_1_1_2_3(numero):
     data = {
@@ -140,3 +142,4 @@ def handle_flow_1_subflow_1_2_1_1_2_3(numero):
         }
     }
     generic_reply(data)
+    update_user_state(numero, func = str(inspect.currentframe().f_code.co_name))
