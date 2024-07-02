@@ -9,6 +9,7 @@ from flow1_1_1 import *
 from flow1_1_1_1 import *
 from flow1_1_2_ import *
 from flow1_1_2_1_ import *
+from flow1_1_2_2 import *
 from flow1_1_5 import handle_flow_1_subflow_1_1_5
 
 
@@ -216,7 +217,11 @@ def send_txt(texto, numero):
                                                 case 0:
                                                     handle_flow_1_subflow_1_2_2(numero)
                                                 case 1:
-                                                    handle_flow_1_subflow_1_2_3(numero,user_state)
+                                                    handle_flow_1_subflow_1_2_1_1_1_1_1(numero)
+                                                case 2:
+                                                    handle_flow_1_subflow_1_2_1_1_2(numero)
+                                                case 3:
+                                                    handle_flow_1_subflow_1_2_1_1_1_3(numero)
 
                                         case 3:
                                             handle_flow_1_subflow_1_2_3(numero, user_state)

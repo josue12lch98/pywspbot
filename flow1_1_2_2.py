@@ -2,7 +2,7 @@ from dbQuery import update_user_state, generic_reply
 import inspect
 
 
-def handle_flow_1_subflow_1_2_1_1(numero):
+def handle_flow_1_subflow_1_2_1_1_1_1_1(numero):
     data = {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
@@ -14,7 +14,7 @@ def handle_flow_1_subflow_1_2_1_1(numero):
     }
     generic_reply(data)
     update_user_state(numero, subFlow2 = 2, subFlow3 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de Capa
-def handle_flow_1_subflow_1_2_1_2(numero):
+def handle_flow_1_subflow_1_2_1_1_2(numero):
     data = {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
@@ -30,7 +30,7 @@ def handle_flow_1_subflow_1_2_1_2(numero):
     generic_reply(data)
     update_user_state(numero, subFlow2 = 2, subFlow3 = 0, func = str(inspect.currentframe().f_code.co_name)) # Retirar 0 cuando tengamos la lógica completa de Capa
 
-def handle_flow_1_subflow_1_2_1_3(numero):
+def handle_flow_1_subflow_1_2_1_1_1_3(numero):
     data = {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
