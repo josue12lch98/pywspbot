@@ -53,21 +53,14 @@ def init_app(app):
                         if tipo_interactivo == "button_reply":
                             texto = messages["interactive"]["button_reply"]["id"]
                             numero = messages["from"]
-                            try :
-                                flow_ = int(texto.split()[0])
-                                subflow_ = int(texto.split()[1])
-                                subFlow2_ = int(texto.split()[2])
-                                subFlow3_ = int(texto.split()[3])
-                                subFlow4_ = int(texto.split()[4])
-                                subFlow5_ = int(texto.split()[5])
-                            except:
-                                flow_ = int(texto.split()[0])
-                                subflow_ = int(texto.split()[1])
-                                subFlow2_ = int(texto.split()[2])
-                                subFlow3_ = int(texto.split()[3])
-                                subFlow4_ = int(texto.split()[4])
-                                subFlow5_ = int(texto.split()[5])
-                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_, subFlow5 = subFlow5_)
+                            flow_ = int(texto.split()[0])
+                            subflow_ = int(texto.split()[1])
+                            subFlow2_ = int(texto.split()[2])
+                            subFlow3_ = int(texto.split()[3])
+                            subFlow4_ = int(texto.split()[4])
+                            subFlow5_ = int(texto.split()[5])
+                            subFlow6_ = int(texto.split()[6])
+                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_, subFlow5 = subFlow5_, subFlow6 = subFlow6_)
                             send_txt(texto, numero)
                             
                         elif tipo_interactivo == "list_reply":
@@ -79,7 +72,8 @@ def init_app(app):
                             subFlow3_ = int(texto.split()[3])
                             subFlow4_ = int(texto.split()[4])
                             subFlow5_ = int(texto.split()[5])
-                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_, subFlow5 = subFlow5_)
+                            subFlow6_ = int(texto.split()[6])
+                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_, subFlow5 = subFlow5_, subFlow6 = subFlow6_)
                             send_txt(texto, numero)
                             
                     if "text" in messages:
@@ -148,7 +142,18 @@ def send_txt(texto, numero):
                                                     case 1:
                                                         match user_state.subFlow5:
                                                             case 1:
-                                                                handle_flow_1_subflow_1_2_1_1_1(numero)
+                                                                if user_state.subFlow6 == 0:
+                                                                    handle_flow_1_subflow_1_2_1_1_1(numero)
+                                                                else:
+                                                                    match user_state.subFlow6:
+                                                                        case 1:
+                                                                            handle_flow_1_subflow_1_2_1_1_1_1(numero)
+                                                                        case 2:
+                                                                            handle_flow_1_subflow_1_2_1_1_1_2(numero)
+                                                                        case 3:
+                                                                            handle_flow_1_subflow_1_2_1_1_1_3(numero)
+                                                                        case _:
+                                                                            print("")
                                                     case _:
                                                         handle_flow_1_subflow_1_2_1_x(numero, user_state.subFlow4)
                                         case 2:

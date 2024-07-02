@@ -15,6 +15,7 @@ class UserState(db.Model):
     subFlow3=db.Column(db.Integer, default=0)
     subFlow4=db.Column(db.Integer, default=0)
     subFlow5=db.Column(db.Integer, default=0)
+    subFlow6=db.Column(db.Integer, default=0)
     dni = db.Column(db.TEXT)
     full_name = db.Column(db.TEXT)
     sucursal = db.Column(db.TEXT)
