@@ -133,7 +133,7 @@ def handle_flow_0_subflow_404(numero):
         "to": numero,
         "text": {
             "preview_url": False,
-            "body": "Saliendo del bucle Inicio \nExit"
+            "body": "Tus datos no son correctos"
         }
     }
     generic_reply(data)

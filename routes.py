@@ -20,6 +20,7 @@ def init_app(app):
         return render_template('index.html', registros=registros);
 
     @app.route('/webhook', methods=['GET', 'POST'])
+    
     def webhook():
         if request.method == 'GET':
             challenge = verificar_token(request)
@@ -27,6 +28,7 @@ def init_app(app):
         elif request.method == 'POST':
             response = recibir_mensaje(request)
             return response
+        
     def verificar_token(req):
         token = req.args.get('hub.verify_token')
         challenge = req.args.get('hub.challenge')
@@ -42,13 +44,13 @@ def init_app(app):
             changes = entry["changes"][0]
             value = changes["value"]
             objeto_mensaje = value["messages"]
-
+            
             if objeto_mensaje:
                 messages = objeto_mensaje[0]
 
                 if "type" in messages:
                     tipo = messages["type"]
-
+                    
                     if tipo == "interactive":
                         tipo_interactivo = messages["interactive"]["type"]
 
@@ -66,8 +68,13 @@ def init_app(app):
                                 subFlow5_=0
 
                             update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_)
+                            try:
+                                subFlow6_ = int(texto.split()[5])
+                            except Exception as e:
+                                subFlow6_ = 0
+                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_, subFlow5 = subFlow5_, subFlow6 = subFlow6_)
                             send_txt(texto, numero)
-
+                            
                         elif tipo_interactivo == "list_reply":
                             texto = messages["interactive"]["list_reply"]["id"]
                             numero = messages["from"]
@@ -79,10 +86,17 @@ def init_app(app):
                             try:
                                 subFlow5_ = int(texto.split()[5])
                             except Exception as e:
-                                subFlow5_=0
-                            update_user_state(number = numero, flow = flow_, subFlow = subflow_, subFlow2 = subFlow2_, subFlow3 = subFlow3_, subFlow4 = subFlow4_)
-                            send_txt(texto, numero)
+                                subFlow5_ = 0
 
+                            try:
+                                subFlow6_ = int(texto.split()[5])
+                            except Exception as e:
+                                subFlow6_ = 0
+                            update_user_state(number=numero, flow=flow_, subFlow=subflow_, subFlow2=subFlow2_,
+                                              subFlow3=subFlow3_, subFlow4=subFlow4_, subFlow5=subFlow5_,
+                                              subFlow6=subFlow6_)
+                            send_txt(texto, numero)
+                            
                     if "text" in messages:
                         texto = messages["text"]["body"]
                         numero = messages["from"]
@@ -100,6 +114,8 @@ def send_txt(texto, numero):
     if user_state is None:
         update_user_state(numero, flow=0,subFlow=0,subFlow2=0,subFlow3=0,subFlow4=0,subFlow5=0)
         user_state = get_user_state(numero)
+
+    b = user_state.Flag_b
 
     match user_state.flow:
         case 0:
@@ -173,18 +189,25 @@ def send_txt(texto, numero):
                                             name = user_state.full_name
                                             name = name.split()[0]
                                             if user_state.subFlow4 == 0:
-                                                name = user_state.full_name
-                                                name = name.split()[0]
-                                                handle_flow_1_subflow_1_2_1(numero, name)
+                                                handle_flow_1_subflow_1_2_1(numero, name, b)
+                                                handle_flow_1_subflow_1_2_1_1(numero)
                                             else:
                                                 match user_state.subFlow4:
                                                     case 1:
-                                                        if user_state.subFlow5 == 0:
-                                                            handle_flow_1_subflow_1_2_1_1(numero)
-                                                        else:
-                                                            match user_state.subFlow5:
-                                                                case 1:
+                                                        match user_state.subFlow5:
+                                                            case 1:
+                                                                if user_state.subFlow6 == 0:
                                                                     handle_flow_1_subflow_1_2_1_1_1(numero)
+                                                                else:
+                                                                    match user_state.subFlow6:
+                                                                        case 1:
+                                                                            handle_flow_1_subflow_1_2_1_1_1_1(numero)
+                                                                        case 2:
+                                                                            handle_flow_1_subflow_1_2_1_1_1_2(numero)
+                                                                        case 3:
+                                                                            handle_flow_1_subflow_1_2_1_1_1_3(numero)
+                                                                        case _:
+                                                                            print("")
                                                     case _:
                                                         handle_flow_1_subflow_1_2_1_x(numero, user_state.subFlow4)
                                         case 2:

@@ -64,23 +64,23 @@ def handle_flow_1_subflow_1(numero):
                         "title": "Section 1",
                         "rows": [
                             {
-                                "id": "1 1 1 0 0",
+                                "id": "1 1 1 0 0 0 0",
                                 "title": "Mis pagos"
                             },
                             {
-                                "id": "1 1 2 0 0",
+                                "id": "1 1 2 0 0 0 0",
                                 "title": "Información G4S y otros"
                             },
                             {
-                                "id": "1 1 3 0 0",
+                                "id": "1 1 3 0 0 0 0",
                                 "title": "Peticiones"
                             },
                             {
-                                "id": "1 1 4 0 0",
+                                "id": "1 1 4 0 0 0 0",
                                 "title": "Trámites"
                             },
                             {
-                                "id": "1 1 5 0 0",
+                                "id": "1 1 5 0 0 0 0",
                                 "title": "Acceso a aplicaciones"
                             }
                         ]
