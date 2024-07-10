@@ -66,7 +66,7 @@ def handle_flow_1_subflow_1_2_2(numero):
                         "description": "Afiliación de ONP a AFP"
                     }, {
                         "id": "1 1 2 2 0 0 0",
-                        "title": "Menú principal",
+                        "title": "Menú AFP",
                         "description": ""
                     }
                 ]

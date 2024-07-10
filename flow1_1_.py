@@ -9,7 +9,13 @@ def handle_flow_1_subflow_1_1(numero):
         "interactive": {
             "type": "list",
             "body": {
-                "text": "1️⃣Cronograma de pagos \n\n " +
+
+                "text":
+                "En esta sección podrás encontrar toda la información relacionada con tus pagos. Accede para ver el " +
+                "cronograma de pagos, el monto que recibirás, consultas sobre descuentos aplicados y todos los " +
+                "detalles de tus pagos.\n\n" +
+                "¡Mantente al tanto de tus finanzas de manera sencilla y rápida!" +
+                "1️⃣Cronograma de pagos \n\n " +
                 "2️⃣¿Cuánto me van a pagar?\n\n" +
                 "3️⃣Consulta sobre los descuentos de mi pago\n\n" +
                 "4️⃣Detalles de mi pago\n\n" +" Otras consultas\n\n"
@@ -51,7 +57,7 @@ def handle_flow_1_subflow_1_1(numero):
                                 "description": ""
                             },
                             {
-                                "id": "1 1 1 0 0",
+                                "id": "1 1 0 0 0",
                                 "title": "Menú principal",
                                 "description": ""
                             }
@@ -72,7 +78,12 @@ def handle_flow_1_subflow_1_2(numero):
         "interactive": {
             "type": "list",
             "body": {
-                "text": "Información sobre beneficios G4S y otros"
+                "text": "Información sobre Beneficios G4S, Solicitudes y Otros"+"En esta sección, encontrarás información detallada sobre los beneficios que G4S ofrece a sus colaboradores. Esto incluye:\n\n" +
+                "- Beneficios G4S: Descubre todas las ventajas y servicios que G4S pone a tu disposición. Convenios, "
+                "Seguros, Beneficios (prestamos y licencias) y Programas.\n" +
+                "- Asignación Familiar: ¿Qué es y cómo aplica? Infórmate sobre este importante beneficio y cómo "
+                "puedes aprovecharlo.\n" +
+                "- Otros Beneficios: Explora información adicional que puedes obtener como parte del equipo G4S.\n"
             },
             "footer": {
                 "text": "Selecciona alguna de las opciones para poder ayudarte"
@@ -230,7 +241,7 @@ def handle_flow_1_subflow_1_4(numero):
                                 "title": "Opción 5",
                                 "description": "Denuncias"
                             }, {
-                                "id": "1 1 1 0 0 0",
+                                "id": "1 1 0 0 0 0",
                                 "title": "Menú principal",
                                 "description": ""
                             }
@@ -250,7 +261,13 @@ def handle_flow_1_subflow_1_5(numero):
         "interactive": {
             "type": "list",
             "body": {
-                "text": "👇 Selecciona una opción para más detalles:"
+                "text": "En esta sección, encontrarás información detallada sobre los accesos a las diferentes "
+                        "plataformas G4S. Esto incluye:\n\n" +
+                "- ¿Cómo registro asistencia?\n" +
+                "- ¿Cómo accedo o marco mi asistencia?\n" +
+                "- Actualización de datos\n" +
+                "- Cambio de contraseña"
+
 
             },
             "footer": {

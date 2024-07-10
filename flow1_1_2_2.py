@@ -9,7 +9,7 @@ def handle_flow_1_subflow_1_2_1_1_1_1_1(numero):
         "to": numero,
         "text": {
             "preview_url": False,
-            "body": "Estimado colaborador G4S, para saber a qué AFP estás afiliado ingresa en el siguiente Link y completa la información solicitada: https://servicios.sbs.gob.pe/ReporteSituacionPrevisional/Afili_Consulta.aspx\n\n"
+            "body": "Estimado colaborador G4S, para saber a qué AFP estás afiliado ingresa en el siguiente Link y completa la información solicitada: https://servicios.sbs.gob.pe/ReporteSituacionPrevisional/Afil_Consulta.aspx\n\n"
         }
     }
     generic_reply(data)

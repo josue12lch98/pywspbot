@@ -113,7 +113,7 @@ def send_txt(texto, numero):
     texto = texto.lower()
     user_state = get_user_state(numero)
     if user_state is None:
-        update_user_state(numero, flow=0,subFlow=0,subFlow2=0,subFlow3=0,subFlow4=0,subFlow5=0)
+        update_user_state(numero, flow=0,subFlow=0,subFlow2=0,subFlow3=0,subFlow4=0,subFlow5=0, subFlow6=0)
         user_state = get_user_state(numero)
 
     b = user_state.Flag_b
@@ -235,42 +235,42 @@ def send_txt(texto, numero):
                                         case 5:
                                             handle_flow_1_subflow_1_2_1_1_2_2(numero)
 
-                            case 3:
-
-                                match user_state.subFlow3:
-                                    case 0:
-                                        handle_flow_1_subflow_1_3(numero)  # 1 1 3 0 0 -  Menú Peticiones
-                                    case 1:
-                                        match user_state.subFlow4:
-                                            case 0:
-                                                handle_database_manteniment(numero)
-
-                                            case _:
-                                                handle_database_manteniment(numero)
-                                    case 2:
-                                        match user_state.subFlow4:
-                                            case 0:
-                                                handle_database_manteniment(numero)
-                                            case _:
-                                                handle_database_manteniment(numero)
-                                    case 3:
-                                        match user_state.subFlow4:
-                                            case 0:
-                                                handle_database_manteniment(numero)
-                                            case _:
-                                                handle_database_manteniment(numero)
-                                    case 4:
-                                        match user_state.subFlow4:
-                                            case 0:
-                                                handle_database_manteniment(numero, )
-                                            case _:
-                                                handle_database_manteniment(numero)
-                                    case 5:
-                                        match user_state.subFlow4:
-                                            case 0:
-                                                handle_database_manteniment(numero)
-                                            case _:
-                                                handle_database_manteniment(numero)
+                            # case 3:
+                            #
+                            #     match user_state.subFlow3:
+                            #         case 0:
+                            #             handle_flow_1_subflow_1_3(numero)  # 1 1 3 0 0 -  Menú Peticiones
+                            #         case 1:
+                            #             match user_state.subFlow4:
+                            #                 case 0:
+                            #                     handle_database_manteniment(numero)
+                            #
+                            #                 case _:
+                            #                     handle_database_manteniment(numero)
+                            #         case 2:
+                            #             match user_state.subFlow4:
+                            #                 case 0:
+                            #                     handle_database_manteniment(numero)
+                            #                 case _:
+                            #                     handle_database_manteniment(numero)
+                            #         case 3:
+                            #             match user_state.subFlow4:
+                            #                 case 0:
+                            #                     handle_database_manteniment(numero)
+                            #                 case _:
+                            #                     handle_database_manteniment(numero)
+                            #         case 4:
+                            #             match user_state.subFlow4:
+                            #                 case 0:
+                            #                     handle_database_manteniment(numero, )
+                            #                 case _:
+                            #                     handle_database_manteniment(numero)
+                            #         case 5:
+                            #             match user_state.subFlow4:
+                            #                 case 0:
+                            #                     handle_database_manteniment(numero)
+                            #                 case _:
+                            #                     handle_database_manteniment(numero)
                             case 4:
 
                                 match user_state.subFlow3:

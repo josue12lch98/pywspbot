@@ -49,10 +49,10 @@ def handle_flow_1_subflow_1(numero):
                 "text": "Estamos felices de que seas parte de la correcta gestión en Javelin, juntos estamos logrando la EXCELENCIA OPERACIONAL.\n\n"+
                         "*Menú principal*\n\n" +
                         "1️⃣ Mis pagos. \n\n " +
-                "2️⃣ Información sobre beneficios G4S y otros.  (Convenios, seguros, Beneficios, programas, asignación familiar, AFP, capacitaciones y retenciones judiciales)\n\n" +
-                "3️⃣ Peticiones\n\n" +
-                "4️⃣ Trámites\n\n" +
-                "5️⃣ Acceso a aplicaciones\n\n"
+                "2️⃣ Información sobre Beneficios G4S, Solicitudes y Otros  (Convenios, seguros, Beneficios, programas, asignación familiar, AFP, capacitaciones y retenciones judiciales)\n\n" +
+
+                "3️⃣ Trámites\n\n" +
+                "4️⃣ Acceso a aplicaciones\n\n"
             },
             "footer": {
                 "text": "Elige un tema para tu reclamo o consulta."
@@ -71,10 +71,7 @@ def handle_flow_1_subflow_1(numero):
                                 "id": "1 1 2 0 0 0 0",
                                 "title": "Información G4S y otros"
                             },
-                            {
-                                "id": "1 1 3 0 0 0 0",
-                                "title": "Peticiones"
-                            },
+
                             {
                                 "id": "1 1 4 0 0 0 0",
                                 "title": "Trámites"

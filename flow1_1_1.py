@@ -32,7 +32,7 @@ def handle_flow_1_subflow_1_1_1(numero):
                                 "title": "Opción 2",
                                 "description": "Quiero saber la fecha de pago de vacaciones"
                             }, {
-                                "id": "1 1 1 1 0",
+                                "id": "1 1 1 0 0",
                                 "title": "Menú Pagos",
                                 "description": ""
                             }
@@ -102,7 +102,7 @@ def handle_flow_1_subflow_1_1_2(numero, ):
                                 "description": ""
                             }, {
                                 "id": "1 1 1 0 0",
-                                "title": "Menú principal",
+                                "title": "Menú Pagos",
                                 "description": ""
                             }
                         ]

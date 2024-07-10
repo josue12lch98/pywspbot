@@ -108,7 +108,7 @@ def handle_flow_1_subflow_1_1_2(numero, ):
                                 "title": "NO ME PAGARON",
                                 "description": ""
                             }, {
-                                "id": "1 1 1 0 0",
+                                "id": "1 1 0 0 0",
                                 "title": "Menú principal",
                                 "description": ""
                             }

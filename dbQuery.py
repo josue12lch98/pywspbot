@@ -22,6 +22,7 @@ class UserState(db.Model):
     json = db.Column(db.TEXT)
     func = db.Column(db.TEXT, default="")
     Flag_b= db.Column(db.TEXT, default="")
+    clientAssigned = db.Column(db.TEXT, default="")
 
 
 
