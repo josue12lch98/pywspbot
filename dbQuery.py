@@ -43,12 +43,12 @@ def generic_reply(data):
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer EAAV8kZCQDeLkBOZCXOZBZAECAfpj82XlNbKcScj0C2xgyaSa4jxWqG3mjY09CafWhMZBgBreiSrOF2xuipmMsXZBW8INRTrum4Cbu1lgocdUaEcWACQdEKQVG8JXHZAZCTKFvweBmkUXh5wmfoNHSGZC7k8JGLODZAuA4Oyu7ioTE8l2luUEeSO1Y2bDZAPsgeyLRLIZAIbGXxeZBNRxzk2SNfEMZD"
+        "Authorization": "Bearer EAAV8kZCQDeLkBO6MTZAFi5YazIsOnxkGTW6Go9QIP5yseUWmJy5g4ziaUGJBCOZBZCTtP7ojQcgyXCqkbCHx9dKMYOptbAwVhBlzrqLSaZAs8lowAmdnjXaD0wPZBWxCLnS7LzsiR0NJLArNjzkeFjpGGfF5VeIK4qAZCALIn2OPjqiWZBn3B4valSGF3LXUNjFN79UlvmZASouhIZBqEc57Ax"
     }
     connection = http.client.HTTPSConnection("graph.facebook.com")
 
     try:
-        connection.request("POST", "/v20.0/357679540758058/messages", data, headers)
+        connection.request("POST", "/v19.0/357679540758058/messages", data, headers)
         response = connection.getresponse()
         print(response.status, response.reason)
     except Exception as e:

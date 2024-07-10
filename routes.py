@@ -295,7 +295,7 @@ def send_txt(texto, numero):
                                             case 0:
                                                 handle_flow_1_subflow_1_4_2(numero, name)
                                                 sleep(1)
-                                                handle_flow_1_subflow_1_2_1_1(numero)
+                                                handle_flow_1_subflow_1_2_1_1(numero) ## Hasta aquì me quedé, falta agregar para enviar correo y demás.
                                             case _:
                                                 handle_database_manteniment(numero)
                                     case 3:
