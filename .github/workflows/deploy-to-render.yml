@@ -18,4 +18,4 @@ jobs:
     - name: Deploy to Render
       run: |
         echo "Triggering deployment to Render..."
-        curl -X POST 'https://api.render.com/deploy/srv-cpuaquaju9rs73fvia50?key=giS3WO9rIb8'
+        curl -X POST 'https://api.render.com/deploy/srv-cq77oog8fa8c7386jo10?key=W9YJIQQDvsQ'
