@@ -1,3 +1,5 @@
+from time import sleep
+
 from flask import  request, jsonify, render_template
 import json
 
@@ -10,6 +12,7 @@ from flow1_1_1_1 import *
 from flow1_1_2_ import *
 from flow1_1_2_1_ import *
 from flow1_1_2_2 import *
+from flow1_1_4_1 import *
 from flow1_1_5 import handle_flow_1_subflow_1_1_5
 
 
@@ -117,6 +120,7 @@ def send_txt(texto, numero):
         user_state = get_user_state(numero)
 
     b = user_state.Flag_b
+    name=user_state.full_name.split()[0]
 
     match user_state.flow:
         case 0:
@@ -277,16 +281,21 @@ def send_txt(texto, numero):
                                     case 0:
                                         handle_flow_1_subflow_1_4(numero)  # 1 1 4 0 0 -  Menú Trámites
                                     case 1:
-                                        match user_state.subFlow4:
+                                        match user_state.subFlow4: # 1 1 4 1 0
                                             case 0:
-                                                handle_contact_asesor(numero)
+
+                                                handle_flow_1_subflow_1_4_1(numero, name)
+                                                sleep(1)
+                                                handle_flow_1_subflow_1_2_1_1(numero)
 
                                             case _:
                                                 handle_database_manteniment(numero)
                                     case 2:
                                         match user_state.subFlow4:
                                             case 0:
-                                                handle_contact_asesor(numero)
+                                                handle_flow_1_subflow_1_4_2(numero, name)
+                                                sleep(1)
+                                                handle_flow_1_subflow_1_2_1_1(numero)
                                             case _:
                                                 handle_database_manteniment(numero)
                                     case 3:
